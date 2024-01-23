@@ -1,0 +1,31 @@
+{
+  "expo": {
+    "jsEngine": "jsc",
+    "name": "Geoapark Ar",
+    "slug": "Geopark_Ar",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/imgs/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/imgs/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#39B061"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/imgs/icon.png"
+      },
+      "package": "com.taas.sousa.Geopark_Ar"
+    },
+    "web": {
+      "favicon": "./assets/imgs/favicon.png"
+    }
+  }
+}
