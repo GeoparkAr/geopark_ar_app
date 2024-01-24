@@ -13,7 +13,7 @@ export default function Missao() {
 
   const navigateToCamera = () => {
     navigation.navigate("Camera", {
-      url: "https://yolov5-tfjs-react-native.vercel.app/",
+      url: "https://web-geoparkcamera-ten.vercel.app/",
     });
   };
 

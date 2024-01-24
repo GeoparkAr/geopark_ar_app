@@ -13,7 +13,7 @@ export default function Missao() {
 
   const navigateToCamera = () => {
     navigation.navigate("Camera", {
-      url: "https://webcamtoy.com/pt/",
+      url: "https://web-geoparkcamera-ten.vercel.app/",
     });
   };
   

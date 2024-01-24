@@ -12,7 +12,9 @@ export default function Missao() {
   const navigation = useNavigation();
 
   const navigateToCamera = () => {
-    navigation.navigate("Camera");
+    navigation.navigate("Camera", {
+      url: "https://web-geoparkcamera-ten.vercel.app/",
+    });
   };
   return (
     <View className=" bg-white">
