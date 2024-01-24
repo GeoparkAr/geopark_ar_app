@@ -23,11 +23,12 @@ export default function Login() {
   };
 
   const handleLogin = async () => {
+    //verificar se as informações inseridas pelo usuário são válidas
     if (!validateEmail(email)) {
       Alert.alert("Erro", "Digite um email válido");
     } else if (senha.length < 6) {
       Alert.alert("Erro", "Insira sua senha");
-    } else {
+    } else { //faz login
       try {
         await signInWithEmailAndPassword(auth, email, senha);
         // Loged in 

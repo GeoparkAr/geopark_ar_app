@@ -7,37 +7,43 @@ import {
   ScrollView,
 } from "react-native";
 import { StyleSheet } from "react-native";
-
 import { Entypo } from "@expo/vector-icons";
 
 export default function EditarPerfil() {
+  // Estados para controle do nome
   const [editingName, setEditingName] = useState(false);
   const [tempName, setTempName] = useState("Maria Vieira Alencar");
   const [name, setName] = useState("Maria Vieira Alencar");
   const [isButtonNameEnabled, setIsButtonNameEnabled] = useState(false);
+  // Estados para controle de senha
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [editingPassword, setEditingPassword] = useState(false);
   const [isButtonEnabled, setIsButtonEnabled] = useState(false);
 
+  // Função para iniciar ou encerrar a edição do nome
   const startEditingName = () => {
     setEditingName(!editingName);
   };
 
+  // Função para finalizar a edição do nome
   const finishEditingName = () => {
     setName(tempName);
     setEditingName(false);
   };
 
+  // Função para iniciar ou encerrar a edição da senha
   const FistEditinPasswordFunction = () => {
     setEditingPassword(!editingPassword);
-    setIsButtonEnabled(false)
+    setIsButtonEnabled(false);
   };
 
+  // Função para encerrar a edição da senha
   const EndEditinPasswordFunction = () => {
     setEditingPassword(false);
   };
 
+  // Função para lidar com mudanças na senha
   const handlePasswordChange = (text, field) => {
     if (field === "current") {
       setCurrentPassword(text);
@@ -48,11 +54,14 @@ export default function EditarPerfil() {
       currentPassword.trim().length > 4 && newPassword.trim().length > 4
     );
   };
+
+  // Função para lidar com mudanças no nome
   const handleNameChange = (text) => {
     setTempName(text);
     setIsButtonNameEnabled(text.trim().length > 0);
   };
 
+  //mudando estilos
   const buttonStyle = {
     backgroundColor: isButtonEnabled ? "#49a066" : "#d6d6d6",
   };
@@ -86,6 +95,7 @@ export default function EditarPerfil() {
                 <Entypo name="chevron-small-down" size={24} color="#5a5a5a" />
               </View>
             </TouchableOpacity>
+            {/* editar nome */}
             {editingName && (
               <View className="flex-row justify-between my-4 bg-white gap-2">
                 <TextInput
@@ -96,10 +106,15 @@ export default function EditarPerfil() {
                 <TouchableOpacity
                   className=" bg-[#49a066] px-3  rounded-md justify-center items-center"
                   onPress={isButtonNameEnabled ? finishEditingName : undefined}
-                  style={{...buttonNameStyle}}
+                  style={{ ...buttonNameStyle }}
                   disabled={!isButtonNameEnabled}
                 >
-                  <Text className="text-white font-semibold" style={{...textNameStyle}}>Concluído</Text>
+                  <Text
+                    className="text-white font-semibold"
+                    style={{ ...textNameStyle }}
+                  >
+                    Concluído
+                  </Text>
                 </TouchableOpacity>
               </View>
             )}
@@ -113,6 +128,7 @@ export default function EditarPerfil() {
                 <Entypo name="chevron-small-down" size={24} color="#5a5a5a" />
               </View>
             </TouchableOpacity>
+            {/* editar senha */}
             {editingPassword && (
               <View className="flex-row justify-between my-4 bg-white z-50 gap-2">
                 <TextInput
@@ -141,7 +157,6 @@ export default function EditarPerfil() {
                     Concluído
                   </Text>
                 </TouchableOpacity>
-                
               </View>
             )}
           </View>

@@ -10,18 +10,21 @@ import {
   ScrollView,
 } from "react-native";
 import { SelectCountry } from "react-native-element-dropdown";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
 
 export default function Questionario() {
   const navigation = useNavigation();
 
+  //verificar se todos os campos foram preenchidos
   const navigateToTarefas = () => {
     if (validateFields()) {
       navigation.navigate("Tarefas");
     } else {
-      Alert.alert("Campos obrigatórios", "Por favor, preencha todos os campos obrigatórios.");
+      Alert.alert(
+        "Campos obrigatórios",
+        "Por favor, preencha todos os campos obrigatórios."
+      );
     }
   };
 
@@ -32,7 +35,8 @@ export default function Questionario() {
   const [selectedOption, setSelectedOption] = useState(null);
   const [groupSize, setGroupSize] = useState("");
   const [visitPurpose, setVisitPurpose] = useState("");
-  
+
+  //chamando os estados do brasil na api do governo
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -51,6 +55,7 @@ export default function Questionario() {
     fetchData();
   }, []);
 
+  //chamando os municípios do brasil na api do governo
   useEffect(() => {
     const fetchCities = async () => {
       if (state) {
@@ -71,11 +76,13 @@ export default function Questionario() {
     fetchCities();
   }, [state]);
 
+  //opções no select customizado
   const yesNoOptions = [
     { value: "yes", label: "Sim" },
     { value: "no", label: "Não" },
   ];
 
+  //lidando com os valores das idades
   const [ageRange, setAgeRange] = useState([20, 50]);
 
   const handleValuesChange = (values) => {
@@ -105,7 +112,7 @@ export default function Questionario() {
                     fontWeight: "700",
                     fontSize: 20,
                     color: "#18241B",
-                    marginTop: 10
+                    marginTop: 10,
                   }}
                 >
                   Pesquisa
@@ -237,16 +244,8 @@ export default function Questionario() {
                       justifyContent: "space-between",
                     }}
                   >
-                    <Text
-                      style={{ fontSize: 16, }}
-                    >
-                      {ageRange[0]}
-                    </Text>
-                    <Text
-                      style={{ fontSize: 16, }}
-                    >
-                      {ageRange[1]}
-                    </Text>
+                    <Text style={{ fontSize: 16 }}>{ageRange[0]}</Text>
+                    <Text style={{ fontSize: 16 }}>{ageRange[1]}</Text>
                   </View>
 
                   <MultiSlider
@@ -309,16 +308,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     borderColor: "#18241B",
     borderWidth: 1,
-    fontSize: 16
+    fontSize: 16,
   },
   placeholderStyle: {
     fontSize: 16,
-    fontWeight: "600"
+    fontWeight: "600",
   },
   selectedTextStyle: {
     fontSize: 16,
     marginLeft: 8,
-    fontWeight: "600"
+    fontWeight: "600",
   },
   iconStyle: {
     width: 20,

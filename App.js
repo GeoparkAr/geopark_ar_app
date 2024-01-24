@@ -9,9 +9,12 @@ import {
   DrawerItemList,
   createDrawerNavigator,
 } from "@react-navigation/drawer";
-{
-  /* telas */
-}
+import { useNavigation } from "@react-navigation/native";
+import { useState, useEffect } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./src/firebase";
+
+//telas
 import Home from "./src/screens/home/index";
 import Welcome from "./src/screens/Welcome";
 import Settings from "./src/screens/settings/Settings";
@@ -34,37 +37,15 @@ import Help from "./src/screens/settings/Help&suport";
 import Problems from "./src/screens/settings/Problems";
 import CameraWeb from "./src/screens/CameraWeb";
 
-import { useNavigation } from "@react-navigation/native";
-import { useState, useEffect } from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "./src/firebase";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 
+//navegação Drawer
 function Root() {
-  const [primeiraVezUsuario, setPrimeiraVezUsuario] = useState(false);
   const [user, setUser] = useState(null);
   const [authChecked, setAuthChecked] = useState(false);
 
-  useEffect(() => {
-    async function verificarPrimeiraVez() {
-      try {
-        const jaAbriuApp = await AsyncStorage.getItem("jaAbriuApp");
-
-        if (jaAbriuApp === null) {
-          setPrimeiraVezUsuario(true);
-          await AsyncStorage.setItem("jaAbriuApp", "true");
-        }
-      } catch (erro) {
-        console.error("Erro ao verificar a primeira vez:", erro);
-      }
-    }
-
-    verificarPrimeiraVez();
-  }, []);
-
+  {/* verificar se usuário está logado */}
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (authUser) => {
       setUser(authUser);
@@ -78,22 +59,14 @@ function Root() {
 
   return (
     <Drawer.Navigator
-      initialRouteName={
-        user && !user.isAnonymous
-          ? "Home"
-          : primeiraVezUsuario
-          ? "Introduction"
-          : "Welcome"
-      }
+      initialRouteName={user && !user.isAnonymous ? "Home" : "Introduction"}
       drawerContent={(props) => {
         if (!authChecked) {
           return null;
         }
 
         return (
-          <SafeAreaView
-            style={{ position: "relative", height: "100%" }}
-          >
+          <SafeAreaView style={{ position: "relative", height: "100%" }}>
             {user && !user.isAnonymous ? (
               <View
                 style={{
@@ -140,14 +113,14 @@ function Root() {
                   padding: 15,
                   backgroundColor: "#287D44",
                   height: 60,
-                  justifyContent: "center"
+                  justifyContent: "center",
                 }}
               >
                 <Text
                   style={{
                     fontSize: 16,
                     color: "#fff",
-                    fontWeight: "700"
+                    fontWeight: "700",
                   }}
                 >
                   Olá visitante!
@@ -170,7 +143,7 @@ function Root() {
                   source={require("./assets/imgs/icons/geopark.png")}
                   style={{ width: 35 }}
                 />
-                <Text style={{fontWeight: "600"}}>Sobre nós</Text>
+                <Text style={{ fontWeight: "600" }}>Sobre nós</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={{
@@ -187,7 +160,7 @@ function Root() {
                   source={require("./assets/imgs/icons/Chest.png")}
                   style={{ width: 26, height: 26 }}
                 />
-                <Text style={{fontWeight: "600"}}>Recompensas</Text>
+                <Text style={{ fontWeight: "600" }}>Recompensas</Text>
               </TouchableOpacity>
               {user && !user.isAnonymous ? (
                 <TouchableOpacity
@@ -232,6 +205,7 @@ function Root() {
   );
 }
 
+//navegação Stack
 export default function App() {
   return (
     <NavigationContainer>
@@ -250,8 +224,13 @@ export default function App() {
           />
         </Stack.Group>
 
-        <Stack.Group screenOptions={{ headerTitleAlign: "center", headerBackTitle: "Voltar" }}>
-        <Stack.Screen
+        <Stack.Group
+          screenOptions={{
+            headerTitleAlign: "center",
+            headerBackTitle: "Voltar",
+          }}
+        >
+          <Stack.Screen
             name="Camera"
             component={CameraWeb}
             options={{

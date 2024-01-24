@@ -22,6 +22,7 @@ export default function Login() {
   const [confirmarSenha, setConfirmarSenha] = useState("");
 
   const handleSignup = async () => {
+    //verificar se as informações inseridas pelo usuário são válidas
     if (!validateEmail(email)) {
       Alert.alert("Erro", "Digite um email válido");
     } else if (senha.length < 6) {
@@ -30,7 +31,7 @@ export default function Login() {
       Alert.alert("Erro", "As senhas não coincidem");
     } else if (nome.length < 2) {
       Alert.alert("Erro", "Preencha todos os campos corretamente");
-    } else {
+    } else { //envia dados para o firebase
       await createUserWithEmailAndPassword(auth, email, senha)
         .then(async (userCredential) => {
           const user = userCredential.user;
@@ -58,7 +59,8 @@ export default function Login() {
         });
     }
   };
-
+  
+  //validar email
   const validateEmail = (email) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);

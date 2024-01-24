@@ -2,22 +2,13 @@ import React, { useState } from "react";
 import {
   View,
   TouchableOpacity,
-  Image,
   Text,
   StyleSheet,
-  Linking,
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { Link, useNavigation } from "@react-navigation/native";
 
 export default function Help() {
-  const navigation = useNavigation();
   const [selectedButton, setSelectedButton] = useState(null);
-
-  const Config = () => {
-    navigation.navigate("Configuracoes");
-  };
 
   const handleButtonPress = (buttonIndex) => {
     setSelectedButton((prevSelectedButton) =>
@@ -34,6 +25,7 @@ export default function Help() {
     >
       <ScrollView style={{ paddingHorizontal: 20, marginBottom: 1 }}>
         <Text style={styles.title}>Perguntas Frequentes:</Text>
+        
         <View style={{ marginBottom: 10 }}>
           <TouchableOpacity
             style={{

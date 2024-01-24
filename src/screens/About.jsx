@@ -1,6 +1,5 @@
 import { View, Text, Image } from "react-native";
 import { StyleSheet } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { ScrollView, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 

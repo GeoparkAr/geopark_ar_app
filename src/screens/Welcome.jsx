@@ -5,7 +5,6 @@ import {
   Image,
   TouchableOpacity,
   ImageBackground,
-  ScrollView,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { auth } from "../firebase";

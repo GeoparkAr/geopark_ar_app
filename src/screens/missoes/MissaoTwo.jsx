@@ -11,6 +11,7 @@ import { useNavigation } from "@react-navigation/native";
 export default function Missao() {
   const navigation = useNavigation();
 
+  //navegando para o link da câmera
   const navigateToCamera = () => {
     navigation.navigate("Camera", {
       url: "https://web-geoparkcamera-ten.vercel.app/",

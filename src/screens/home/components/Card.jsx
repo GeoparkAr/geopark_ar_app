@@ -1,6 +1,7 @@
 import React from "react";
 import { View, StyleSheet, Image, Text, TouchableOpacity } from "react-native";
 
+//propriedades que devem ser importadas
 export default function Card({ nome, municipio, source }) {
   return (
     <View style={styles.geossitio}>

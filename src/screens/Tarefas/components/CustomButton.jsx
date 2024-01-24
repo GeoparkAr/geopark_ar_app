@@ -1,6 +1,14 @@
 import { TouchableOpacity, View, StyleSheet, Image } from "react-native";
 
-export default function Custombutton({ onPress, disabled, icon, backgroundOption }) {
+//propriedades que devem ser importadas
+export default function Custombutton({
+  onPress,
+  disabled,
+  icon,
+  backgroundOption,
+}) {
+  
+  //lidando com estilos
   const isDisabled = disabled || false;
   let backgroundColor, containerViewBackgroundColor;
 

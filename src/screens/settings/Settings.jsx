@@ -25,6 +25,7 @@ export default function Settings() {
     navigation.navigate("Problems");
   }
 
+  //sair da conta
   const handleLogout = async () => {
     try {
       await signOut(auth);

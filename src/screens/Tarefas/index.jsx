@@ -51,6 +51,7 @@ export default function Tarefas() {
     navigation.navigate("Selos");
   };
 
+  //os botões começam com false
   const [status, setStatus] = useState({
     primeiro: false,
     segundo: false,
@@ -62,6 +63,7 @@ export default function Tarefas() {
     oitavo: false,
   });
 
+  //verificar se está logado
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (authUser) => {
       setUser(authUser);
@@ -90,6 +92,7 @@ export default function Tarefas() {
     fetchData();
   }, []);
 
+  //mudando o estado dos botões
   const handleClick1 = () => {
     setStatus({
       ...status,
@@ -106,6 +109,7 @@ export default function Tarefas() {
     navigateToMissao();
   };
 
+  //se não estiver logado bloqueia os demais botões e chama o modal
   const handleClick3 = () => {
     if (authChecked) {
       if (user && !user.isAnonymous) {
@@ -181,6 +185,7 @@ export default function Tarefas() {
     }
   };
 
+  //animação do começar
   const [bounceAnimation] = useState(new Animated.Value(0));
 
   useEffect(() => {

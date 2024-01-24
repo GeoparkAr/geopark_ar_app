@@ -4,14 +4,16 @@ import { useState, useEffect } from "react";
 import { ScrollView } from "react-native-gesture-handler";
 import Card from "./components/Card";
 import { DrawerActions, useNavigation } from "@react-navigation/native";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase";
 
 export default function Home() {
   const [categoriaSelecionada, setCategoriaSelecionada] = useState(null);
+  const [user, setUser] = useState(null);
+  const [authChecked, setAuthChecked] = useState(false);
 
+  //informações sobre os geossítios
   const geossitios = [
     {
       nome: "Arajara",
@@ -93,6 +95,7 @@ export default function Home() {
       category: ["Aquático", "Trilha", "Cultural", "Geodiversidade"],
     },
   ];
+  //filtrando os geossítios por categoria
   const geossitiosFiltrados = geossitios.filter((geossitio) => {
     return (
       categoriaSelecionada === null ||
@@ -102,15 +105,14 @@ export default function Home() {
     );
   });
 
+  //navegação
   const navigation = useNavigation();
 
   function openTarefas() {
     navigation.navigate("Tarefas");
   }
 
-  const [user, setUser] = useState(null);
-  const [authChecked, setAuthChecked] = useState(false);
-
+  //verificar se está logado
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (authUser) => {
       setUser(authUser);
@@ -121,8 +123,9 @@ export default function Home() {
   }, []);
 
   return (
-    <SafeAreaView style={{ backgroundColor: "#FFF", flex:1 }}>
+    <SafeAreaView style={{ backgroundColor: "#FFF", flex: 1 }}>
       <ScrollView style={styles.container}>
+        {/* botão de login */}
         {authChecked && user && !user.isAnonymous ? null : (
           <TouchableOpacity
             style={{
@@ -164,6 +167,7 @@ export default function Home() {
             </View>
           </TouchableOpacity>
         )}
+        {/* header */}
         <View style={styles.header}>
           <TouchableOpacity
             onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
@@ -176,6 +180,7 @@ export default function Home() {
             </TouchableOpacity>
           </View>
         </View>
+        {/* card de destaque ao padre cícero */}
         <View style={styles.viewDestaque}>
           <Image
             source={require("../../../assets/imgs/banner.png")}
@@ -197,6 +202,7 @@ export default function Home() {
             </TouchableOpacity>
           </View>
         </View>
+        {/* categorias */}
         <View style={styles.categorias}>
           <Text style={styles.title}>Categorias</Text>
           <View
@@ -429,8 +435,10 @@ export default function Home() {
             <TouchableOpacity style={{ width: 50 }}></TouchableOpacity>
           </View>
         </View>
+        {/* geossítios */}
         <View>
           <Text style={styles.title}>Geossítios</Text>
+          {/* botão de limpar categoria selecionada */}
           {categoriaSelecionada && (
             <TouchableOpacity
               onPress={() => setCategoriaSelecionada(null)}
@@ -454,6 +462,7 @@ export default function Home() {
               marginBottom: 50,
             }}
           >
+            {/* mostrar o card da colina do horto */}
             {categoriaSelecionada === "Religioso" ||
             categoriaSelecionada === "Trilha" ||
             categoriaSelecionada === null ? (
@@ -480,6 +489,7 @@ export default function Home() {
                 </View>
               </View>
             ) : null}
+            {/* mostrando todos os geossítios */}
             {geossitiosFiltrados.map((geossitio) => (
               <Card
                 key={geossitio.nome}
@@ -495,10 +505,11 @@ export default function Home() {
   );
 }
 
+//estilização com styleSheet
 const styles = StyleSheet.create({
   container: {
     padding: 16,
-    backgroundColor:"#FFF",
+    backgroundColor: "#FFF",
   },
   header: {
     display: "flex",

@@ -8,15 +8,8 @@ import {
   Linking,
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { Link, useNavigation } from "@react-navigation/native";
 
 export default function Terms() {
-  const navigation = useNavigation();
-
-  const Config = () => {
-    navigation.navigate("Configuracoes");
-  };
 
   return (
     <View

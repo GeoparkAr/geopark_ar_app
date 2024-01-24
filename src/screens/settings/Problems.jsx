@@ -7,14 +7,8 @@ import {
   View
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import { Link, useNavigation } from "@react-navigation/native";
 
 export default function Problems() {
-  const navigation = useNavigation();
-
-  const Config = () => {
-    navigation.navigate("Configuracoes");
-  };
 
   return (
     <View

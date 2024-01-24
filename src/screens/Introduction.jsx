@@ -14,7 +14,7 @@ const Introduction = () => {
       setStep(step + 1);
     }
   };
-
+  //informações sobre cada tela de introdução
   const renderContent = () => {
     switch (step) {
       case 1:
@@ -107,10 +107,9 @@ const Introduction = () => {
 
   return (
     <SafeAreaView className="h-full bg-white">
+      {/* mostrando informações das telas */}
       <ImageBackground className="h-full px-7" source={imageSource}>
-        <Text className="pt-14 text-2xl font-bold w-[80%]">
-          {title}
-        </Text>
+        <Text className="pt-14 text-2xl font-bold w-[80%]">{title}</Text>
         <Text className="pt-1 text-base w-[80%]">{text}</Text>
         <View className="gap-1 flex flex-row mt-6">
           {viewStyles.map((style, index) => (
