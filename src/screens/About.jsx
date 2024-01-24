@@ -1,14 +1,8 @@
 import { View, Text, Image } from "react-native";
 import { StyleSheet } from "react-native";
 import { ScrollView, TouchableOpacity } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 
 export default function About() {
-  const navigation = useNavigation();
-
-  const home = () => {
-    navigation.navigate("Home");
-  };
 
   return (
     <ScrollView style={{ backgroundColor: "#FFF" }}>
