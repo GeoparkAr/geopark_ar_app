@@ -17,7 +17,7 @@ export default function Missao() {
     });
   };
   return (
-    <View className=" bg-white">
+    <ScrollView className=" bg-white">
       <View className="flex flex-col justify-around items-center h-[90vh]">
         <Text style={styles.textCamera}>
           Clique na câmera e comece a explorar
@@ -31,7 +31,7 @@ export default function Missao() {
           <Image source={require("../../../assets/imgs/icons/camera.png")} />
         </TouchableOpacity>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 

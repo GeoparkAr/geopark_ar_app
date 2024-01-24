@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   TextInput,
   Alert,
+  ScrollView,
 } from "react-native";
 import { SelectCountry } from "react-native-element-dropdown";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -86,7 +87,7 @@ export default function Questionario() {
   };
 
   return (
-    <View style={{ backgroundColor: "#FFF", flex: 1 }}>
+    <ScrollView style={{ backgroundColor: "#FFF", flex: 1 }}>
       <View>
         <View style={{ alignItems: "center" }}>
           <View style={{ marginHorizontal: 26 }}>
@@ -287,7 +288,7 @@ export default function Questionario() {
           </TouchableOpacity>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 

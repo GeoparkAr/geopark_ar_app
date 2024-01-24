@@ -37,7 +37,7 @@ export default function Welcome() {
     <View className="bg-[#39B061] flex-1">
       <ImageBackground
         source={require("../../assets/imgs/background.png")}
-        className=" relative justify-between items-center pt-20 flex-1"
+        className=" relative justify-between items-center pt-16 flex-1"
       >
         <View
           style={{ justifyContent: "center", alignItems: "center", gap: 10 }}
@@ -53,35 +53,30 @@ export default function Welcome() {
         </View>
 
         <View style={styles.containerbuttons}>
-          <TouchableOpacity style={styles.googleButton}>
+          <TouchableOpacity style={styles.googleButton} className="w-[80vw]">
             <Text style={styles.googleText}>Entrar com o Google</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.greenButton} onPress={login}>
+          <TouchableOpacity
+            style={styles.greenButton}
+            onPress={login}
+            className="w-[80vw]"
+          >
             <Text style={styles.greenText}>Entrar com email</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.greenButton} onPress={Register}>
+          <TouchableOpacity
+            className="w-[80vw]"
+            style={styles.greenButton}
+            onPress={Register}
+          >
             <Text style={styles.greenText}>Criar conta</Text>
           </TouchableOpacity>
           <TouchableOpacity
+            className="w-[80vw]"
             style={styles.visitanteButton}
             onPress={handleAnonymousLogin}
           >
             <Text style={styles.textVisitantes}>Entrar como visitante</Text>
           </TouchableOpacity>
-          <View style={{ justifyContent: "center", alignItems: "center" }}>
-            <Text style={{ fontSize: 12 }}>
-              Ao continuar, você concorda com nossos
-            </Text>
-            <TouchableOpacity style={{ flexDirection: "row", gap: 3 }}>
-              <Text style={{ fontSize: 12, fontWeight: "700" }}>
-                Termos de Serviços
-              </Text>
-              <Text style={{ fontSize: 12 }}>e</Text>
-              <Text style={{ fontSize: 12, fontWeight: "700" }}>
-                Política de Privacidade
-              </Text>
-            </TouchableOpacity>
-          </View>
         </View>
       </ImageBackground>
     </View>
@@ -112,7 +107,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     gap: 11,
-    paddingVertical: 32,
+    paddingVertical: 20,
   },
   backgroundImage: {
     width: "100%",
@@ -122,8 +117,7 @@ const styles = StyleSheet.create({
   googleButton: {
     backgroundColor: "#111111",
     flexDirection: "row",
-    width: 327,
-    height: 43.24,
+    height: 40,
     borderRadius: 30,
     justifyContent: "center",
     alignItems: "center",
@@ -137,8 +131,7 @@ const styles = StyleSheet.create({
   greenButton: {
     backgroundColor: "#3EB25EB2",
     flexDirection: "row",
-    width: 327,
-    height: 43.24,
+    height: 40,
     borderRadius: 30,
     justifyContent: "center",
     alignItems: "center",
@@ -152,8 +145,7 @@ const styles = StyleSheet.create({
   visitanteButton: {
     backgroundColor: "transparent",
     flexDirection: "row",
-    width: 327,
-    height: 43.24,
+    height: 40,
     borderRadius: 30,
     justifyContent: "center",
     alignItems: "center",
