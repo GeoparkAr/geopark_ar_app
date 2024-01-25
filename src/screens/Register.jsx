@@ -10,9 +10,9 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db } from "../firebase";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, setDoc, doc } from "firebase/firestore";
 
 export default function Login() {
   const navigation = useNavigation();
@@ -43,7 +43,7 @@ export default function Login() {
               Alert.alert("Erro ao atualizar nome", errorMessage);
             });
           console.log("user data,", user);
-          const docRef = await addDoc(collection(db, "users"), {
+          await setDoc(doc(db, "users", user.uid), {
             uid: user.uid,
             email: user.email.toLowerCase().trim(),
             displayName: user.displayName,

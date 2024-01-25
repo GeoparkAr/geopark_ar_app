@@ -36,6 +36,7 @@ import EditarPerfil from "./src/screens/settings/Editarperfil";
 import Help from "./src/screens/settings/Help&suport";
 import Problems from "./src/screens/settings/Problems";
 import CameraWeb from "./src/screens/CameraWeb";
+import { AuthProvider } from "./src/hooks/useAuth";
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -208,6 +209,7 @@ function Root() {
 //navegação Stack
 export default function App() {
   return (
+    <AuthProvider>
     <NavigationContainer>
       <Stack.Navigator options={{ headerShown: false }}>
         <Stack.Screen
@@ -352,5 +354,6 @@ export default function App() {
         </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>
+    </AuthProvider>
   );
 }

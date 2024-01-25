@@ -11,8 +11,12 @@ import { Entypo } from "@expo/vector-icons";
 import { auth, db } from "../../firebase";
 import { updatePassword, updateProfile } from "firebase/auth";
 import { collection, doc, getDocs, query, updateDoc, where } from "firebase/firestore";
+import { useAuth } from "../../hooks/useAuth";
 
 export default function EditarPerfil() {
+
+  const { data: { user } } = useAuth();
+
   // Estados para controle do nome
   const [editingName, setEditingName] = useState(false);
   const [tempName, setTempName] = useState("");

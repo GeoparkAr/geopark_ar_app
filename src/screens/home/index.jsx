@@ -6,12 +6,15 @@ import Card from "./components/Card";
 import { DrawerActions, useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../../firebase";
+import { auth, db } from "../../firebase";
+import { useAuth } from "../../hooks/useAuth";
+import { doc } from "firebase/firestore";
 
 export default function Home() {
   const [categoriaSelecionada, setCategoriaSelecionada] = useState(null);
-  const [user, setUser] = useState(null);
   const [authChecked, setAuthChecked] = useState(false);
+
+  const { data: {user, docRef} } = useAuth()
 
   //informações sobre os geossítios
   const geossitios = [
@@ -114,11 +117,9 @@ export default function Home() {
 
   //verificar se está logado
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (authUser) => {
-      setUser(authUser);
+    const unsubscribe = onAuthStateChanged(auth, (_) => {
       setAuthChecked(true);
     });
-    console.log(user);
     return () => unsubscribe();
   }, []);
 
