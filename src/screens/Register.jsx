@@ -35,14 +35,12 @@ export default function Login() {
       await createUserWithEmailAndPassword(auth, email, senha)
         .then(async (userCredential) => {
           const user = userCredential.user;
-          console.log("nome = ", nome);
-          await updateProfile(auth.currentUser, {displayName: nome})
+          await updateProfile(user, {displayName: nome})
             .then(() => {})
             .catch((error) => {
               const errorMessage = error.message;
               Alert.alert("Erro ao atualizar nome", errorMessage);
             });
-          console.log("user data,", user);
           await setDoc(doc(db, "users", user.uid), {
             uid: user.uid,
             email: user.email.toLowerCase().trim(),

@@ -12,9 +12,12 @@ import {
 import { SelectCountry } from "react-native-element-dropdown";
 import { useNavigation } from "@react-navigation/native";
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
+import { useAuth } from "../../hooks/useAuth";
+import { updateDoc } from "firebase/firestore";
 
 export default function Questionario() {
   const navigation = useNavigation();
+  const { data: { docRef } } = useAuth();
 
   //verificar se todos os campos foram preenchidos
   const navigateToTarefas = () => {
@@ -92,6 +95,22 @@ export default function Questionario() {
   const validateFields = () => {
     return Boolean(groupSize && state && city && selectedOption);
   };
+
+  const handleLastVisitSave = async () => {
+    const cityFinded = cityData.find(cityFind => cityFind.value === city)
+    await updateDoc(docRef, {
+      "lastVisit.geoparkAraripe.groupSize": groupSize,
+      "lastVisit.geoparkAraripe.originState": state,
+      "lastVisit.geoparkAraripe.originCity": cityFinded.label,
+      "lastVisit.geoparkAraripe.groupAgeRange": ageRange,
+      "lastVisit.geoparkAraripe.visitPurpose": selectedOption,
+    }).then(() => {
+      navigateToTarefas();
+    }).catch((error) => {
+      const errorMessage = error.message;
+      Alert.alert("Erro ao atualizar BD", errorMessage);
+    });
+  }
 
   return (
     <ScrollView style={{ backgroundColor: "#FFF", flex: 1 }}>
@@ -273,7 +292,7 @@ export default function Questionario() {
               alignItems: "center",
               marginTop: 50,
             }}
-            onPress={navigateToTarefas}
+            onPress={handleLastVisitSave}
           >
             <Text
               style={{

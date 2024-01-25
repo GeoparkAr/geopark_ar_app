@@ -13,7 +13,7 @@ import {
 } from "react-native";
 import { useState, useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../../firebase";
+import { auth, db } from "../../firebase";
 
 import { useNavigation } from "@react-navigation/native";
 
