@@ -35,22 +35,31 @@ export default function Login() {
       await createUserWithEmailAndPassword(auth, email, senha)
         .then(async (userCredential) => {
           const user = userCredential.user;
+          console.log("nome = ", nome);
+          await updateProfile(auth.currentUser, {displayName: nome})
+            .then(() => {})
+            .catch((error) => {
+              const errorMessage = error.message;
+              Alert.alert("Erro ao atualizar nome", errorMessage);
+            });
           console.log("user data,", user);
           const docRef = await addDoc(collection(db, "users"), {
             uid: user.uid,
             email: user.email.toLowerCase().trim(),
-            name: nome,
-            displayName: nome,
-            selos: {
+            displayName: user.displayName,
+            stamps: {
               geoparkAraripe: {
-                missionOneCompleted: false,
-                missionTwoCompleted: false,
-                missionThreeCompleted: false,
-                missionFourCompleted: false,
+                mission1: false,
+                mission2: false,
+                mission3: false,
+                mission4: false,
+                mission5: false,
+                mission6: false,
+                mission7: false,
+                geoparkAraripeStamp: false,
               },
             },
           });
-          console.log("Nome before signup:", nome);
           navigation.navigate("Welcome");
         })
         .catch((error) => {
@@ -75,7 +84,7 @@ export default function Login() {
       <View className="h-full py-7 px-7 bg-white">
         <View>
           <TextInput
-            placeholder="Nome completo"
+            placeholder="Nome e Sobrenome"
             style={styles.input}
             className="mb-5 pl-3"
             value={nome}
