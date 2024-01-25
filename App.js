@@ -92,7 +92,7 @@ function Root() {
                       color: "#18241B",
                     }}
                   >
-                    {user.name ? user.name : "Undefined"}
+                    {user.displayName ? user.displayName : "Undefined"}
                   </Text>
                   <Text
                     style={{
