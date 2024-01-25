@@ -19,6 +19,7 @@ import { useNavigation } from "@react-navigation/native";
 
 import Custombutton from "./components/CustomButton";
 import { Feather } from "@expo/vector-icons";
+import { collection, doc, getDocs, query, updateDoc, where } from "firebase/firestore";
 
 export default function Tarefas() {
   const navigation = useNavigation();
@@ -63,12 +64,24 @@ export default function Tarefas() {
     oitavo: false,
   });
 
-  //verificar se está logado
+  const [documentID, setDocumentID] = useState("");
+
+  const getDocumentID = async ()=>{
+    const q = query(collection(db, "users"), where("uid", "==", auth.currentUser.uid));
+
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      setDocumentID(doc.id);
+    });
+  };
+
+  //verificar se está logado e coletar o a ID do documento do usuário no BD
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (authUser) => {
       setUser(authUser);
       setAuthChecked(true);
     });
+    getDocumentID();
     console.log(user);
     return () => unsubscribe();
   }, []);
@@ -93,24 +106,40 @@ export default function Tarefas() {
   }, []);
 
   //mudando o estado dos botões
-  const handleClick1 = () => {
+  const handleClick1 = async () => {
     setStatus({
       ...status,
       primeiro: true,
     });
     navigateToQuestionario();
+    const docRef = doc(db, "users", documentID);
+    await updateDoc(docRef, {
+      "selos.geoparkAraripe.mission1": true
+    }).then(() => {
+    }).catch((error) => {
+      const errorMessage = error.message;
+      Alert.alert("Erro ao atualizar BD", errorMessage);
+    });
   };
 
-  const handleClick2 = () => {
+  const handleClick2 = async () => {
     setStatus({
       ...status,
       segundo: true,
     });
     navigateToMissao();
+    const docRef = doc(db, "users", documentID);
+    await updateDoc(docRef, {
+      "selos.geoparkAraripe.mission2": true
+    }).then(() => {
+    }).catch((error) => {
+      const errorMessage = error.message;
+      Alert.alert("Erro ao atualizar BD", errorMessage);
+    });
   };
 
   //se não estiver logado bloqueia os demais botões e chama o modal
-  const handleClick3 = () => {
+  const handleClick3 = async () => {
     if (authChecked) {
       if (user && !user.isAnonymous) {
         setStatus({
@@ -118,6 +147,14 @@ export default function Tarefas() {
           terceiro: true,
         });
         navigateToMissao3();
+        const docRef = doc(db, "users", documentID);
+        await updateDoc(docRef, {
+          "selos.geoparkAraripe.mission3": true
+        }).then(() => {
+        }).catch((error) => {
+          const errorMessage = error.message;
+          Alert.alert("Erro ao atualizar BD", errorMessage);
+        });
       } else {
         setModalVisible(true);
       }
@@ -125,7 +162,7 @@ export default function Tarefas() {
     }
   };
 
-  const handleClick4 = () => {
+  const handleClick4 = async () => {
     if (authChecked) {
       if (user && !user.isAnonymous) {
         setStatus({
@@ -133,6 +170,14 @@ export default function Tarefas() {
           quarto: true,
         });
         navigateToMissao4();
+        const docRef = doc(db, "users", documentID);
+        await updateDoc(docRef, {
+          "selos.geoparkAraripe.mission4": true
+        }).then(() => {
+        }).catch((error) => {
+          const errorMessage = error.message;
+          Alert.alert("Erro ao atualizar BD", errorMessage);
+        });
       } else {
         setModalVisible(true);
       }
@@ -140,7 +185,7 @@ export default function Tarefas() {
     }
   };
 
-  const handleClick5 = () => {
+  const handleClick5 = async () => {
     if (authChecked) {
       if (user && !user.isAnonymous) {
         setStatus({
@@ -148,6 +193,14 @@ export default function Tarefas() {
           quinto: true,
         });
         navigateToMissao5();
+        const docRef = doc(db, "users", documentID);
+        await updateDoc(docRef, {
+          "selos.geoparkAraripe.mission5": true
+        }).then(() => {
+        }).catch((error) => {
+          const errorMessage = error.message;
+          Alert.alert("Erro ao atualizar BD", errorMessage);
+        });
       } else {
         setModalVisible(true);
       }
@@ -155,7 +208,7 @@ export default function Tarefas() {
     }
   };
 
-  const handleClick6 = () => {
+  const handleClick6 = async () => {
     if (authChecked) {
       if (user && !user.isAnonymous) {
         setStatus({
@@ -163,6 +216,14 @@ export default function Tarefas() {
           sexto: true,
         });
         navigateToMissao6();
+        const docRef = doc(db, "users", documentID);
+        await updateDoc(docRef, {
+          "selos.geoparkAraripe.mission6": true
+        }).then(() => {
+        }).catch((error) => {
+          const errorMessage = error.message;
+          Alert.alert("Erro ao atualizar BD", errorMessage);
+        });
       } else {
         setModalVisible(true);
       }
@@ -170,7 +231,7 @@ export default function Tarefas() {
     }
   };
 
-  const handleClick7 = () => {
+  const handleClick7 = async () => {
     if (authChecked) {
       if (user && !user.isAnonymous) {
         setStatus({
@@ -178,6 +239,14 @@ export default function Tarefas() {
           setimo: true,
         });
         navigateToMissao7();
+        const docRef = doc(db, "users", documentID);
+        await updateDoc(docRef, {
+          "selos.geoparkAraripe.mission7": true
+        }).then(() => {
+        }).catch((error) => {
+          const errorMessage = error.message;
+          Alert.alert("Erro ao atualizar BD", errorMessage);
+        });
       } else {
         setModalVisible(true);
       }

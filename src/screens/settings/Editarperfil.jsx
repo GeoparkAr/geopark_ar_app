@@ -54,7 +54,7 @@ export default function EditarPerfil() {
       const errorMessage = error.message;
       Alert.alert("Erro ao atualizar nome", errorMessage);
     });
-    // Editando no Firebase Firesto Database
+    // Editando no Firebase Firestore Database
     const docRef = doc(db, "users", documentID);
     await updateDoc(docRef, {
       "displayName": tempName
