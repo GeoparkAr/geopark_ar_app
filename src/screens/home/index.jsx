@@ -14,7 +14,9 @@ export default function Home() {
   const [categoriaSelecionada, setCategoriaSelecionada] = useState(null);
   const [authChecked, setAuthChecked] = useState(false);
 
-  const { data: {user, docRef} } = useAuth()
+  const {
+    data: { user, docRef },
+  } = useAuth();
 
   //informações sobre os geossítios
   const geossitios = [

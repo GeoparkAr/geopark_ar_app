@@ -19,7 +19,14 @@ import { useNavigation } from "@react-navigation/native";
 
 import Custombutton from "./components/CustomButton";
 import { Feather } from "@expo/vector-icons";
-import { collection, doc, getDocs, query, updateDoc, where } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDocs,
+  query,
+  updateDoc,
+  where,
+} from "firebase/firestore";
 
 export default function Tarefas() {
   const navigation = useNavigation();
@@ -66,8 +73,11 @@ export default function Tarefas() {
 
   const [documentID, setDocumentID] = useState("");
 
-  const getDocumentID = async ()=>{
-    const q = query(collection(db, "users"), where("uid", "==", auth.currentUser.uid));
+  const getDocumentID = async () => {
+    const q = query(
+      collection(db, "users"),
+      where("uid", "==", auth.currentUser.uid)
+    );
 
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
@@ -114,12 +124,13 @@ export default function Tarefas() {
     navigateToQuestionario();
     const docRef = doc(db, "users", documentID);
     await updateDoc(docRef, {
-      "selos.geoparkAraripe.mission1": true
-    }).then(() => {
-    }).catch((error) => {
-      const errorMessage = error.message;
-      Alert.alert("Erro ao atualizar BD", errorMessage);
-    });
+      "selos.geoparkAraripe.mission1": true,
+    })
+      .then(() => {})
+      .catch((error) => {
+        const errorMessage = error.message;
+        Alert.alert("Erro ao atualizar BD", errorMessage);
+      });
   };
 
   const handleClick2 = async () => {
@@ -130,12 +141,13 @@ export default function Tarefas() {
     navigateToMissao();
     const docRef = doc(db, "users", documentID);
     await updateDoc(docRef, {
-      "selos.geoparkAraripe.mission2": true
-    }).then(() => {
-    }).catch((error) => {
-      const errorMessage = error.message;
-      Alert.alert("Erro ao atualizar BD", errorMessage);
-    });
+      "selos.geoparkAraripe.mission2": true,
+    })
+      .then(() => {})
+      .catch((error) => {
+        const errorMessage = error.message;
+        Alert.alert("Erro ao atualizar BD", errorMessage);
+      });
   };
 
   //se não estiver logado bloqueia os demais botões e chama o modal
@@ -149,12 +161,13 @@ export default function Tarefas() {
         navigateToMissao3();
         const docRef = doc(db, "users", documentID);
         await updateDoc(docRef, {
-          "selos.geoparkAraripe.mission3": true
-        }).then(() => {
-        }).catch((error) => {
-          const errorMessage = error.message;
-          Alert.alert("Erro ao atualizar BD", errorMessage);
-        });
+          "selos.geoparkAraripe.mission3": true,
+        })
+          .then(() => {})
+          .catch((error) => {
+            const errorMessage = error.message;
+            Alert.alert("Erro ao atualizar BD", errorMessage);
+          });
       } else {
         setModalVisible(true);
       }
@@ -172,12 +185,13 @@ export default function Tarefas() {
         navigateToMissao4();
         const docRef = doc(db, "users", documentID);
         await updateDoc(docRef, {
-          "selos.geoparkAraripe.mission4": true
-        }).then(() => {
-        }).catch((error) => {
-          const errorMessage = error.message;
-          Alert.alert("Erro ao atualizar BD", errorMessage);
-        });
+          "selos.geoparkAraripe.mission4": true,
+        })
+          .then(() => {})
+          .catch((error) => {
+            const errorMessage = error.message;
+            Alert.alert("Erro ao atualizar BD", errorMessage);
+          });
       } else {
         setModalVisible(true);
       }
@@ -195,12 +209,13 @@ export default function Tarefas() {
         navigateToMissao5();
         const docRef = doc(db, "users", documentID);
         await updateDoc(docRef, {
-          "selos.geoparkAraripe.mission5": true
-        }).then(() => {
-        }).catch((error) => {
-          const errorMessage = error.message;
-          Alert.alert("Erro ao atualizar BD", errorMessage);
-        });
+          "selos.geoparkAraripe.mission5": true,
+        })
+          .then(() => {})
+          .catch((error) => {
+            const errorMessage = error.message;
+            Alert.alert("Erro ao atualizar BD", errorMessage);
+          });
       } else {
         setModalVisible(true);
       }
@@ -218,12 +233,13 @@ export default function Tarefas() {
         navigateToMissao6();
         const docRef = doc(db, "users", documentID);
         await updateDoc(docRef, {
-          "selos.geoparkAraripe.mission6": true
-        }).then(() => {
-        }).catch((error) => {
-          const errorMessage = error.message;
-          Alert.alert("Erro ao atualizar BD", errorMessage);
-        });
+          "selos.geoparkAraripe.mission6": true,
+        })
+          .then(() => {})
+          .catch((error) => {
+            const errorMessage = error.message;
+            Alert.alert("Erro ao atualizar BD", errorMessage);
+          });
       } else {
         setModalVisible(true);
       }
@@ -241,12 +257,13 @@ export default function Tarefas() {
         navigateToMissao7();
         const docRef = doc(db, "users", documentID);
         await updateDoc(docRef, {
-          "selos.geoparkAraripe.mission7": true
-        }).then(() => {
-        }).catch((error) => {
-          const errorMessage = error.message;
-          Alert.alert("Erro ao atualizar BD", errorMessage);
-        });
+          "selos.geoparkAraripe.mission7": true,
+        })
+          .then(() => {})
+          .catch((error) => {
+            const errorMessage = error.message;
+            Alert.alert("Erro ao atualizar BD", errorMessage);
+          });
       } else {
         setModalVisible(true);
       }
@@ -295,7 +312,7 @@ export default function Tarefas() {
           className="w-screen"
         />
       </View>
-      <ImageBackground>
+      <View>
         <View className="px-3">
           <Text className="text-[#18241B] text-xl font-bold py-2">
             Colina do Horto
@@ -430,7 +447,7 @@ export default function Tarefas() {
             </View>
           </View>
         </View>
-      </ImageBackground>
+      </View>
     </ScrollView>
   );
 }
