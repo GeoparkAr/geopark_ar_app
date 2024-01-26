@@ -176,7 +176,7 @@ function Root() {
                   onPress={() => navigation.navigate("Configuracoes")}
                 >
                   <Ionicons name="ios-settings" size={24} color="#39B061" />
-                  <Text>Configurações</Text>
+                  <Text style={{ fontWeight: "600" }}>Configurações</Text>
                 </TouchableOpacity>
               ) : null}
             </View>

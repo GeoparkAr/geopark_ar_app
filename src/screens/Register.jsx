@@ -82,7 +82,7 @@ export default function Login() {
       <View className="h-full py-7 px-7 bg-white">
         <View>
           <TextInput
-            placeholder="Nome e Sobrenome"
+            placeholder="Nome Completo"
             style={styles.input}
             className="mb-5 pl-3"
             value={nome}

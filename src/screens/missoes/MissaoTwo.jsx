@@ -28,7 +28,6 @@ export default function Missao() {
           source={require("../../../assets/imgs/boy.png")}
           style={styles.img}
         />
-
         <TouchableOpacity onPress={navigateToCamera}>
           <Image source={require("../../../assets/imgs/icons/camera.png")} />
         </TouchableOpacity>
