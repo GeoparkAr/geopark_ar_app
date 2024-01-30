@@ -47,6 +47,7 @@ export default function Login() {
             displayName: user.displayName,
             stamps: {
               geoparkAraripe: {
+                mission0: true,
                 mission1: false,
                 mission2: false,
                 mission3: false,
@@ -58,7 +59,7 @@ export default function Login() {
               },
             },
           });
-          navigation.navigate("Welcome");
+          navigation.navigate("Home");
         })
         .catch((error) => {
           const errorMessage = error.message;
