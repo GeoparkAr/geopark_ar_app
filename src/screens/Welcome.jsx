@@ -15,7 +15,18 @@ export default function Welcome() {
 
   const handleAnonymousLogin = async () => {
     await signInAnonymously(auth)
-      .then(() => {
+      .then(async () => {
+        const user = auth.currentUser;
+        await setDoc(doc(db, "visitors", user.uid), {
+          uid: user.uid,
+          stamps: {
+            geoparkAraripe: {
+              mission0: true,
+              mission1: false,
+              mission2: false,
+            },
+          },
+        });
         navigation.navigate("Home");
       })
       .catch((error) => {

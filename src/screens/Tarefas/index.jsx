@@ -124,7 +124,7 @@ export default function Tarefas() {
     navigateToQuestionario();
     const docRef = doc(db, "users", documentID);
     await updateDoc(docRef, {
-      "selos.geoparkAraripe.mission1": true,
+      "stamps.geoparkAraripe.mission1": true,
     })
       .then(() => {})
       .catch((error) => {
@@ -141,7 +141,7 @@ export default function Tarefas() {
     navigateToMissao();
     const docRef = doc(db, "users", documentID);
     await updateDoc(docRef, {
-      "selos.geoparkAraripe.mission2": true,
+      "stamps.geoparkAraripe.mission2": true,
     })
       .then(() => {})
       .catch((error) => {
@@ -161,7 +161,7 @@ export default function Tarefas() {
         navigateToMissao3();
         const docRef = doc(db, "users", documentID);
         await updateDoc(docRef, {
-          "selos.geoparkAraripe.mission3": true,
+          "stamps.geoparkAraripe.mission3": true,
         })
           .then(() => {})
           .catch((error) => {
@@ -185,7 +185,7 @@ export default function Tarefas() {
         navigateToMissao4();
         const docRef = doc(db, "users", documentID);
         await updateDoc(docRef, {
-          "selos.geoparkAraripe.mission4": true,
+          "stamps.geoparkAraripe.mission4": true,
         })
           .then(() => {})
           .catch((error) => {
@@ -209,7 +209,7 @@ export default function Tarefas() {
         navigateToMissao5();
         const docRef = doc(db, "users", documentID);
         await updateDoc(docRef, {
-          "selos.geoparkAraripe.mission5": true,
+          "stamps.geoparkAraripe.mission5": true,
         })
           .then(() => {})
           .catch((error) => {
@@ -233,7 +233,7 @@ export default function Tarefas() {
         navigateToMissao6();
         const docRef = doc(db, "users", documentID);
         await updateDoc(docRef, {
-          "selos.geoparkAraripe.mission6": true,
+          "stamps.geoparkAraripe.mission6": true,
         })
           .then(() => {})
           .catch((error) => {
@@ -257,7 +257,7 @@ export default function Tarefas() {
         navigateToMissao7();
         const docRef = doc(db, "users", documentID);
         await updateDoc(docRef, {
-          "selos.geoparkAraripe.mission7": true,
+          "stamps.geoparkAraripe.mission7": true,
         })
           .then(() => {})
           .catch((error) => {
