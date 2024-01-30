@@ -38,8 +38,8 @@ const styles = StyleSheet.create({
   },
   geossitioNome: {
     color: "#18241B",
-    fontWeight: "700",
-    fontSize: 14,
+    fontWeight: "600",
+    fontSize: 12,
     textAlign: "center",
     marginVertical: 5,
   },

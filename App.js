@@ -46,7 +46,9 @@ function Root() {
   const [user, setUser] = useState(null);
   const [authChecked, setAuthChecked] = useState(false);
 
-  {/* verificar se usuário está logado */}
+  {
+    /* verificar se usuário está logado */
+  }
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (authUser) => {
       setUser(authUser);
@@ -141,10 +143,10 @@ function Root() {
                 onPress={() => navigation.navigate("Sobre")}
               >
                 <Image
-                  source={require("./assets/imgs/icons/geopark.png")}
-                  style={{ width: 35 }}
+                  source={require("./assets/imgs/icon.png")}
+                  style={{ width: 35, height: 35 }}
                 />
-                <Text style={{ fontWeight: "600" }}>Sobre nós</Text>
+                <Text style={{ fontWeight: "500" }}>Sobre nós</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={{
@@ -153,15 +155,29 @@ function Root() {
                   width: "100%",
                   height: 60,
                   alignItems: "center",
-                  paddingLeft: 5,
                 }}
                 onPress={() => navigation.navigate("Selos")}
               >
-                <Image
-                  source={require("./assets/imgs/icons/Chest.png")}
-                  style={{ width: 26, height: 26 }}
-                />
-                <Text style={{ fontWeight: "600" }}>Recompensas</Text>
+                <View
+                  style={{
+                    width: 35,
+                    height: 35,
+                    backgroundColor: "#39B061",
+                    borderRadius: 5,
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Image
+                    source={require("./assets/imgs/icons/chestbig.png")}
+                    style={{
+                      width: 26,
+                      height: 26,
+                    }}
+                  />
+                </View>
+
+                <Text style={{ fontWeight: "500" }}>Recompensas</Text>
               </TouchableOpacity>
               {user && !user.isAnonymous ? (
                 <TouchableOpacity
@@ -171,12 +187,23 @@ function Root() {
                     width: "100%",
                     height: 60,
                     alignItems: "center",
-                    paddingLeft: 6,
                   }}
                   onPress={() => navigation.navigate("Configuracoes")}
                 >
-                  <Ionicons name="ios-settings" size={24} color="#39B061" />
-                  <Text style={{ fontWeight: "600" }}>Configurações</Text>
+                  <View
+                    style={{
+                      width: 35,
+                      height: 35,
+                      backgroundColor: "#39B061",
+                      borderRadius: 5,
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Ionicons name="ios-settings" size={24} color="#F4F4F4" />
+                  </View>
+
+                  <Text style={{ fontWeight: "500" }}>Configurações</Text>
                 </TouchableOpacity>
               ) : null}
             </View>
@@ -210,150 +237,150 @@ function Root() {
 export default function App() {
   return (
     <AuthProvider>
-    <NavigationContainer>
-      <Stack.Navigator options={{ headerShown: false }}>
-        <Stack.Screen
-          name="Root"
-          component={Root}
-          options={{ headerShown: false, title: "" }}
-        />
+      <NavigationContainer>
+        <Stack.Navigator options={{ headerShown: false }}>
+          <Stack.Screen
+            name="Root"
+            component={Root}
+            options={{ headerShown: false, title: "" }}
+          />
 
-        <Stack.Group screenOptions={{ headerShown: false }}>
-          <Stack.Screen
-            name="Tarefas"
-            component={Tarefas}
-            options={{ title: "" }}
-          />
-        </Stack.Group>
+          <Stack.Group screenOptions={{ headerShown: false }}>
+            <Stack.Screen
+              name="Tarefas"
+              component={Tarefas}
+              options={{ title: "" }}
+            />
+          </Stack.Group>
 
-        <Stack.Group
-          screenOptions={{
-            headerTitleAlign: "center",
-            headerBackTitle: "Voltar",
-          }}
-        >
-          <Stack.Screen
-            name="Camera"
-            component={CameraWeb}
-            options={{
-              headerTitle: "Câmera ",
+          <Stack.Group
+            screenOptions={{
+              headerTitleAlign: "center",
+              headerBackTitle: "Voltar",
             }}
-          />
-          <Stack.Screen
-            name="Terms"
-            component={Terms}
-            options={{
-              headerTitle: "Termos e Política ",
-            }}
-          />
-          <Stack.Screen
-            name="Problems"
-            component={Problems}
-            options={{
-              headerTitle: "Denuncie um problema",
-            }}
-          />
-          <Stack.Screen
-            name="Editar"
-            component={EditarPerfil}
-            options={{
-              headerTitle: "Editar perfil",
-            }}
-          />
-          <Stack.Screen
-            name="Help"
-            component={Help}
-            options={{
-              headerTitle: "Ajuda e suporte",
-            }}
-          />
-          <Stack.Screen
-            name="Sobre"
-            component={About}
-            options={{
-              headerTitle: "Sobre nós",
-            }}
-          />
-          <Stack.Screen
-            name="Selos"
-            component={Selos}
-            options={{
-              headerTitle: "Recompensas",
-            }}
-          />
-          <Stack.Screen
-            name="Configuracoes"
-            component={Settings}
-            options={{
-              headerTitle: "Configurações",
-            }}
-          />
-          <Stack.Screen
-            name="Questionario"
-            component={Questionario}
-            options={{
-              headerTitle: "Pesquisa Geopark",
-            }}
-          />
-          <Stack.Screen
-            name="Missao"
-            component={Missao}
-            options={{
-              headerTitle: "Estátua do Padre Cícero",
-            }}
-          />
-          <Stack.Screen
-            name="MissaoTree"
-            component={MissaoTree}
-            options={{
-              headerTitle: "Pedra do Pecado",
-            }}
-          />
-          <Stack.Screen
-            name="MissaoFour"
-            component={MissaoFour}
-            options={{
-              headerTitle: "Muro da Resistência",
-            }}
-          />
-          <Stack.Screen
-            name="MissaoFive"
-            component={MissaoFive}
-            options={{
-              headerTitle: "O Marco do Padre Cícero",
-            }}
-          />
-          <Stack.Screen
-            name="MissaoSix"
-            component={MissaoSix}
-            options={{
-              headerTitle: "Cruzeiro",
-            }}
-          />
-          <Stack.Screen
-            name="MissaoSeven"
-            component={MissaoSeven}
-            options={{
-              headerTitle: "Igreja Bom jesus do Horto",
-            }}
-          />
-          <Stack.Screen
-            name="Login"
-            component={Login}
-            options={{
-              headerTitle: "Entrar",
-            }}
-          />
-          <Stack.Screen
-            name="Register"
-            component={Register}
-            options={{
-              headerTitle: "Criar conta",
-            }}
-          />
-        </Stack.Group>
-      </Stack.Navigator>
-    </NavigationContainer>
+          >
+            <Stack.Screen
+              name="Camera"
+              component={CameraWeb}
+              options={{
+                headerTitle: "Câmera ",
+              }}
+            />
+            <Stack.Screen
+              name="Terms"
+              component={Terms}
+              options={{
+                headerTitle: "Termos e Política ",
+              }}
+            />
+            <Stack.Screen
+              name="Problems"
+              component={Problems}
+              options={{
+                headerTitle: "Denuncie um problema",
+              }}
+            />
+            <Stack.Screen
+              name="Editar"
+              component={EditarPerfil}
+              options={{
+                headerTitle: "Editar perfil",
+              }}
+            />
+            <Stack.Screen
+              name="Help"
+              component={Help}
+              options={{
+                headerTitle: "Ajuda e suporte",
+              }}
+            />
+            <Stack.Screen
+              name="Sobre"
+              component={About}
+              options={{
+                headerTitle: "Sobre nós",
+              }}
+            />
+            <Stack.Screen
+              name="Selos"
+              component={Selos}
+              options={{
+                headerTitle: "Recompensas",
+              }}
+            />
+            <Stack.Screen
+              name="Configuracoes"
+              component={Settings}
+              options={{
+                headerTitle: "Configurações",
+              }}
+            />
+            <Stack.Screen
+              name="Questionario"
+              component={Questionario}
+              options={{
+                headerTitle: "Pesquisa Geopark",
+              }}
+            />
+            <Stack.Screen
+              name="Missao"
+              component={Missao}
+              options={{
+                headerTitle: "Estátua do Padre Cícero",
+              }}
+            />
+            <Stack.Screen
+              name="MissaoTree"
+              component={MissaoTree}
+              options={{
+                headerTitle: "Pedra do Pecado",
+              }}
+            />
+            <Stack.Screen
+              name="MissaoFour"
+              component={MissaoFour}
+              options={{
+                headerTitle: "Muro da Resistência",
+              }}
+            />
+            <Stack.Screen
+              name="MissaoFive"
+              component={MissaoFive}
+              options={{
+                headerTitle: "O Marco do Padre Cícero",
+              }}
+            />
+            <Stack.Screen
+              name="MissaoSix"
+              component={MissaoSix}
+              options={{
+                headerTitle: "Cruzeiro",
+              }}
+            />
+            <Stack.Screen
+              name="MissaoSeven"
+              component={MissaoSeven}
+              options={{
+                headerTitle: "Igreja Bom jesus do Horto",
+              }}
+            />
+            <Stack.Screen
+              name="Login"
+              component={Login}
+              options={{
+                headerTitle: "Entrar",
+              }}
+            />
+            <Stack.Screen
+              name="Register"
+              component={Register}
+              options={{
+                headerTitle: "Criar conta",
+              }}
+            />
+          </Stack.Group>
+        </Stack.Navigator>
+      </NavigationContainer>
     </AuthProvider>
   );
 }

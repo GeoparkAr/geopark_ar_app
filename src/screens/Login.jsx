@@ -6,7 +6,7 @@ import {
   Text,
   Image,
   Alert,
-  TouchableOpacity
+  TouchableOpacity,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
@@ -28,10 +28,11 @@ export default function Login() {
       Alert.alert("Erro", "Digite um email válido");
     } else if (senha.length < 6) {
       Alert.alert("Erro", "Insira sua senha");
-    } else { //faz login
+    } else {
+      //faz login
       try {
         await signInWithEmailAndPassword(auth, email, senha);
-        // Loged in 
+        // Loged in
         navigation.navigate("Home");
       } catch (error) {
         const errorMessage = error.message;
@@ -39,7 +40,6 @@ export default function Login() {
       }
     }
   };
-  
 
   const validateEmail = (email) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -87,14 +87,20 @@ export default function Login() {
         </View>
 
         <TouchableOpacity className="flex flex-row items-center justify-center h-10 rounded-[10px] border-[#18241B] border mb-16">
-          <Image source={require("../../assets/imgs/icons/google.png")}  className="mr-3"/>
+          <Image
+            source={require("../../assets/imgs/icons/google.png")}
+            className="mr-3"
+          />
           <Text style={styles.textGoogle}>Entrar com Google</Text>
         </TouchableOpacity>
         <View className="flex flex-row justify-center items-center gap-1">
           <Text className="text-sm font-semibold">Não tem uma conta? </Text>
-          <TouchableOpacity onPress={Register}><Text className="text-sm font-semibold text-[#40CC6F]">Criar conta</Text></TouchableOpacity>
+          <TouchableOpacity onPress={Register}>
+            <Text className="text-sm font-semibold text-[#40CC6F]">
+              Criar conta
+            </Text>
+          </TouchableOpacity>
         </View>
-        
       </ScrollView>
     </View>
   );
@@ -146,12 +152,12 @@ const styles = StyleSheet.create({
     backgroundColor: "gray",
     marginLeft: 5,
   },
-  textGoogle:{
+  textGoogle: {
     fontWeight: "600",
     fontSize: 14,
     color: "#18241B",
   },
-  title:{
+  title: {
     fontWeight: "600",
-  }
+  },
 });

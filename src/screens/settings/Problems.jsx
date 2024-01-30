@@ -37,19 +37,11 @@ export default function Problems() {
         />
 
         <TouchableOpacity
-          style={{
-            backgroundColor: "#DAF1E2",
-            width: 100,
-            paddingVertical: 5,
-            borderRadius: 10,
-            justifyContent: "center",
-            alignItems: "center",
-            marginTop: 20,
-          }}
+         className="h-14 rounded-[10px] flex justify-center items-center w-full bg-[#39B061] mt-7"
         >
           <Text
             style={{
-              color: "#18241B",
+              color: "#fff",
               fontSize: 16,
               fontWeight: "700",
             }}
@@ -64,14 +56,14 @@ export default function Problems() {
 
 const styles = StyleSheet.create({
   text: {
-    fontSize: 14,
+    fontSize: 16,
     marginBottom: 8,
     textAlign: "justify",
   },
   title: {
     color: "#18241B",
     fontSize: 18,
-    fontWeight: "600",
+    fontWeight: "500",
     marginVertical: 18,
   },
   title2: {

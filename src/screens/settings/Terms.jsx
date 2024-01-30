@@ -20,7 +20,7 @@ export default function Terms() {
     >
 
       <ScrollView style={{ paddingHorizontal: 20, marginBottom: 1 }}>
-        <Text style={styles.title}>Termos e condições de uso:</Text>
+        <Text className="text-[18px] font-medium, my-3">Termos e condições de uso:</Text>
         <Text style={styles.text}>
           Ao baixar ou usar o aplicativo, estes termos serão aplicados
           automaticamente a você. Você deve certificar-se, portanto, de que não
@@ -73,19 +73,7 @@ export default function Terms() {
           assumir a responsabilidade pelo aplicativo não funcionar totalmente se
           você não tiver acesso a Wi-Fi ou não tiver parte da sua cota de dados.
         </Text>
-        <Text style={styles.text} className=" justify-center gap-3">
-          O aplicativo atualmente está disponível para Android em{" "}
-          <Text
-            onPress={() => {
-              Linking.openURL("https://play.google.com");
-            }}
-            style={{ textDecorationLine: "underline", color: "blue" }}
-          >
-            https://play.google.com
-          </Text>
-          . Os requisitos para o sistema podem mudar, e você precisará baixar as
-          atualizações se quiser manter-se usando o aplicativo.
-        </Text>
+        
         <Text style={styles.text}>
           Alterações a esses termos e condições de uso: Nós podemos atualizar
           nossos Termos e Condições de tempos em tempos, portanto, é
@@ -97,14 +85,14 @@ export default function Terms() {
           style={{
             textDecorationLine: "underline",
             color: "blue",
-            paddingVertical: 20,
             borderBottomColor: "#E8E8E8",
             borderBottomWidth: 1,
+            marginBottom: 20
           }}
         >
           Atualização: 15/12/2023
         </Text>
-        <Text style={styles.title}>Política de privacidade:</Text>
+        <Text className="text-[18px] font-medium, my-3">Política de privacidade:</Text>
         <Text style={styles.text}>
           Prezado usuário do aplicativo Geopark AR, é com grande respeito pela
           sua privacidade que apresentamos nossa Política de Privacidade, a qual
@@ -169,7 +157,9 @@ export default function Terms() {
           style={{
             textDecorationLine: "underline",
             color: "blue",
-            paddingVertical: 20,
+            borderBottomColor: "#E8E8E8",
+            borderBottomWidth: 1,
+            marginBottom: 30
           }}
         >
           Atualização: 15/12/2023
@@ -195,5 +185,6 @@ const styles = StyleSheet.create({
     color: "#18241B",
     fontSize: 16,
     marginVertical: 4,
+    fontWeight: "600"
   },
 });

@@ -299,7 +299,7 @@ export default function Tarefas() {
   };
 
   return (
-    <ScrollView>
+    <ScrollView style={{backgroundColor:"#FFF"}}>
       <View className="relative">
         <TouchableOpacity
           className="absolute top-16 left-4 z-50 bg-[#39B061] rounded-full p-1"
@@ -313,11 +313,11 @@ export default function Tarefas() {
         />
       </View>
       <View>
-        <View className="px-3">
-          <Text className="text-[#18241B] text-xl font-bold py-2">
+        <View className="px-3 bg-[#39B061] py-3 ">
+          <Text className=" text-[18px] font-medium pb-2 text-white">
             Colina do Horto
           </Text>
-          <Text className="text-[#18241B] text-base font-medium text-justify">
+          <Text className="text-white text-base text-justify">
             A Colina do Horto é um local religioso associado ao Padre Cícero.
             Abriga a estátua do Padim Ciço, centro de devoção e peregrinação de
             fiéis que acreditam em milagres associados ao religioso.

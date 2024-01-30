@@ -223,7 +223,7 @@ export default function Home() {
                 style={[
                   styles.img,
                   categoriaSelecionada === "Acessibilidade" && {
-                    backgroundColor: "#41C76E",
+                    backgroundColor: "#287D44",
                   },
                 ]}
               >
@@ -242,7 +242,7 @@ export default function Home() {
                 style={[
                   styles.img,
                   categoriaSelecionada === "Aquático" && {
-                    backgroundColor: "#41C76E",
+                    backgroundColor: "#287D44",
                   },
                 ]}
               >
@@ -261,7 +261,7 @@ export default function Home() {
                 style={[
                   styles.img,
                   categoriaSelecionada === "Arqueológico" && {
-                    backgroundColor: "#41C76E",
+                    backgroundColor: "#287D44",
                   },
                 ]}
               >
@@ -279,7 +279,7 @@ export default function Home() {
                 style={[
                   styles.img,
                   categoriaSelecionada === "Biodiversidade" && {
-                    backgroundColor: "#41C76E",
+                    backgroundColor: "#287D44",
                   },
                 ]}
               >
@@ -305,7 +305,7 @@ export default function Home() {
                 style={[
                   styles.img,
                   categoriaSelecionada === "Cultural" && {
-                    backgroundColor: "#41C76E",
+                    backgroundColor: "#287D44",
                   },
                 ]}
               >
@@ -324,7 +324,7 @@ export default function Home() {
                 style={[
                   styles.img,
                   categoriaSelecionada === "Geodiversidade" && {
-                    backgroundColor: "#41C76E",
+                    backgroundColor: "#287D44",
                   },
                 ]}
               >
@@ -343,7 +343,7 @@ export default function Home() {
                 style={[
                   styles.img,
                   categoriaSelecionada === "Geomorfológico" && {
-                    backgroundColor: "#41C76E",
+                    backgroundColor: "#287D44",
                   },
                 ]}
               >
@@ -361,7 +361,7 @@ export default function Home() {
                 style={[
                   styles.img,
                   categoriaSelecionada === "Mirante" && {
-                    backgroundColor: "#41C76E",
+                    backgroundColor: "#287D44",
                   },
                 ]}
               >
@@ -387,7 +387,7 @@ export default function Home() {
                 style={[
                   styles.img,
                   categoriaSelecionada === "Paleontológico" && {
-                    backgroundColor: "#41C76E",
+                    backgroundColor: "#287D44",
                   },
                 ]}
               >
@@ -406,7 +406,7 @@ export default function Home() {
                 style={[
                   styles.img,
                   categoriaSelecionada === "Religioso" && {
-                    backgroundColor: "#41C76E",
+                    backgroundColor: "#287D44",
                   },
                 ]}
               >
@@ -415,7 +415,7 @@ export default function Home() {
                 />
               </View>
 
-              <Text style={styles.categoriaText}>Religioso</Text>
+              <Text style={styles.categoriaText}>Espiritual</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.containerCategoria}
@@ -425,7 +425,7 @@ export default function Home() {
                 style={[
                   styles.img,
                   categoriaSelecionada === "Trilha" && {
-                    backgroundColor: "#41C76E",
+                    backgroundColor: "#287D44",
                   },
                 ]}
               >
@@ -533,7 +533,6 @@ const styles = StyleSheet.create({
   },
   destaque: {
     width: "100%",
-    height: 117,
     borderRadius: 8,
   },
   viewDestaque: {
@@ -542,6 +541,7 @@ const styles = StyleSheet.create({
     position: "relative",
     marginBottom: 37,
     elevation: 6,
+
   },
   destaqueContent: {
     position: "absolute",
@@ -551,12 +551,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     width: "90%",
-    alignItems: "center",
+    alignItems: "center",   
   },
   titleDestaque: {
     color: "#FFF",
-    fontSize: 24,
-    fontWeight: "800",
+    fontSize: 18,
+    fontWeight: "500",
   },
   textsDestaque: {
     display: "flex",
@@ -564,9 +564,10 @@ const styles = StyleSheet.create({
   },
   textDestaque: {
     color: "#FFF",
-    fontWeight: "600",
-    fontSize: 11,
+    fontWeight: "400",
+    fontSize: 12,
     width: 200,
+    textAlign:"justify"
   },
   buttonDestaque: {
     width: 73,
@@ -583,9 +584,9 @@ const styles = StyleSheet.create({
   },
   title: {
     color: "#18241B",
-    fontWeight: "700",
-    fontSize: 20,
-    marginBottom: 12.54,
+    fontWeight: "500",
+    fontSize: 18,
+    marginBottom: 25,
   },
   categoriaText: {
     color: "#18241B",
@@ -605,43 +606,56 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
   },
   geossitioDestaque: {
-    width: 159.482,
-    height: 216.256,
-    backgroundColor: "#39B061",
-    borderRadius: 16,
-    justifyContent: "center",
-    alignItems: "center",
-    elevation: 3,
-  },
-  geossitioNomeDestaque: {
-    color: "#FFF",
-    fontWeight: "600",
-    fontSize: 14,
-    marginVertical: 5,
-  },
-  municipioDestaque: {
-    color: "#FFF",
-    fontWeight: "600",
-    fontSize: 10,
-    width: 53,
-  },
-  buttonColina: {
-    width: 69,
-    height: 25.5,
+    width: 150,
+    height: 216,
     backgroundColor: "#FFF",
     borderRadius: 16,
     justifyContent: "center",
     alignItems: "center",
+    elevation: 3,
+    paddingHorizontal: 10,
+    shadowColor: "#18241B",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+    elevation: 4,
+  },
+  geossitioNomeDestaque: {
+    color: "#18241B",
+    fontWeight: "700",
+    fontSize: 14,
+    textAlign: "center",
+    marginVertical: 5,
+  },
+  municipioDestaque: {
+    color: "#18241B",
+    fontWeight: "500",
+    fontSize: 10,
+    width: 55,
+    textAlign: "center",
+  },
+  buttonColina: {
+    width: 65,
+    height: 25.5,
+    backgroundColor: "#39B061",
+    borderRadius: 16,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingBottom: 2,
+    marginLeft: 3
   },
   inforButton: {
     flexDirection: "row",
     justifyContent: "space-around",
-    alignItems: "center",
+    alignItems: "center"
   },
   explorar: {
-    color: "#18241B",
+    color: "#fff",
     fontWeight: "700",
-    fontSize: 13,
+    fontSize: 13
   },
   geossitios: {
     flexDirection: "row",

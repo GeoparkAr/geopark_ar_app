@@ -9,7 +9,7 @@ export default function About() {
       <View className="px-7 justify-center py-10">
         <View className="self-center"></View>
         <View>
-          <Text className="text-xl mb-3">Geopark AR</Text>
+          <Text className="text-[18px] font-medium mb-3">Geopark AR</Text>
           <Text className="text-justify text-base">
             No seio do Cariri, nasce o Geoark AR, um aplicativo pioneiro
             desenvolvido a partir de uma residência em Tecnologia da Informação
@@ -78,7 +78,7 @@ export default function About() {
               />
             </View>
           </View>
-          <Text className="text-xl mb-3 mt-7">Sobre o Geopark Araripe</Text>
+          <Text className="text-[18px] font-medium mb-3 mt-7">Sobre o Geopark Araripe</Text>
           <Text className="text-justify text-base">
             O Geopark Araripe é uma área de preservação localizada na região do
             Cariri, no estado do Ceará, Brasil. Criado em 2006, o geoparque

@@ -31,11 +31,12 @@ export default function Login() {
       Alert.alert("Erro", "As senhas não coincidem");
     } else if (nome.length < 2) {
       Alert.alert("Erro", "Preencha todos os campos corretamente");
-    } else { //envia dados para o firebase
+    } else {
+      //envia dados para o firebase
       await createUserWithEmailAndPassword(auth, email, senha)
         .then(async (userCredential) => {
           const user = userCredential.user;
-          await updateProfile(user, {displayName: nome})
+          await updateProfile(user, { displayName: nome })
             .then(() => {})
             .catch((error) => {
               const errorMessage = error.message;
@@ -67,7 +68,7 @@ export default function Login() {
         });
     }
   };
-  
+
   //validar email
   const validateEmail = (email) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

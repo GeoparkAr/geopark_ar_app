@@ -17,7 +17,9 @@ import { updateDoc } from "firebase/firestore";
 
 export default function Questionario() {
   const navigation = useNavigation();
-  const { data: { docRef } } = useAuth();
+  const {
+    data: { docRef },
+  } = useAuth();
 
   //verificar se todos os campos foram preenchidos
   const navigateToTarefas = () => {
@@ -97,222 +99,176 @@ export default function Questionario() {
   };
 
   const handleLastVisitSave = async () => {
-    const cityFinded = cityData.find(cityFind => cityFind.value === city)
+    const cityFinded = cityData.find((cityFind) => cityFind.value === city);
     await updateDoc(docRef, {
       "lastVisit.geoparkAraripe.groupSize": groupSize,
       "lastVisit.geoparkAraripe.originState": state,
       "lastVisit.geoparkAraripe.originCity": cityFinded.label,
       "lastVisit.geoparkAraripe.groupAgeRange": ageRange,
       "lastVisit.geoparkAraripe.visitPurpose": selectedOption,
-    }).then(() => {
-      navigateToTarefas();
-    }).catch((error) => {
-      const errorMessage = error.message;
-      Alert.alert("Erro ao atualizar BD", errorMessage);
-    });
-  }
+    })
+      .then(() => {
+        navigateToTarefas();
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        Alert.alert("Erro ao atualizar BD", errorMessage);
+      });
+  };
 
   return (
     <ScrollView style={{ backgroundColor: "#FFF", flex: 1 }}>
-      <View>
-        <View style={{ alignItems: "center" }}>
-          <View style={{ marginHorizontal: 26 }}>
-            <View
-              style={{
-                flexDirection: "row",
-                gap: 20,
-                alignItems: "center",
-                marginVertical: 10,
-              }}
-            >
-              <View>
-                <Text
-                  style={{
-                    fontWeight: "700",
-                    fontSize: 20,
-                    color: "#18241B",
-                    marginTop: 10,
-                  }}
-                >
-                  Pesquisa
-                </Text>
-                <Text
-                  style={{
-                    fontWeight: "700",
-                    fontSize: 20,
-                    color: "#18241B",
-                  }}
-                >
-                  Geopark Araripe
-                </Text>
-              </View>
+          <View className="justify-around flex h-full py-4 px-6 gap-9">
+            <View className="gap-3">
+              <Text
+                style={{
+                  fontWeight: "600",
+                  fontSize: 16,
+                  color: "#18241B",
+                }}
+              >
+                Quantas pessoas estão no seu grupo?
+              </Text>
+              <TextInput
+                placeholder="01"
+                style={styles.dropdown2}
+                keyboardType="numeric"
+                value={groupSize}
+                onChangeText={(text) => setGroupSize(text)}
+                maxLength={2}
+              />
             </View>
-
-            <View style={{ gap: 15 }}>
-              <View style={{ gap: 10 }}>
-                <Text
-                  style={{
-                    fontWeight: "600",
-                    fontSize: 16,
-                    color: "#18241B",
-                    marginTop: 20,
-                  }}
-                >
-                  Quantas pessoas estão no seu grupo?
-                </Text>
-                <TextInput
-                  placeholder="01"
-                  style={styles.dropdown2}
-                  keyboardType="numeric"
-                  value={groupSize}
-                  onChangeText={(text) => setGroupSize(text)}
-                  maxLength={2}
-                />
-              </View>
-              <View>
-                <Text
-                  style={{
-                    fontWeight: "600",
-                    fontSize: 16,
-                    color: "#18241B",
-                  }}
-                >
-                  De onde veio para visitar o Padre Cícero?
-                </Text>
-                <View
-                  style={{ marginVertical: 10, flexDirection: "row", gap: 20 }}
-                >
-                  <SelectCountry
-                    search
-                    style={styles.dropdown}
-                    selectedTextStyle={styles.selectedTextStyle}
-                    placeholderStyle={styles.placeholderStyle}
-                    imageStyle={styles.imageStyle}
-                    iconStyle={styles.iconStyle}
-                    maxHeight={200}
-                    value={state}
-                    data={stateData}
-                    valueField="value"
-                    labelField="label"
-                    placeholder="Estado"
-                    searchPlaceholder="Procurar"
-                    onChange={(e) => {
-                      setState(e.value);
-                    }}
-                  />
-                  <SelectCountry
-                    search
-                    style={styles.dropdown}
-                    selectedTextStyle={styles.selectedTextStyle}
-                    placeholderStyle={styles.placeholderStyle}
-                    imageStyle={styles.imageStyle}
-                    iconStyle={styles.iconStyle}
-                    maxHeight={200}
-                    value={city}
-                    data={cityData}
-                    valueField="value"
-                    labelField="label"
-                    placeholder="Cidade"
-                    searchPlaceholder="Procurar"
-                    onChange={(e) => {
-                      setCity(e.value);
-                    }}
-                  />
-                </View>
-              </View>
-              <View>
-                <Text
-                  style={{
-                    fontWeight: "600",
-                    fontSize: 16,
-                    color: "#18241B",
-                    textAlign: "justify",
-                    marginVertical: 10,
-                  }}
-                >
-                  O objetivo principal da sua visita a cidade de Juazeiro do
-                  Norte é visitar a Colina do Horto?
-                </Text>
+            <View className="gap-3">
+              <Text
+                style={{
+                  fontWeight: "600",
+                  fontSize: 16,
+                  color: "#18241B",
+                }}
+              >
+                De onde veio para visitar o Padre Cícero?
+              </Text>
+              <View
+                style={{ marginVertical: 10, flexDirection: "row", gap: 20 }}
+              >
                 <SelectCountry
-                  style={styles.dropdown2}
-                  value={selectedOption}
-                  data={yesNoOptions}
+                  search
+                  style={styles.dropdown}
+                  selectedTextStyle={styles.selectedTextStyle}
+                  placeholderStyle={styles.placeholderStyle}
+                  imageStyle={styles.imageStyle}
+                  iconStyle={styles.iconStyle}
+                  maxHeight={200}
+                  value={state}
+                  data={stateData}
                   valueField="value"
                   labelField="label"
-                  placeholder="Selecione"
+                  placeholder="Estado"
+                  searchPlaceholder="Procurar"
                   onChange={(e) => {
-                    setSelectedOption(e.value);
+                    setState(e.value);
+                  }}
+                />
+                <SelectCountry
+                  search
+                  style={styles.dropdown}
+                  selectedTextStyle={styles.selectedTextStyle}
+                  placeholderStyle={styles.placeholderStyle}
+                  imageStyle={styles.imageStyle}
+                  iconStyle={styles.iconStyle}
+                  maxHeight={200}
+                  value={city}
+                  data={cityData}
+                  valueField="value"
+                  labelField="label"
+                  placeholder="Cidade"
+                  searchPlaceholder="Procurar"
+                  onChange={(e) => {
+                    setCity(e.value);
                   }}
                 />
               </View>
-              <View>
-                <Text
+            </View>
+            <View className="gap-3">
+              <Text
+                style={{
+                  fontWeight: "600",
+                  fontSize: 16,
+                  color: "#18241B",
+                  textAlign: "justify",
+                }}
+              >
+                O objetivo principal da sua visita a cidade de Juazeiro do Norte
+                é visitar a Colina do Horto?
+              </Text>
+              <SelectCountry
+                style={styles.dropdown2}
+                value={selectedOption}
+                data={yesNoOptions}
+                valueField="value"
+                labelField="label"
+                placeholder="Selecione"
+                onChange={(e) => {
+                  setSelectedOption(e.value);
+                }}
+              />
+            </View>
+            <View className="gap-3">
+              <Text
+                style={{
+                  fontWeight: "600",
+                  fontSize: 16,
+                  color: "#18241B",
+                }}
+              >
+                Qual faixa etária seu grupo possui?
+              </Text>
+              <View style={{ alignSelf: "center" }}>
+                <View
                   style={{
-                    fontWeight: "600",
-                    fontSize: 16,
-                    color: "#18241B",
-                    marginTop: 20,
+                    flexDirection: "row",
+                    justifyContent: "space-between",
                   }}
                 >
-                  Qual faixa etária seu grupo possui?
-                </Text>
-                <View style={{ alignSelf: "center" }}>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <Text style={{ fontSize: 16 }}>{ageRange[0]}</Text>
-                    <Text style={{ fontSize: 16 }}>{ageRange[1]}</Text>
-                  </View>
-
-                  <MultiSlider
-                    values={ageRange}
-                    min={0}
-                    max={100}
-                    step={1}
-                    sliderLength={310}
-                    onValuesChange={handleValuesChange}
-                    allowOverlap={false}
-                    snapped={false}
-                    isMarkersSeparated={true}
-                  />
+                  <Text style={{ fontSize: 16 }}>{ageRange[0]}</Text>
+                  <Text style={{ fontSize: 16 }}>{ageRange[1]}</Text>
                 </View>
+
+                <MultiSlider
+                  values={ageRange}
+                  min={0}
+                  max={100}
+                  step={1}
+                  sliderLength={310}
+                  onValuesChange={handleValuesChange}
+                  allowOverlap={false}
+                  snapped={false}
+                  isMarkersSeparated={true}
+                />
               </View>
             </View>
-          </View>
-          <TouchableOpacity
-            style={{
-              width: 137,
-              height: 44,
-              backgroundColor: "#287D44",
-              borderRadius: 10,
-              justifyContent: "center",
-              alignItems: "center",
-              marginTop: 50,
-            }}
-            onPress={handleLastVisitSave}
-          >
-            <Text
-              style={{
-                fontWeight: "700",
-                fontSize: 16,
-                color: "#fff",
-              }}
+            <TouchableOpacity
+             className="h-14 rounded-[10px] flex justify-center items-center bg-[#39B061] mt-7"
+              onPress={handleLastVisitSave}
             >
-              Continuar
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+              <Text
+                style={{
+                  fontWeight: "700",
+                  fontSize: 16,
+                  color: "#fff",
+                }}
+              >
+                Continuar
+              </Text>
+            </TouchableOpacity>
+          </View>
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   dropdown: {
-    height: 50,
+    height: 40,
     flex: 1,
     backgroundColor: "#FFF",
     borderRadius: 8,
@@ -321,7 +277,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   dropdown2: {
-    height: 50,
+    height: 40,
     backgroundColor: "#FFF",
     borderRadius: 8,
     paddingHorizontal: 8,
