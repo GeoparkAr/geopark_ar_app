@@ -22,6 +22,9 @@ export default function Login() {
     navigation.navigate("Register");
   };
 
+  const NovaSenha =() => {
+    navigation.navigate("NewPassword")
+  }
   const handleLogin = async () => {
     //verificar se as informações inseridas pelo usuário são válidas
     if (!validateEmail(email)) {
@@ -64,7 +67,9 @@ export default function Login() {
           value={senha}
           onChangeText={(text) => setSenha(text)}
         />
-        <Text style={styles.text}>Esqueceu a senha?</Text>
+        <TouchableOpacity onPress={NovaSenha}>
+          <Text style={styles.text}>Esqueceu a senha?</Text>
+        </TouchableOpacity>
 
         <TouchableOpacity
           className="h-14 rounded-[10px] flex justify-center items-center w-full bg-[#39B061]"

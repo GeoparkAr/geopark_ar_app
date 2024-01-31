@@ -22,11 +22,6 @@ import Tarefas from "./src/screens/Tarefas/";
 import Missao from "./src/screens/missoes/MissaoTwo";
 import Selos from "./src/screens/Selos";
 import Questionario from "./src/screens/missoes/Questionario";
-import MissaoFour from "./src/screens/missoes/missaoFour";
-import MissaoTree from "./src/screens/missoes/missaoTree";
-import MissaoFive from "./src/screens/missoes/missaoFive";
-import MissaoSix from "./src/screens/missoes/missaoSix";
-import MissaoSeven from "./src/screens/missoes/missaoSeven";
 import About from "./src/screens/About";
 import Login from "./src/screens/Login";
 import Register from "./src/screens/Register";
@@ -36,6 +31,8 @@ import EditarPerfil from "./src/screens/settings/Editarperfil";
 import Help from "./src/screens/settings/Help&suport";
 import Problems from "./src/screens/settings/Problems";
 import CameraWeb from "./src/screens/CameraWeb";
+import NewPassword from "./src/screens/NewPassword";
+
 import { AuthProvider } from "./src/hooks/useAuth";
 
 const Drawer = createDrawerNavigator();
@@ -95,7 +92,7 @@ function Root() {
                       color: "#18241B",
                     }}
                   >
-                    {user.displayName ? user.displayName : "Undefined"}
+                    {user.displayName ? user.displayName : " "}
                   </Text>
                   <Text
                     style={{
@@ -103,7 +100,7 @@ function Root() {
                       color: "#18241B",
                     }}
                   >
-                    {user.email ? user.email : ""}
+                    {user.email ? user.email : " "}
                   </Text>
                 </View>
               </View>
@@ -267,6 +264,13 @@ export default function App() {
               }}
             />
             <Stack.Screen
+              name="NewPassword"
+              component={NewPassword}
+              options={{
+                headerTitle: "Nova Senha ",
+              }}
+            />
+            <Stack.Screen
               name="Terms"
               component={Terms}
               options={{
@@ -327,41 +331,6 @@ export default function App() {
               component={Missao}
               options={{
                 headerTitle: "Estátua do Padre Cícero",
-              }}
-            />
-            <Stack.Screen
-              name="MissaoTree"
-              component={MissaoTree}
-              options={{
-                headerTitle: "Pedra do Pecado",
-              }}
-            />
-            <Stack.Screen
-              name="MissaoFour"
-              component={MissaoFour}
-              options={{
-                headerTitle: "Muro da Resistência",
-              }}
-            />
-            <Stack.Screen
-              name="MissaoFive"
-              component={MissaoFive}
-              options={{
-                headerTitle: "O Marco do Padre Cícero",
-              }}
-            />
-            <Stack.Screen
-              name="MissaoSix"
-              component={MissaoSix}
-              options={{
-                headerTitle: "Cruzeiro",
-              }}
-            />
-            <Stack.Screen
-              name="MissaoSeven"
-              component={MissaoSeven}
-              options={{
-                headerTitle: "Igreja Bom jesus do Horto",
               }}
             />
             <Stack.Screen

@@ -54,7 +54,7 @@ export default function Welcome() {
         >
           <Image
             source={require("../../assets/imgs/logo.png")}
-            style={{ width: 160, height: 160 }}
+            style={{ width: 130, height: 120, marginVertical: 15}}
           />
           <Text style={{ color: "#fff", fontSize: 14 }}>Bem-vindo ao</Text>
           <Text style={{ color: "#fff", fontSize: 20, fontWeight: "800" }}>
