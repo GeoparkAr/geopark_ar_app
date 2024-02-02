@@ -51,11 +51,11 @@ export default function Selos() {
   return (
     <ScrollView className="bg-white p-4 relative">
       {user && !user.isAnonymous ? (
-        <View className="bg-[#39B061] rounded-[10px] flex-row justify-around items-center relative p-3">
+        <View className="bg-[#39B061] rounded-[10px] flex-row justify-around items-center relative">
           {selos.geoparkAraripe && selos.geoparkAraripe.mission7 ? (
-            <View className="bg-[#39B061] rounded-[10px] flex-row justify-around items-center relative p-3 h-48">
+            <View className="bg-[#39B061] rounded-[10px] flex-row justify-around items-center relative p-5">
               <Image source={require("../../assets/imgs/selo.png")} />
-              <View className="justify-center">
+              <View className="justify-center ml-6">
                 <Text className=" text-white font-bold">Colina do Horto</Text>
                 <Text className="text-xs text-white min-w-fit text-justify w-44">
                   A Colina do Horto é um local religioso associado ao Padre
@@ -76,7 +76,7 @@ export default function Selos() {
               </View>
             </View>
           ) : (
-            <Text className="text-white font-medium">
+            <Text className="text-white font-medium p-3">
               Conclua todas as missões para ter acesso as recompensas.
             </Text>
           )}

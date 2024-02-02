@@ -1,4 +1,11 @@
-import { Text, View, StyleSheet, TouchableOpacity, Image } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  ImageBackground,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useState, useEffect } from "react";
 import { ScrollView } from "react-native-gesture-handler";
@@ -9,6 +16,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "../../firebase";
 import { useAuth } from "../../hooks/useAuth";
 import { doc } from "firebase/firestore";
+import { Entypo } from "@expo/vector-icons";
 
 export default function Home() {
   const [categoriaSelecionada, setCategoriaSelecionada] = useState(null);
@@ -184,27 +192,27 @@ export default function Home() {
           </View>
         </View>
         {/* card de destaque ao padre cícero */}
-        <View style={styles.viewDestaque}>
+
+        <TouchableOpacity
+          className="rounded-lg mt-8 mb-6 p-6 w-[85vw] self-center justify-around items-center flex-row bg-[#39B061] max-w-lg"
+          onPress={openTarefas}
+        >
           <Image
             source={require("../../../assets/imgs/banner.png")}
-            style={styles.destaque}
+            className="rounded-full w-24 h-24 mr-3"
           />
-          <View style={styles.destaqueContent}>
-            <View style={styles.textsDestaque}>
-              <Text style={styles.titleDestaque}>Colina do Horto</Text>
-              <Text style={styles.textDestaque}>
+          <View>
+            <View>
+              <Text className="w-48 text-justify text-white text-lg font-semibold">
+                Colina do Horto
+              </Text>
+              <Text className="w-48 text-justify text-white">
                 Conheça a cultura do Cariri com um importante símbolo histórico
                 da região.
               </Text>
             </View>
-            <TouchableOpacity
-              style={styles.buttonDestaque}
-              onPress={openTarefas}
-            >
-              <Text style={styles.buttonDestaqueText}>Explorar</Text>
-            </TouchableOpacity>
           </View>
-        </View>
+        </TouchableOpacity>
         {/* categorias */}
         <View style={styles.categorias}>
           <Text style={styles.title}>Categorias</Text>
@@ -228,6 +236,7 @@ export default function Home() {
                 ]}
               >
                 <Image
+                  style={styles.imgCategoria}
                   source={require("../../../assets/imgs/icons/Accessible.png")}
                 />
               </View>
@@ -247,6 +256,7 @@ export default function Home() {
                 ]}
               >
                 <Image
+                  style={styles.imgCategoria}
                   source={require("../../../assets/imgs/icons/aquatico.png")}
                 />
               </View>
@@ -266,6 +276,7 @@ export default function Home() {
                 ]}
               >
                 <Image
+                  style={styles.imgCategoria}
                   source={require("../../../assets/imgs/icons/archeo.png")}
                 />
               </View>
@@ -284,6 +295,7 @@ export default function Home() {
                 ]}
               >
                 <Image
+                  style={styles.imgCategoria}
                   source={require("../../../assets/imgs/icons/Biome.png")}
                 />
               </View>
@@ -310,6 +322,7 @@ export default function Home() {
                 ]}
               >
                 <Image
+                  style={styles.imgCategoria}
                   source={require("../../../assets/imgs/icons/cultural.png")}
                 />
               </View>
@@ -329,6 +342,7 @@ export default function Home() {
                 ]}
               >
                 <Image
+                  style={styles.imgCategoria}
                   source={require("../../../assets/imgs/icons/geodi.png")}
                 />
               </View>
@@ -348,6 +362,7 @@ export default function Home() {
                 ]}
               >
                 <Image
+                  style={styles.imgCategoria}
                   source={require("../../../assets/imgs/icons/Geology.png")}
                 />
               </View>
@@ -366,6 +381,7 @@ export default function Home() {
                 ]}
               >
                 <Image
+                  style={styles.imgCategoria}
                   source={require("../../../assets/imgs/icons/tower.png")}
                 />
               </View>
@@ -392,6 +408,7 @@ export default function Home() {
                 ]}
               >
                 <Image
+                  style={styles.imgCategoria}
                   source={require("../../../assets/imgs/icons/paleantologia.png")}
                 />
               </View>
@@ -411,6 +428,7 @@ export default function Home() {
                 ]}
               >
                 <Image
+                  style={styles.imgCategoria}
                   source={require("../../../assets/imgs/icons/Rosary.png")}
                 />
               </View>
@@ -430,6 +448,7 @@ export default function Home() {
                 ]}
               >
                 <Image
+                  style={styles.imgCategoria}
                   source={require("../../../assets/imgs/icons/trilha.png")}
                 />
               </View>
@@ -456,39 +475,35 @@ export default function Home() {
               />
             </TouchableOpacity>
           )}
-          <View
-            style={{
-              justifyContent: "space-around",
-              flexDirection: "row",
-              flexWrap: "wrap",
-              gap: 20,
-              marginBottom: 50,
-            }}
-          >
+          <View className="justify-around flex-row flex-wrap mb-8">
             {/* mostrar o card da colina do horto */}
             {categoriaSelecionada === "Religioso" ||
             categoriaSelecionada === "Trilha" ||
             categoriaSelecionada === null ? (
-              <View style={styles.geossitioDestaque}>
-                <View style={styles.imgGeossitio}>
-                  <Image
-                    source={require("../../../assets/imgs/geossitios/colinadohorto.png")}
-                  />
-                </View>
-
-                <Text style={styles.geossitioNomeDestaque}>
-                  Colina do Horto
-                </Text>
-                <View style={styles.inforButton}>
-                  <Text style={styles.municipioDestaque}>
-                    Juazeiro do Norte
+              <View className="bg-[#39B061] justify-around items-center rounded-xl mb-3 w-[85vw] flex-row h-36 max-w-sm">
+                <Image
+                  className="w-24 h-24 rounded-lg"
+                  source={require("../../../assets/imgs/geossitios/colina.png")}
+                />
+                <View className="justify-center h-full gap-3">
+                  <Text className="text-base font-semibold text-white w-36">
+                    Colina do Horto
                   </Text>
-                  <TouchableOpacity
-                    style={styles.buttonColina}
-                    onPress={openTarefas}
-                  >
-                    <Text style={styles.explorar}>Explorar</Text>
-                  </TouchableOpacity>
+                  <View className="flex-row items-center">
+                    <View className="justify-center items-center flex-row">
+                      <Entypo name="location-pin" size={24} color="#1A4E38" />
+                      <Text className="text-white text-xs font-medium w-14 justify-center items-center mx-1">
+                        Juazeiro do Norte
+                      </Text>
+                    </View>
+
+                    <TouchableOpacity className="bg-white h-7 justify-center items-center px-2 rounded-lg "
+                    onPress={openTarefas}>
+                      <Text className="text-[#39B061] font-semibold text-xs">
+                        Explorar
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
                 </View>
               </View>
             ) : null}
@@ -533,25 +548,22 @@ const styles = StyleSheet.create({
   },
   destaque: {
     width: "100%",
-    borderRadius: 8,
+    borderRadius: 10,
+    height: 150,
   },
   viewDestaque: {
-    borderRadius: 8,
+    borderRadius: 10,
     marginTop: 40,
     position: "relative",
     marginBottom: 37,
     elevation: 6,
-
   },
   destaqueContent: {
-    position: "absolute",
-    top: 17.8,
-    left: 20.9,
-    right: 20.9,
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
     width: "90%",
-    alignItems: "center",   
+    alignItems: "center",
+    gap: 10,
   },
   titleDestaque: {
     color: "#FFF",
@@ -567,7 +579,7 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     fontSize: 12,
     width: 200,
-    textAlign:"justify"
+    textAlign: "justify",
   },
   buttonDestaque: {
     width: 73,
@@ -608,7 +620,7 @@ const styles = StyleSheet.create({
   geossitioDestaque: {
     width: 150,
     height: 216,
-    backgroundColor: "#FFF",
+    backgroundColor: "#39B061",
     borderRadius: 16,
     justifyContent: "center",
     alignItems: "center",
@@ -624,14 +636,14 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   geossitioNomeDestaque: {
-    color: "#18241B",
+    color: "#fff",
     fontWeight: "700",
     fontSize: 14,
     textAlign: "center",
     marginVertical: 5,
   },
   municipioDestaque: {
-    color: "#18241B",
+    color: "#fff",
     fontWeight: "500",
     fontSize: 10,
     width: 55,
@@ -640,22 +652,22 @@ const styles = StyleSheet.create({
   buttonColina: {
     width: 65,
     height: 25.5,
-    backgroundColor: "#39B061",
+    backgroundColor: "#fff",
     borderRadius: 16,
     justifyContent: "center",
     alignItems: "center",
     paddingBottom: 2,
-    marginLeft: 3
+    marginLeft: 3,
   },
   inforButton: {
     flexDirection: "row",
     justifyContent: "space-around",
-    alignItems: "center"
+    alignItems: "center",
   },
   explorar: {
-    color: "#fff",
+    color: "#000",
     fontWeight: "700",
-    fontSize: 13
+    fontSize: 13,
   },
   geossitios: {
     flexDirection: "row",
@@ -704,8 +716,8 @@ const styles = StyleSheet.create({
   img: {
     justifyContent: "center",
     alignItems: "center",
-    width: 42,
-    height: 42,
+    width: 40,
+    height: 40,
     backgroundColor: "#FFF",
     borderRadius: 10,
     shadowColor: "#000",
@@ -716,6 +728,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+  },
+  imgCategoria: {
+    maxWidth: 25,
+    maxHeight: 25,
   },
   limpar: {
     backgroundColor: "#39B061",

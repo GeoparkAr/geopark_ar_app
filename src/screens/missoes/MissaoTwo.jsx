@@ -36,23 +36,25 @@ export default function Missao() {
     <ScrollView className=" bg-white">
       {isConnected ? (
         <View className="flex flex-col justify-around items-center h-[90vh]">
-          <Text style={styles.textCamera}>
-            Clique na câmera e comece a explorar
-          </Text>
           <Image
-            source={require("../../../assets/imgs/boy.png")}
-            style={styles.img}
+            source={require("../../../assets/imgs/missoes/padrecicero.png")}
+            style={{ width: 200, height: 200 }}
           />
-          <TouchableOpacity onPress={navigateToCamera}>
-            <Image source={require("../../../assets/imgs/icons/camera.png")} />
-          </TouchableOpacity>
+          <View style={{justifyContent: "center", alignItems: "center", gap: 20}}>
+            <Text style={styles.textCamera}>
+              Clique na câmera e comece a explorar
+            </Text>
+            <TouchableOpacity onPress={navigateToCamera}>
+              <Image
+                source={require("../../../assets/imgs/icons/camera.png")}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
       ) : (
         <View className="flex flex-col justify-center items-center h-[90vh] gap-1">
           <Text className="text-red-600">Erro:</Text>
-          <Text style={styles.textCamera}>
-            Sem conexão com a internet
-          </Text>
+          <Text style={styles.textCamera}>Sem conexão com a internet</Text>
         </View>
       )}
     </ScrollView>

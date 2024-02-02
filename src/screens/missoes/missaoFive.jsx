@@ -7,31 +7,56 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import NetInfo from "@react-native-community/netinfo";
+import { useState, useEffect } from "react";
 
-export default function Missao() {
+export default function MissaoFive() {
   const navigation = useNavigation();
+  const [isConnected, setIsConnected] = useState(true);
 
+  //verifica se há conexão com internet
+  useEffect(() => {
+    const unsubscribe = NetInfo.addEventListener((state) => {
+      setIsConnected(state.isConnected);
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
+  //navegando para o link da câmera
   const navigateToCamera = () => {
     navigation.navigate("Camera", {
       url: "https://web-geoparkcamera-ten.vercel.app/",
     });
   };
-  
+
   return (
     <ScrollView className=" bg-white">
-      <View className="flex flex-col justify-around items-center h-[90vh]">
-        <Text style={styles.textCamera}>
-          Clique na câmera e comece a explorar
-        </Text>
-        <Image
-          source={require("../../../assets/imgs/boy.png")}
-          style={styles.img}
-        />
-
-        <TouchableOpacity onPress={navigateToCamera}>
-          <Image source={require("../../../assets/imgs/icons/camera.png")} />
-        </TouchableOpacity>
-      </View>
+      {isConnected ? (
+        <View className="flex flex-col justify-around items-center h-[90vh]">
+          <Image
+            source={require("../../../assets/imgs/missoes/vitrais.png")}
+            style={{ width: 200, height: 200 }}
+          />
+          <View style={{justifyContent: "center", alignItems: "center", gap: 20}}>
+            <Text style={styles.textCamera}>
+              Clique na câmera e comece a explorar
+            </Text>
+            <TouchableOpacity onPress={navigateToCamera}>
+              <Image
+                source={require("../../../assets/imgs/icons/camera.png")}
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
+      ) : (
+        <View className="flex flex-col justify-center items-center h-[90vh] gap-1">
+          <Text className="text-red-600">Erro:</Text>
+          <Text style={styles.textCamera}>Sem conexão com a internet</Text>
+        </View>
+      )}
     </ScrollView>
   );
 }

@@ -14,11 +14,9 @@ import {
 import { useState, useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "../../firebase";
-
 import { useNavigation } from "@react-navigation/native";
-
 import Custombutton from "./components/CustomButton";
-import { Feather } from "@expo/vector-icons";
+import { Entypo } from '@expo/vector-icons';
 import {
   collection,
   doc,
@@ -27,6 +25,7 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore";
+import CustomButton from "./components/CustomButton";
 
 export default function Tarefas() {
   const navigation = useNavigation();
@@ -34,11 +33,11 @@ export default function Tarefas() {
   const [modalVisible, setModalVisible] = useState(false);
   const [user, setUser] = useState(null);
 
-  const navigateToMissao = () => {
-    navigation.navigate("Missao");
-  };
   const navigateToQuestionario = () => {
     navigation.navigate("Questionario");
+  };
+  const navigateToMissao = () => {
+    navigation.navigate("Missao");
   };
   const navigateToMissao3 = () => {
     navigation.navigate("MissaoTree");
@@ -55,21 +54,12 @@ export default function Tarefas() {
   const navigateToMissao7 = () => {
     navigation.navigate("MissaoSeven");
   };
+  const navigateToMissao8 = () => {
+    navigation.navigate("MissaoEight");
+  };
   const navigateToSelo = () => {
     navigation.navigate("Selos");
   };
-
-  //os botões começam com false
-  const [status, setStatus] = useState({
-    primeiro: false,
-    segundo: false,
-    terceiro: false,
-    quarto: false,
-    quinto: false,
-    sexto: false,
-    setimo: false,
-    oitavo: false,
-  });
 
   const [documentID, setDocumentID] = useState("");
 
@@ -115,29 +105,37 @@ export default function Tarefas() {
     fetchData();
   }, []);
 
+  const [mission1Status, setMission1Status] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await checkAuthentication();
+
+      // Verify documentID
+      console.log("DocumentID:", documentID);
+
+      // Obter o valor da mission1 do banco de dados
+      const docRef = doc(db, "users", documentID);
+      const docSnapshot = await getDoc(docRef);
+      const mission1Value =
+        docSnapshot.data()?.stamps.geoparkAraripe.mission1 || false;
+
+      // Verify mission1Value
+      console.log("Mission1 Value:", mission1Value);
+
+      // Atualizar o estado local
+      setMission1Status(mission1Value);
+    };
+
+    fetchData();
+  }, [documentID]);
+
   //mudando o estado dos botões
-  const handleClick1 = async () => {
-    setStatus({
-      ...status,
-      primeiro: true,
-    });
+  const handleClick1 = () => {
     navigateToQuestionario();
-    const docRef = doc(db, "users", documentID);
-    await updateDoc(docRef, {
-      "stamps.geoparkAraripe.mission1": true,
-    })
-      .then(() => {})
-      .catch((error) => {
-        const errorMessage = error.message;
-        Alert.alert("Erro ao atualizar BD", errorMessage);
-      });
   };
 
   const handleClick2 = async () => {
-    setStatus({
-      ...status,
-      segundo: true,
-    });
     navigateToMissao();
     const docRef = doc(db, "users", documentID);
     await updateDoc(docRef, {
@@ -154,10 +152,6 @@ export default function Tarefas() {
   const handleClick3 = async () => {
     if (authChecked) {
       if (user && !user.isAnonymous) {
-        setStatus({
-          ...status,
-          terceiro: true,
-        });
         navigateToMissao3();
         const docRef = doc(db, "users", documentID);
         await updateDoc(docRef, {
@@ -178,10 +172,6 @@ export default function Tarefas() {
   const handleClick4 = async () => {
     if (authChecked) {
       if (user && !user.isAnonymous) {
-        setStatus({
-          ...status,
-          quarto: true,
-        });
         navigateToMissao4();
         const docRef = doc(db, "users", documentID);
         await updateDoc(docRef, {
@@ -202,10 +192,6 @@ export default function Tarefas() {
   const handleClick5 = async () => {
     if (authChecked) {
       if (user && !user.isAnonymous) {
-        setStatus({
-          ...status,
-          quinto: true,
-        });
         navigateToMissao5();
         const docRef = doc(db, "users", documentID);
         await updateDoc(docRef, {
@@ -226,10 +212,6 @@ export default function Tarefas() {
   const handleClick6 = async () => {
     if (authChecked) {
       if (user && !user.isAnonymous) {
-        setStatus({
-          ...status,
-          sexto: true,
-        });
         navigateToMissao6();
         const docRef = doc(db, "users", documentID);
         await updateDoc(docRef, {
@@ -250,11 +232,27 @@ export default function Tarefas() {
   const handleClick7 = async () => {
     if (authChecked) {
       if (user && !user.isAnonymous) {
-        setStatus({
-          ...status,
-          setimo: true,
-        });
         navigateToMissao7();
+        const docRef = doc(db, "users", documentID);
+        await updateDoc(docRef, {
+          "stamps.geoparkAraripe.mission7": true,
+        })
+          .then(() => {})
+          .catch((error) => {
+            const errorMessage = error.message;
+            Alert.alert("Erro ao atualizar BD", errorMessage);
+          });
+      } else {
+        setModalVisible(true);
+      }
+    } else {
+    }
+  };
+
+  const handleClick8 = async () => {
+    if (authChecked) {
+      if (user && !user.isAnonymous) {
+        navigateToMissao8();
         const docRef = doc(db, "users", documentID);
         await updateDoc(docRef, {
           "stamps.geoparkAraripe.mission7": true,
@@ -299,13 +297,13 @@ export default function Tarefas() {
   };
 
   return (
-    <ScrollView style={{backgroundColor:"#FFF"}}>
+    <ScrollView style={{ backgroundColor: "#FFF" }}>
       <View className="relative">
         <TouchableOpacity
           className="absolute top-16 left-4 z-50 bg-[#39B061] rounded-full p-1"
           onPress={() => navigation.goBack()}
         >
-          <Feather name="arrow-left" size={30} color="#fff" />
+          <Entypo name="chevron-left" size={28} color="white" />
         </TouchableOpacity>
         <Image
           source={require("../../../assets/imgs/geossitios/colina.png")}
@@ -313,7 +311,7 @@ export default function Tarefas() {
         />
       </View>
       <View>
-        <View className="px-3 bg-[#39B061] py-3 ">
+        <View className="px-3 bg-[#39B061] py-4 ">
           <Text className=" text-[18px] font-medium pb-2 text-white">
             Colina do Horto
           </Text>
@@ -349,7 +347,8 @@ export default function Tarefas() {
             </View>
           </View>
         </Modal>
-        <View style={styles.scrool}>
+        <ImageBackground style={styles.scrool}
+        source={require("../../../assets/imgs/tarefasbg.png")}>
           <View style={styles.container}>
             <View style={styles.comecar}>
               <Animated.View
@@ -380,73 +379,55 @@ export default function Tarefas() {
               />
             </View>
             <View style={styles.buttonTwo}>
-              <Custombutton
-                onPress={() => {
-                  handleClick2();
-                }}
-                disabled={!status.primeiro}
+              <CustomButton
+                onPress={handleClick2}
                 icon={require("../../../assets/imgs/icons/estatua.png")}
               />
             </View>
             <View style={styles.buttonTree}>
-              <Custombutton
-                icon={require("../../../assets/imgs/icons/Stone.png")}
-                onPress={() => {
-                  handleClick3();
-                }}
-                disabled={!status.segundo}
+              <CustomButton
+                onPress={handleClick3}
+                icon={require("../../../assets/imgs/icons/Wall.png")}
               />
             </View>
             <View style={styles.buttonFor}>
-              <Custombutton
-                icon={require("../../../assets/imgs/icons/Wall.png")}
-                onPress={() => {
-                  handleClick4();
-                }}
-                disabled={!status.terceiro}
+              <CustomButton
+                onPress={handleClick4}
+                icon={require("../../../assets/imgs/icons/Church.png")}
               />
             </View>
             <View style={styles.buttonFive}>
-              <Custombutton
-                icon={require("../../../assets/imgs/icons/priest.png")}
-                onPress={() => {
-                  handleClick5();
-                }}
-                disabled={!status.quarto}
+              <CustomButton
+                onPress={handleClick5}
+                icon={require("../../../assets/imgs/icons/StainedGlass.png")}
               />
             </View>
             <View style={styles.buttonSix}>
-              <Custombutton
+              <CustomButton
+                onPress={handleClick6}
                 icon={require("../../../assets/imgs/icons/Cross.png")}
-                onPress={() => {
-                  handleClick6();
-                }}
-                disabled={!status.quinto}
               />
             </View>
             <View style={styles.buttonSeven}>
-              <Custombutton
-                icon={require("../../../assets/imgs/icons/Church.png")}
-                onPress={() => {
-                  handleClick7();
-                }}
-                disabled={!status.sexto}
+              <CustomButton
+                onPress={handleClick7}
+                icon={require("../../../assets/imgs/icons/Stone.png")}
               />
             </View>
-            <View style={styles.buttonEight} className="mb-8">
-              <Custombutton
-                icon={
-                  status.setimo
-                    ? require("../../../assets/imgs/icons/Chest.png")
-                    : require("../../../assets/imgs/icons/chestbig.png")
-                }
+            <View style={styles.buttonNine} className="mb-8">
+              <CustomButton
+                onPress={handleClick8}
+                icon={require("../../../assets/imgs/icons/priest.png")}
+              />
+            </View>
+            <View style={styles.buttonNine} className="mb-8">
+              <CustomButton
                 onPress={navigateToSelo}
-                backgroundOption="yellow"
-                disabled={!status.setimo}
+                icon={require("../../../assets/imgs/icons/chestbig.png")}
               />
             </View>
           </View>
-        </View>
+        </ImageBackground>
       </View>
     </ScrollView>
   );
@@ -528,7 +509,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginVertical: 10,
   },
-  buttonEight: {
+  buttonNine: {
     marginRight: 0,
     justifyContent: "center",
     alignItems: "center",

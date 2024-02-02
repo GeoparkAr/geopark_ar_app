@@ -20,6 +20,12 @@ import Welcome from "./src/screens/Welcome";
 import Settings from "./src/screens/settings/Settings";
 import Tarefas from "./src/screens/Tarefas/";
 import Missao from "./src/screens/missoes/MissaoTwo";
+import MissaoTree from "./src/screens/missoes/MissaoTree";
+import MissaoFour from "./src/screens/missoes/MissaoFour";
+import MissaoFive from "./src/screens/missoes/MissaoFive";
+import MissaoSix from "./src/screens/missoes/MissaoSix";
+import MissaoSeven from "./src/screens/missoes/MissaoSeven";
+import MissaoEight from "./src/screens/missoes/MissaoEight";
 import Selos from "./src/screens/Selos";
 import Questionario from "./src/screens/missoes/Questionario";
 import About from "./src/screens/About";
@@ -77,17 +83,13 @@ function Root() {
                   flexDirection: "row",
                   padding: 10,
                   gap: 15,
+                  marginLeft: 10
                 }}
               >
-                <Ionicons
-                  name="person-circle-outline"
-                  size={48}
-                  color="black"
-                />
                 <View>
                   <Text
                     style={{
-                      fontSize: 14,
+                      fontSize: 16,
                       fontWeight: "300",
                       color: "#18241B",
                     }}
@@ -96,7 +98,7 @@ function Root() {
                   </Text>
                   <Text
                     style={{
-                      fontSize: 12,
+                      fontSize: 14,
                       color: "#18241B",
                     }}
                   >
@@ -128,7 +130,7 @@ function Root() {
               </View>
             )}
 
-            <View style={{ paddingLeft: 10 }}>
+            <View style={{ paddingLeft: 10, marginLeft: 10 }}>
               <TouchableOpacity
                 style={{
                   flexDirection: "row",
@@ -139,11 +141,23 @@ function Root() {
                 }}
                 onPress={() => navigation.navigate("Sobre")}
               >
-                <Image
-                  source={require("./assets/imgs/icon.png")}
-                  style={{ width: 35, height: 35 }}
-                />
-                <Text style={{ fontWeight: "500" }}>Sobre nós</Text>
+                <View
+                  style={{
+                    width: 32,
+                    height: 32,
+                    backgroundColor: "#39B061",
+                    borderRadius: 5,
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Image
+                    source={require("./assets/imgs/icon.png")}
+                    style={{ width: 25, height: 25 }}
+                  />
+                </View>
+
+                <Text>Sobre nós</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={{
@@ -157,8 +171,8 @@ function Root() {
               >
                 <View
                   style={{
-                    width: 35,
-                    height: 35,
+                    width: 32,
+                    height: 32,
                     backgroundColor: "#39B061",
                     borderRadius: 5,
                     justifyContent: "center",
@@ -168,13 +182,13 @@ function Root() {
                   <Image
                     source={require("./assets/imgs/icons/chestbig.png")}
                     style={{
-                      width: 26,
-                      height: 26,
+                      width: 20,
+                      height: 20,
                     }}
                   />
                 </View>
 
-                <Text style={{ fontWeight: "500" }}>Recompensas</Text>
+                <Text>Recompensas</Text>
               </TouchableOpacity>
               {user && !user.isAnonymous ? (
                 <TouchableOpacity
@@ -189,18 +203,18 @@ function Root() {
                 >
                   <View
                     style={{
-                      width: 35,
-                      height: 35,
+                      width: 32,
+                      height: 32,
                       backgroundColor: "#39B061",
                       borderRadius: 5,
                       justifyContent: "center",
                       alignItems: "center",
                     }}
                   >
-                    <Ionicons name="ios-settings" size={24} color="#F4F4F4" />
+                    <Ionicons name="ios-settings" size={20} color="#F4F4F4" />
                   </View>
 
-                  <Text style={{ fontWeight: "500" }}>Configurações</Text>
+                  <Text>Configurações</Text>
                 </TouchableOpacity>
               ) : null}
             </View>
@@ -331,6 +345,48 @@ export default function App() {
               component={Missao}
               options={{
                 headerTitle: "Estátua do Padre Cícero",
+              }}
+            />
+            <Stack.Screen
+              name="MissaoTree"
+              component={MissaoTree}
+              options={{
+                headerTitle: "Muro da Resistência",
+              }}
+            />
+            <Stack.Screen
+              name="MissaoFour"
+              component={MissaoFour}
+              options={{
+                headerTitle: "Igreja Bom Jesus do Horto",
+              }}
+            />
+            <Stack.Screen
+              name="MissaoFive"
+              component={MissaoFive}
+              options={{
+                headerTitle: "Vitrais",
+              }}
+            />
+            <Stack.Screen
+              name="MissaoSix"
+              component={MissaoSix}
+              options={{
+                headerTitle: "Crucifixo",
+              }}
+            />
+            <Stack.Screen
+              name="MissaoSeven"
+              component={MissaoSeven}
+              options={{
+                headerTitle: "Pedra do Pecado",
+              }}
+            />
+            <Stack.Screen
+              name="MissaoEight"
+              component={MissaoEight}
+              options={{
+                headerTitle: "Marco do Padre Cícero",
               }}
             />
             <Stack.Screen
