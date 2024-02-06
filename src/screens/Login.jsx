@@ -72,7 +72,7 @@ export default function Login() {
         </TouchableOpacity>
 
         <TouchableOpacity
-          className="h-14 rounded-[10px] flex justify-center items-center w-full bg-[#39B061]"
+          className="h-14 rounded-[10px] flex justify-center items-center w-full bg-[#287D44]"
           onPress={handleLogin}
         >
           <Text style={styles.textButton}>Entrar</Text>

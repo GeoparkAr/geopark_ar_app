@@ -13,15 +13,15 @@ export default function CustomButton({
   switch (backgroundOption) {
     case "yellow":
       backgroundColor = isDisabled ? "#8F8F8F" : "#18241B";
-      containerViewBackgroundColor = isDisabled ? "#C7C6C6" : "#0E4F34";
+      containerViewBackgroundColor = isDisabled ? "#C7C6C6" : "#46A302";
       break;
     case "green":
-      backgroundColor = isDisabled ? "#8F8F8F" : "#287D44";
-      containerViewBackgroundColor = isDisabled ? "#C7C6C6" : "#39B061";
+      backgroundColor = isDisabled ? "#8F8F8F" : "#46A302";
+      containerViewBackgroundColor = isDisabled ? "#C7C6C6" : "#58CC02";
       break;
     default:
-      backgroundColor = isDisabled ? "#8F8F8F" : "#287D44";
-      containerViewBackgroundColor = isDisabled ? "#C7C6C6" : "#39B061";
+      backgroundColor = isDisabled ? "#8F8F8F" : "#46A302";
+      containerViewBackgroundColor = isDisabled ? "#C7C6C6" : "#58CC02";
   }
 
   return (
@@ -31,7 +31,7 @@ export default function CustomButton({
       disabled={isDisabled}
     >
       <View style={styles.containerView(containerViewBackgroundColor)}>
-        <Image source={icon} />
+        <Image source={icon} style={{width: 40, height: 40}}/>
       </View>
     </TouchableOpacity>
   );
@@ -39,14 +39,15 @@ export default function CustomButton({
 
 const styles = StyleSheet.create({
   container: (backgroundColor) => ({
-    width: 70,
-    height: 74,
-    borderRadius: 63,
+    width: 80,
+    height: 80,
+    borderRadius: 70,
     backgroundColor,
+    alignItems: "center"
   }),
   containerView: (backgroundColor) => ({
-    width: 70,
-    height: 68,
+    width: 78,
+    height: 72,
     borderRadius: 60,
     justifyContent: "center",
     backgroundColor,

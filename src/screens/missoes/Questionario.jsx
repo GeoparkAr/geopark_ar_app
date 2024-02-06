@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import {
-  Image,
   Text,
   View,
   StyleSheet,
@@ -23,7 +22,9 @@ import {
   query,
   updateDoc,
   where,
+  getDoc
 } from "firebase/firestore";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Questionario() {
   const navigation = useNavigation();
@@ -54,7 +55,6 @@ export default function Questionario() {
       setAuthChecked(true);
     });
     getDocumentID();
-    console.log(user);
     return () => unsubscribe();
   }, []);
 
@@ -76,7 +76,6 @@ export default function Questionario() {
 
     fetchData();
   }, []);
-  const [mission1Status, setMission1Status] = useState(false);
 
   // ...
 
@@ -87,35 +86,16 @@ export default function Questionario() {
       // Agora que você tem o documentID, pode buscar a informação do banco de dados
       const docRef = doc(db, "users", documentID);
       const docSnapshot = await getDoc(docRef);
-
-      // Obtenha o status da mission1 do banco de dados
-      const mission1Value =
-        docSnapshot.data()?.stamps.geoparkAraripe.mission1 || false;
-
-      // Atualize o estado
-      setMission1Status(mission1Value);
     };
 
     fetchData();
   }, [documentID]);
-  
+
   //verificar se todos os campos foram preenchidos
   const navigateToTarefas = async () => {
     if (validateFields()) {
       navigation.navigate("Tarefas");
       const docRef = doc(db, "users", documentID);
-
-      // Configurar mission1 como true
-      await updateDoc(docRef, {
-        "stamps.geoparkAraripe.mission1": true,
-      })
-        .then(() => {
-          setMission1Status(true);
-        })
-        .catch((error) => {
-          const errorMessage = error.message;
-          Alert.alert("Erro ao atualizar BD", errorMessage);
-        });
     } else {
       Alert.alert(
         "Campos obrigatórios",
@@ -124,53 +104,8 @@ export default function Questionario() {
     }
   };
 
-  const [state, setState] = useState();
-  const [city, setCity] = useState();
-  const [stateData, setStateData] = useState([]);
-  const [cityData, setCityData] = useState([]);
   const [selectedOption, setSelectedOption] = useState(null);
   const [groupSize, setGroupSize] = useState("");
-  const [visitPurpose, setVisitPurpose] = useState("");
-
-  //chamando os estados do brasil na api do governo
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          "https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome"
-        );
-        const data = await response.json();
-        setStateData(
-          data.map((state) => ({ value: state.sigla, label: state.nome }))
-        );
-      } catch (error) {
-        console.error("Error fetching state data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  //chamando os municípios do brasil na api do governo
-  useEffect(() => {
-    const fetchCities = async () => {
-      if (state) {
-        try {
-          const response = await fetch(
-            `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${state}/municipios`
-          );
-          const data = await response.json();
-          setCityData(
-            data.map((city) => ({ value: city.id, label: city.nome }))
-          );
-        } catch (error) {
-          console.error("Error fetching city data:", error);
-        }
-      }
-    };
-
-    fetchCities();
-  }, [state]);
 
   //opções no select customizado
   const yesNoOptions = [
@@ -186,42 +121,16 @@ export default function Questionario() {
   };
 
   const validateFields = () => {
-    return Boolean(groupSize && state && city && selectedOption);
+    return Boolean(groupSize && selectedOption);
   };
 
-  const handleLastVisitSave = async () => {
-    const cityFinded = cityData.find((cityFind) => cityFind.value === city);
-  
-    if (cityFinded) {
-      await updateDoc(docRef, {
-        "lastVisit.geoparkAraripe.groupSize": groupSize,
-        "lastVisit.geoparkAraripe.originState": state,
-        "lastVisit.geoparkAraripe.originCity": cityFinded.label,
-        "lastVisit.geoparkAraripe.groupAgeRange": ageRange,
-        "lastVisit.geoparkAraripe.visitPurpose": selectedOption,
-      })
-        .then(() => {
-          navigateToTarefas();
-        })
-        .catch((error) => {
-          const errorMessage = error.message;
-          Alert.alert("Erro ao atualizar BD", errorMessage);
-        });
-    } else {
-      Alert.alert("Informações Pendentes", "Preencha todos os campos.");
-    }
-  };
-  
   const handleContinuarPress = async () => {
     if (validateFields()) {
       navigation.navigate("Tarefas");
       const docRef = doc(db, "users", documentID);
 
       await updateDoc(docRef, {
-        "stamps.geoparkAraripe.mission1": true,
         "lastVisit.geoparkAraripe.groupSize": groupSize,
-        "lastVisit.geoparkAraripe.originState": state,
-        "lastVisit.geoparkAraripe.originCity": city,
         "lastVisit.geoparkAraripe.groupAgeRange": ageRange,
         "lastVisit.geoparkAraripe.visitPurpose": selectedOption,
       })
@@ -230,7 +139,6 @@ export default function Questionario() {
         })
         .catch((error) => {
           const errorMessage = error.message;
-          Alert.alert("Erro ao atualizar BD", errorMessage);
         });
     } else {
       Alert.alert(
@@ -241,150 +149,103 @@ export default function Questionario() {
   };
 
   return (
-    <ScrollView style={{ backgroundColor: "#FFF", flex: 1 }}>
-      <View className="justify-around flex h-full py-4 px-6 gap-9">
-        <View className="gap-3">
-          <Text
-            style={{
-              fontWeight: "600",
-              fontSize: 16,
-              color: "#18241B",
-            }}
-          >
-            Quantas pessoas estão no seu grupo?
-          </Text>
-          <TextInput
-            placeholder="01"
-            style={styles.dropdown2}
-            keyboardType="numeric"
-            value={groupSize}
-            onChangeText={(text) => setGroupSize(text)}
-            maxLength={2}
-          />
-        </View>
-        <View className="gap-3">
-          <Text
-            style={{
-              fontWeight: "600",
-              fontSize: 16,
-              color: "#18241B",
-            }}
-          >
-            De onde veio para visitar o Padre Cícero?
-          </Text>
-          <View style={{ marginVertical: 10, flexDirection: "row", gap: 20 }}>
-            <SelectCountry
-              search
-              style={styles.dropdown}
-              selectedTextStyle={styles.selectedTextStyle}
-              placeholderStyle={styles.placeholderStyle}
-              imageStyle={styles.imageStyle}
-              iconStyle={styles.iconStyle}
-              maxHeight={200}
-              value={state}
-              data={stateData}
-              valueField="value"
-              labelField="label"
-              placeholder="Estado"
-              searchPlaceholder="Procurar"
-              onChange={(e) => {
-                setState(e.value);
-              }}
-            />
-            <SelectCountry
-              search
-              style={styles.dropdown}
-              selectedTextStyle={styles.selectedTextStyle}
-              placeholderStyle={styles.placeholderStyle}
-              imageStyle={styles.imageStyle}
-              iconStyle={styles.iconStyle}
-              maxHeight={200}
-              value={city}
-              data={cityData}
-              valueField="value"
-              labelField="label"
-              placeholder="Cidade"
-              searchPlaceholder="Procurar"
-              onChange={(e) => {
-                setCity(e.value);
-              }}
-            />
-          </View>
-        </View>
-        <View className="gap-3">
-          <Text
-            style={{
-              fontWeight: "600",
-              fontSize: 16,
-              color: "#18241B",
-              textAlign: "justify",
-            }}
-          >
-            O objetivo principal da sua visita a cidade de Juazeiro do Norte é
-            visitar a Colina do Horto?
-          </Text>
-          <SelectCountry
-            style={styles.dropdown2}
-            value={selectedOption}
-            data={yesNoOptions}
-            valueField="value"
-            labelField="label"
-            placeholder="Selecione"
-            onChange={(e) => {
-              setSelectedOption(e.value);
-            }}
-          />
-        </View>
-        <View className="gap-3">
-          <Text
-            style={{
-              fontWeight: "600",
-              fontSize: 16,
-              color: "#18241B",
-            }}
-          >
-            Qual faixa etária seu grupo possui?
-          </Text>
-          <View style={{ alignSelf: "center" }}>
-            <View
+    <SafeAreaView style={{ backgroundColor: "#FFF", flex: 1 }}>
+      <ScrollView>
+        <View className="justify-around flex h-full py-4 px-6 gap-9">
+          <View className="gap-3">
+            <Text
               style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
+                fontWeight: "600",
+                fontSize: 16,
+                color: "#18241B",
               }}
             >
-              <Text style={{ fontSize: 16 }}>{ageRange[0]}</Text>
-              <Text style={{ fontSize: 16 }}>{ageRange[1]}</Text>
-            </View>
-
-            <MultiSlider
-              values={ageRange}
-              min={0}
-              max={100}
-              step={1}
-              sliderLength={310}
-              onValuesChange={handleValuesChange}
-              allowOverlap={false}
-              snapped={false}
-              isMarkersSeparated={true}
+              Quantas pessoas estão no seu grupo?
+            </Text>
+            <TextInput
+              placeholder="01"
+              style={styles.dropdown2}
+              keyboardType="numeric"
+              value={groupSize}
+              onChangeText={(text) => setGroupSize(text)}
+              maxLength={2}
             />
           </View>
-        </View>
-        <TouchableOpacity
-          className="h-14 rounded-[10px] flex justify-center items-center bg-[#39B061] mt-7"
-          onPress={handleContinuarPress}
-        >
-          <Text
-            style={{
-              fontWeight: "700",
-              fontSize: 16,
-              color: "#fff",
-            }}
+          <View className="gap-3">
+            <Text
+              style={{
+                fontWeight: "600",
+                fontSize: 16,
+                color: "#18241B",
+                textAlign: "justify",
+              }}
+            >
+              O objetivo principal da sua visita a cidade de Juazeiro do Norte é
+              visitar a Colina do Horto?
+            </Text>
+            <SelectCountry
+              style={styles.dropdown2}
+              value={selectedOption}
+              data={yesNoOptions}
+              valueField="value"
+              labelField="label"
+              placeholder="Selecione"
+              onChange={(e) => {
+                setSelectedOption(e.value);
+              }}
+            />
+          </View>
+          <View className="gap-3">
+            <Text
+              style={{
+                fontWeight: "600",
+                fontSize: 16,
+                color: "#18241B",
+              }}
+            >
+              Qual faixa etária seu grupo possui?
+            </Text>
+            <View style={{ alignSelf: "center" }}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Text style={{ fontSize: 16 }}>{ageRange[0]}</Text>
+                <Text style={{ fontSize: 16 }}>{ageRange[1]}</Text>
+              </View>
+
+              <MultiSlider
+                values={ageRange}
+                min={0}
+                max={100}
+                step={1}
+                sliderLength={310}
+                onValuesChange={handleValuesChange}
+                allowOverlap={false}
+                snapped={false}
+                isMarkersSeparated={true}
+              />
+            </View>
+          </View>
+          <TouchableOpacity
+            className="h-14 rounded-[10px] flex justify-center items-center bg-[#39B061] mt-7"
+            onPress={handleContinuarPress}
           >
-            Continuar
-          </Text>
-        </TouchableOpacity>
-      </View>
-    </ScrollView>
+            <Text
+              style={{
+                fontWeight: "700",
+                fontSize: 16,
+                color: "#fff",
+              }}
+            >
+              Continuar
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 

@@ -20,7 +20,7 @@ export default function Terms() {
     >
 
       <ScrollView style={{ paddingHorizontal: 20, marginBottom: 1 }}>
-        <Text className="text-[18px] font-medium, my-3">Termos e condições de uso:</Text>
+        <Text style={styles.title}>Termos e condições de uso:</Text>
         <Text style={styles.text}>
           Ao baixar ou usar o aplicativo, estes termos serão aplicados
           automaticamente a você. Você deve certificar-se, portanto, de que não
@@ -92,7 +92,7 @@ export default function Terms() {
         >
           Atualização: 15/12/2023
         </Text>
-        <Text className="text-[18px] font-medium, my-3">Política de privacidade:</Text>
+        <Text style={styles.title}>Política de privacidade:</Text>
         <Text style={styles.text}>
           Prezado usuário do aplicativo Geopark AR, é com grande respeito pela
           sua privacidade que apresentamos nossa Política de Privacidade, a qual

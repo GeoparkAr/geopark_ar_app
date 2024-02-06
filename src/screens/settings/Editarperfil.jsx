@@ -143,7 +143,7 @@ export default function EditarPerfil() {
               <View className="flex-row justify-between my-4 bg-white gap-2">
                 <TextInput
                   placeholder={name}
-                  className="flex-1 bg-[#f8f8f8] py-1 px-5 rounded-md"
+                  className="flex-1 bg-[#f8f8f8] py-1 px-5 rounded-md h-10"
                   onChangeText={handleNameChange}
                 />
                 <TouchableOpacity
@@ -176,7 +176,7 @@ export default function EditarPerfil() {
               <View className="flex-row justify-between my-4 bg-white z-50 gap-2">
                 <TextInput
                   placeholder="Senha atual"
-                  className="w-[30vw] bg-[#f8f8f8] py-1 px-5 rounded-md flex-1"
+                  className="w-[30vw] bg-[#f8f8f8] py-1 px-5 rounded-md flex-1 h-10"
                   secureTextEntry={true}
                   onChangeText={(text) => handlePasswordChange(text, "current")}
                 />

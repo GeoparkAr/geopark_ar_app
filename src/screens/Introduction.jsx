@@ -1,6 +1,10 @@
 import React, { useState } from "react";
-import { ImageBackground, Text, TouchableOpacity, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import {
+  ImageBackground,
+  Text,
+  TouchableOpacity,
+  View
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 const Introduction = () => {
@@ -19,9 +23,9 @@ const Introduction = () => {
     switch (step) {
       case 1:
         return {
-          title: "Explore Geossítios",
-          text: "Conheça tudo sobre a cultura e geologia dos nossos geossítios.",
-          imageSource: require("../../assets/imgs/bg-intro1.png"),
+          title: "Conheça a Cultura do Cariri",
+          text: "Conheça tudo sobre a cultura e geologia do Cariri através dos nossos geossítios.",
+          imageSource: require("../../assets/imgs/introduction/primeira.png"),
           viewStyles: [
             {
               width: 20,
@@ -45,9 +49,9 @@ const Introduction = () => {
         };
       case 2:
         return {
-          title: "Realidade Aumentada e Inteligência Artificial",
-          text: "Aponte sua câmera para pontos turísticos e receba informações na sua tela.",
-          imageSource: require("../../assets/imgs/bg-intro2.png"),
+          title: "Informações em Tempo Real",
+          text: "Utilizamos  Inteligência Artificial e Realidade Aumentada.",
+          imageSource: require("../../assets/imgs/introduction/segunda.png"),
           viewStyles: [
             {
               width: 7,
@@ -71,9 +75,9 @@ const Introduction = () => {
         };
       case 3:
         return {
-          title: "Tesouros Ocultos",
-          text: "Explore lugares secretos e histórias que só povos locais conhecem e ganhe um selo de explorador.",
-          imageSource: require("../../assets/imgs/bg-intro3.png"),
+          title: "Guia Turístico",
+          text: "Explore todos os locais dos geossítios com o nosso app.",
+          imageSource: require("../../assets/imgs/introduction/terceira.png"),
           viewStyles: [
             {
               width: 7,
@@ -106,36 +110,37 @@ const Introduction = () => {
     renderContent();
 
   return (
-    <SafeAreaView className="h-full bg-white">
+    <ImageBackground
+      className="h-full bg-[#39B061] justify-center items-center"
+      source={imageSource}
+    >
       {/* mostrando informações das telas */}
-      <ImageBackground className="h-full px-7" source={imageSource}>
-        <Text className="pt-14 text-2xl font-bold w-[80%]">{title}</Text>
-        <Text className="pt-1 text-base w-[80%] h-20">{text}</Text>
-        <View className="gap-1 flex flex-row mt-6">
-          {viewStyles.map((style, index) => (
-            <View key={index} style={style}></View>
-          ))}
+      <View className=" justify-around items-center flex-1">
+        <View className="flex-row">
+          <Text className="text-white font-extrabold text-3xl">GEOPARK</Text>
+          <Text className="text-[#39B061] font-extrabold italic text-3xl">
+            AR
+          </Text>
         </View>
-
-        <TouchableOpacity
-          style={{
-            backgroundColor: "#39B061",
-            borderRadius: 10,
-            width: buttonWidth || 120,
-            height: 40,
-            alignItems: "center",
-            justifyContent: "center",
-            marginTop: 30,
-            elevation: 7,
-          }}
+        <View className="justify-center items-center w-64">
+          <Text className="font-bold text-2xl text-white text-center">{title}</Text>
+          <Text className="text-base text-white text-center my-3">{text}</Text>
+          <View className="gap-1 flex flex-row mt-8">
+            {viewStyles.map((style, index) => (
+              <View key={index} style={style}></View>
+            ))}
+          </View>
+        </View>
+        <TouchableOpacity className="bg-transparent w-[80vw] border
+         border-white h-12 justify-center items-center rounded-md"
           onPress={handleNext}
         >
           <Text style={{ fontSize: 16, color: "white", fontWeight: "bold" }}>
-            {buttonText || "Próximo"}
+            {buttonText || "Continuar"}
           </Text>
         </TouchableOpacity>
-      </ImageBackground>
-    </SafeAreaView>
+      </View>
+    </ImageBackground>
   );
 };
 

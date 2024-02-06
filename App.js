@@ -27,7 +27,6 @@ import MissaoSix from "./src/screens/missoes/MissaoSix";
 import MissaoSeven from "./src/screens/missoes/MissaoSeven";
 import MissaoEight from "./src/screens/missoes/MissaoEight";
 import Selos from "./src/screens/Selos";
-import Questionario from "./src/screens/missoes/Questionario";
 import About from "./src/screens/About";
 import Login from "./src/screens/Login";
 import Register from "./src/screens/Register";
@@ -40,6 +39,11 @@ import CameraWeb from "./src/screens/CameraWeb";
 import NewPassword from "./src/screens/NewPassword";
 
 import { AuthProvider } from "./src/hooks/useAuth";
+import PerguntaUm from "./src/screens/missoes/Questionario/pergunta1";
+import PerguntaDois from "./src/screens/missoes/Questionario/pergunda2";
+import PerguntaTres from "./src/screens/missoes/Questionario/pergunta3";
+import PerguntaQuatro from "./src/screens/missoes/Questionario/pergunta4";
+import Sucesso from "./src/screens/missoes/Questionario/sucesso";
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -72,7 +76,14 @@ function Root() {
         }
 
         return (
-          <SafeAreaView style={{ position: "relative", height: "100%" }}>
+          <SafeAreaView
+            style={{
+              position: "relative",
+              height: "100%",
+              paddingLeft: 25,
+              gap: 10,
+            }}
+          >
             {user && !user.isAnonymous ? (
               <View
                 style={{
@@ -81,16 +92,15 @@ function Root() {
                   borderBottomColor: "#f4f4f4",
                   borderBottomWidth: 1,
                   flexDirection: "row",
-                  padding: 10,
-                  gap: 15,
-                  marginLeft: 10
+                  paddingBottom: 10,
+                  paddingTop: 10,
                 }}
               >
                 <View>
                   <Text
                     style={{
                       fontSize: 16,
-                      fontWeight: "300",
+                      fontWeight: "600",
                       color: "#18241B",
                     }}
                   >
@@ -99,7 +109,7 @@ function Root() {
                   <Text
                     style={{
                       fontSize: 14,
-                      color: "#18241B",
+                      color: "#686868",
                     }}
                   >
                     {user.email ? user.email : " "}
@@ -130,49 +140,48 @@ function Root() {
               </View>
             )}
 
-            <View style={{ paddingLeft: 10, marginLeft: 10 }}>
+            <View style={{ gap: 15 }}>
               <TouchableOpacity
                 style={{
                   flexDirection: "row",
-                  gap: 10,
+                  gap: 15,
                   width: "100%",
-                  height: 60,
                   alignItems: "center",
+                  borderRadius: 5,
                 }}
                 onPress={() => navigation.navigate("Sobre")}
               >
                 <View
                   style={{
-                    width: 32,
-                    height: 32,
+                    width: 24,
+                    height: 24,
                     backgroundColor: "#39B061",
-                    borderRadius: 5,
                     justifyContent: "center",
                     alignItems: "center",
+                    borderRadius: 5,
                   }}
                 >
                   <Image
                     source={require("./assets/imgs/icon.png")}
-                    style={{ width: 25, height: 25 }}
+                    style={{ width: 24, height: 24, borderRadius: 5 }}
                   />
                 </View>
 
-                <Text>Sobre nós</Text>
+                <Text style={{ fontSize: 16 }}>Sobre nós</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={{
                   flexDirection: "row",
-                  gap: 10,
+                  gap: 15,
                   width: "100%",
-                  height: 60,
                   alignItems: "center",
                 }}
                 onPress={() => navigation.navigate("Selos")}
               >
                 <View
                   style={{
-                    width: 32,
-                    height: 32,
+                    width: 24,
+                    height: 24,
                     backgroundColor: "#39B061",
                     borderRadius: 5,
                     justifyContent: "center",
@@ -182,39 +191,38 @@ function Root() {
                   <Image
                     source={require("./assets/imgs/icons/chestbig.png")}
                     style={{
-                      width: 20,
-                      height: 20,
+                      width: 18,
+                      height: 18,
                     }}
                   />
                 </View>
 
-                <Text>Recompensas</Text>
+                <Text style={{ fontSize: 16 }}>Recompensas</Text>
               </TouchableOpacity>
               {user && !user.isAnonymous ? (
                 <TouchableOpacity
                   style={{
                     flexDirection: "row",
-                    gap: 10,
+                    gap: 15,
                     width: "100%",
-                    height: 60,
                     alignItems: "center",
                   }}
                   onPress={() => navigation.navigate("Configuracoes")}
                 >
                   <View
                     style={{
-                      width: 32,
-                      height: 32,
+                      width: 24,
+                      height: 24,
                       backgroundColor: "#39B061",
                       borderRadius: 5,
                       justifyContent: "center",
                       alignItems: "center",
                     }}
                   >
-                    <Ionicons name="ios-settings" size={20} color="#F4F4F4" />
+                    <Ionicons name="ios-settings" size={18} color="#F4F4F4" />
                   </View>
 
-                  <Text>Configurações</Text>
+                  <Text style={{ fontSize: 16 }}>Configurações</Text>
                 </TouchableOpacity>
               ) : null}
             </View>
@@ -256,20 +264,58 @@ export default function App() {
             options={{ headerShown: false, title: "" }}
           />
 
-          <Stack.Group screenOptions={{ headerShown: false }}>
+          <Stack.Group
+            screenOptions={{
+              headerShown: false,
+            }}
+          >
             <Stack.Screen
-              name="Tarefas"
-              component={Tarefas}
-              options={{ title: "" }}
+              name="PerguntaUm"
+              component={PerguntaUm}
+              options={{
+                headerTitle: "Pesquisa Geopark",
+              }}
+            />
+            <Stack.Screen
+              name="PerguntaDois"
+              component={PerguntaDois}
+              options={{
+                headerTitle: "Pesquisa Geopark",
+              }}
+            />
+            <Stack.Screen
+              name="PerguntaTres"
+              component={PerguntaTres}
+              options={{
+                headerTitle: "Pesquisa Geopark",
+              }}
+            />
+            <Stack.Screen
+              name="PerguntaQuatro"
+              component={PerguntaQuatro}
+              options={{
+                headerTitle: "Pesquisa Geopark",
+              }}
+            />
+            <Stack.Screen
+              name="Sucesso"
+              component={Sucesso}
+              options={{
+                headerTitle: "Pesquisa Geopark",
+              }}
             />
           </Stack.Group>
-
           <Stack.Group
             screenOptions={{
               headerTitleAlign: "center",
               headerBackTitle: "Voltar",
             }}
           >
+            <Stack.Screen
+              name="Tarefas"
+              component={Tarefas}
+              options={{ title: "Colina do Horto" }}
+            />
             <Stack.Screen
               name="Camera"
               component={CameraWeb}
@@ -331,13 +377,6 @@ export default function App() {
               component={Settings}
               options={{
                 headerTitle: "Configurações",
-              }}
-            />
-            <Stack.Screen
-              name="Questionario"
-              component={Questionario}
-              options={{
-                headerTitle: "Pesquisa Geopark",
               }}
             />
             <Stack.Screen

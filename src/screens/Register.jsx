@@ -115,7 +115,7 @@ export default function Login() {
         </View>
 
         <TouchableOpacity
-          className="h-14 rounded-[10px] flex justify-center items-center w-full bg-[#39B061] mt-7"
+          className="h-14 rounded-[10px] flex justify-center items-center w-full bg-[#287D44] mt-7"
           onPress={handleSignup}
         >
           <Text style={styles.textButton}>Criar conta</Text>

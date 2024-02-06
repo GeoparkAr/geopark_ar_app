@@ -6,7 +6,7 @@ export default function About() {
 
   return (
     <ScrollView style={{ backgroundColor: "#FFF" }}>
-      <View className="px-7 justify-center py-10">
+      <View className="px-7 justify-center py-3">
         <View className="self-center"></View>
         <View>
           <Text className="text-[18px] font-medium mb-3">Geopark AR</Text>

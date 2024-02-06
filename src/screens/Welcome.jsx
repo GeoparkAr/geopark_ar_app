@@ -136,10 +136,10 @@ const styles = StyleSheet.create({
   googleText: {
     color: "#ffffff",
     fontSize: 14,
-    fontWeight: "600",
+    fontWeight: "500",
   },
   greenButton: {
-    backgroundColor: "#3EB25EB2",
+    backgroundColor: "#287D44",
     flexDirection: "row",
     height: 40,
     borderRadius: 30,
@@ -148,8 +148,8 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   greenText: {
-    color: "#2D2D2D",
-    fontWeight: "700",
+    color: "#FFF",
+    fontWeight: "500",
     fontSize: 14,
   },
   visitanteButton: {
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
   },
   textVisitantes: {
     color: "#2D2D2D",
-    fontWeight: "700",
+    fontWeight: "500",
     fontSize: 14,
   },
 });

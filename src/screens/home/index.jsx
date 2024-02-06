@@ -15,12 +15,15 @@ import { Ionicons } from "@expo/vector-icons";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "../../firebase";
 import { useAuth } from "../../hooks/useAuth";
-import { doc } from "firebase/firestore";
-import { Entypo } from "@expo/vector-icons";
 
 export default function Home() {
   const [categoriaSelecionada, setCategoriaSelecionada] = useState(null);
   const [authChecked, setAuthChecked] = useState(false);
+  const [categoria, setCategoria] = useState(false);
+
+  function handleCategoria() {
+    setCategoria(!categoria);
+  }
 
   const {
     data: { user, docRef },
@@ -178,6 +181,7 @@ export default function Home() {
             </View>
           </TouchableOpacity>
         )}
+
         {/* header */}
         <View style={styles.header}>
           <TouchableOpacity
@@ -187,279 +191,280 @@ export default function Home() {
           </TouchableOpacity>
           <View style={styles.buttons}>
             <TouchableOpacity onPress={() => navigation.navigate("Selos")}>
-              <Image source={require("../../../assets/imgs/icons/Chest.png")} />
+              <Image
+                source={require("../../../assets/imgs/icons/Chest.png")}
+                className="h-11 w-11"
+              />
             </TouchableOpacity>
           </View>
         </View>
-        {/* card de destaque ao padre cícero */}
 
-        <TouchableOpacity
-          className="rounded-lg mt-8 mb-6 p-6 w-[85vw] self-center justify-around items-center flex-row bg-[#39B061] max-w-lg"
-          onPress={openTarefas}
-        >
-          <Image
-            source={require("../../../assets/imgs/banner.png")}
-            className="rounded-full w-24 h-24 mr-3"
-          />
-          <View>
-            <View>
-              <Text className="w-48 text-justify text-white text-lg font-semibold">
-                Colina do Horto
-              </Text>
-              <Text className="w-48 text-justify text-white">
-                Conheça a cultura do Cariri com um importante símbolo histórico
-                da região.
-              </Text>
-            </View>
-          </View>
-        </TouchableOpacity>
-        {/* categorias */}
-        <View style={styles.categorias}>
-          <Text style={styles.title}>Categorias</Text>
-          <View
-            style={{
-              justifyContent: "space-around",
-              flexDirection: "row",
-              flexWrap: "wrap",
-            }}
-          >
-            <TouchableOpacity
-              style={styles.containerCategoria}
-              onPress={() => setCategoriaSelecionada("Acessibilidade")}
-            >
-              <View
-                style={[
-                  styles.img,
-                  categoriaSelecionada === "Acessibilidade" && {
-                    backgroundColor: "#287D44",
-                  },
-                ]}
-              >
-                <Image
-                  style={styles.imgCategoria}
-                  source={require("../../../assets/imgs/icons/Accessible.png")}
-                />
-              </View>
-
-              <Text style={styles.categoriaText}>Acessibili dade</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.containerCategoria}
-              onPress={() => setCategoriaSelecionada("Aquático")}
-            >
-              <View
-                style={[
-                  styles.img,
-                  categoriaSelecionada === "Aquático" && {
-                    backgroundColor: "#287D44",
-                  },
-                ]}
-              >
-                <Image
-                  style={styles.imgCategoria}
-                  source={require("../../../assets/imgs/icons/aquatico.png")}
-                />
-              </View>
-
-              <Text style={styles.categoriaText}>Aquático</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.containerCategoria}
-              onPress={() => setCategoriaSelecionada("Arqueológico")}
-            >
-              <View
-                style={[
-                  styles.img,
-                  categoriaSelecionada === "Arqueológico" && {
-                    backgroundColor: "#287D44",
-                  },
-                ]}
-              >
-                <Image
-                  style={styles.imgCategoria}
-                  source={require("../../../assets/imgs/icons/archeo.png")}
-                />
-              </View>
-              <Text style={styles.categoriaText}>Arqueoló gico</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.containerCategoria}
-              onPress={() => setCategoriaSelecionada("Biodiversidade")}
-            >
-              <View
-                style={[
-                  styles.img,
-                  categoriaSelecionada === "Biodiversidade" && {
-                    backgroundColor: "#287D44",
-                  },
-                ]}
-              >
-                <Image
-                  style={styles.imgCategoria}
-                  source={require("../../../assets/imgs/icons/Biome.png")}
-                />
-              </View>
-              <Text style={styles.categoriaText}>Biodiversi dade</Text>
-            </TouchableOpacity>
-          </View>
-          <View
-            style={{
-              justifyContent: "space-around",
-              flexDirection: "row",
-              flexWrap: "wrap",
-            }}
-          >
-            <TouchableOpacity
-              style={styles.containerCategoria}
-              onPress={() => setCategoriaSelecionada("Cultural")}
-            >
-              <View
-                style={[
-                  styles.img,
-                  categoriaSelecionada === "Cultural" && {
-                    backgroundColor: "#287D44",
-                  },
-                ]}
-              >
-                <Image
-                  style={styles.imgCategoria}
-                  source={require("../../../assets/imgs/icons/cultural.png")}
-                />
-              </View>
-
-              <Text style={styles.categoriaText}>Cultural</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.containerCategoria}
-              onPress={() => setCategoriaSelecionada("Geodiversidade")}
-            >
-              <View
-                style={[
-                  styles.img,
-                  categoriaSelecionada === "Geodiversidade" && {
-                    backgroundColor: "#287D44",
-                  },
-                ]}
-              >
-                <Image
-                  style={styles.imgCategoria}
-                  source={require("../../../assets/imgs/icons/geodi.png")}
-                />
-              </View>
-
-              <Text style={styles.categoriaText}>Geodiversi dade</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.containerCategoria}
-              onPress={() => setCategoriaSelecionada("Geomorfológico")}
-            >
-              <View
-                style={[
-                  styles.img,
-                  categoriaSelecionada === "Geomorfológico" && {
-                    backgroundColor: "#287D44",
-                  },
-                ]}
-              >
-                <Image
-                  style={styles.imgCategoria}
-                  source={require("../../../assets/imgs/icons/Geology.png")}
-                />
-              </View>
-              <Text style={styles.categoriaText}>Geomorfo lógico</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.containerCategoria}
-              onPress={() => setCategoriaSelecionada("Mirante")}
-            >
-              <View
-                style={[
-                  styles.img,
-                  categoriaSelecionada === "Mirante" && {
-                    backgroundColor: "#287D44",
-                  },
-                ]}
-              >
-                <Image
-                  style={styles.imgCategoria}
-                  source={require("../../../assets/imgs/icons/tower.png")}
-                />
-              </View>
-              <Text style={styles.categoriaText}>Mirante</Text>
-            </TouchableOpacity>
-          </View>
-          <View
-            style={{
-              justifyContent: "space-around",
-              flexDirection: "row",
-              flexWrap: "wrap",
-            }}
-          >
-            <TouchableOpacity
-              style={styles.containerCategoria}
-              onPress={() => setCategoriaSelecionada("Paleontológico")}
-            >
-              <View
-                style={[
-                  styles.img,
-                  categoriaSelecionada === "Paleontológico" && {
-                    backgroundColor: "#287D44",
-                  },
-                ]}
-              >
-                <Image
-                  style={styles.imgCategoria}
-                  source={require("../../../assets/imgs/icons/paleantologia.png")}
-                />
-              </View>
-
-              <Text style={styles.categoriaText}>Paleonto lógico</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.containerCategoria}
-              onPress={() => setCategoriaSelecionada("Religioso")}
-            >
-              <View
-                style={[
-                  styles.img,
-                  categoriaSelecionada === "Religioso" && {
-                    backgroundColor: "#287D44",
-                  },
-                ]}
-              >
-                <Image
-                  style={styles.imgCategoria}
-                  source={require("../../../assets/imgs/icons/Rosary.png")}
-                />
-              </View>
-
-              <Text style={styles.categoriaText}>Espiritual</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.containerCategoria}
-              onPress={() => setCategoriaSelecionada("Trilha")}
-            >
-              <View
-                style={[
-                  styles.img,
-                  categoriaSelecionada === "Trilha" && {
-                    backgroundColor: "#287D44",
-                  },
-                ]}
-              >
-                <Image
-                  style={styles.imgCategoria}
-                  source={require("../../../assets/imgs/icons/trilha.png")}
-                />
-              </View>
-              <Text style={styles.categoriaText}>Trilha</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={{ width: 50 }}></TouchableOpacity>
-          </View>
-        </View>
         {/* geossítios */}
         <View>
-          <Text style={styles.title}>Geossítios</Text>
+          <View className="flex-row justify-between items-center my-5">
+            <Text className="text-[#18241B] font-bold text-lg">Geossítios</Text>
+            <TouchableOpacity
+              className="bg-[#39B061] px-3.5 py-1.5 rounded-2xl flex-row justify-center items-center"
+              onPress={handleCategoria}
+            >
+              <View className="border border-white rounded-full p-1 justify-center items-center">
+                {categoria ? (
+                  <Ionicons name="close" size={10} color="white" />
+                ) : (
+                  <Ionicons name="filter" size={10} color="white" />
+                )}
+                
+                
+              </View>
+              <Text className="text-white font-medium ml-2">Filtrar</Text>
+            </TouchableOpacity>
+          </View>
+
+          {categoria && (
+            <View className="p-5">
+              <View
+                style={{
+                  justifyContent: "space-between",
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                }}
+              >
+                <TouchableOpacity
+                  style={styles.containerCategoria}
+                  onPress={() => setCategoriaSelecionada("Acessibilidade")}
+                >
+                  <View
+                    style={[
+                      styles.img,
+                      categoriaSelecionada === "Acessibilidade" && {
+                        backgroundColor: "#287D44",
+                      },
+                    ]}
+                  >
+                    <Image
+                      style={styles.imgCategoria}
+                      source={require("../../../assets/imgs/icons/Accessible.png")}
+                    />
+                  </View>
+
+                  <Text style={styles.categoriaText}>Acessibili dade</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.containerCategoria}
+                  onPress={() => setCategoriaSelecionada("Aquático")}
+                >
+                  <View
+                    style={[
+                      styles.img,
+                      categoriaSelecionada === "Aquático" && {
+                        backgroundColor: "#287D44",
+                      },
+                    ]}
+                  >
+                    <Image
+                      style={styles.imgCategoria}
+                      source={require("../../../assets/imgs/icons/aquatico.png")}
+                    />
+                  </View>
+
+                  <Text style={styles.categoriaText}>Aquático</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.containerCategoria}
+                  onPress={() => setCategoriaSelecionada("Arqueológico")}
+                >
+                  <View
+                    style={[
+                      styles.img,
+                      categoriaSelecionada === "Arqueológico" && {
+                        backgroundColor: "#287D44",
+                      },
+                    ]}
+                  >
+                    <Image
+                      style={styles.imgCategoria}
+                      source={require("../../../assets/imgs/icons/archeo.png")}
+                    />
+                  </View>
+                  <Text style={styles.categoriaText}>Arqueoló gico</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.containerCategoria}
+                  onPress={() => setCategoriaSelecionada("Biodiversidade")}
+                >
+                  <View
+                    style={[
+                      styles.img,
+                      categoriaSelecionada === "Biodiversidade" && {
+                        backgroundColor: "#287D44",
+                      },
+                    ]}
+                  >
+                    <Image
+                      style={styles.imgCategoria}
+                      source={require("../../../assets/imgs/icons/Biome.png")}
+                    />
+                  </View>
+                  <Text style={styles.categoriaText}>Biodiversi dade</Text>
+                </TouchableOpacity>
+              </View>
+              <View
+                style={{
+                  justifyContent: "space-between",
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                }}
+              >
+                <TouchableOpacity
+                  style={styles.containerCategoria}
+                  onPress={() => setCategoriaSelecionada("Cultural")}
+                >
+                  <View
+                    style={[
+                      styles.img,
+                      categoriaSelecionada === "Cultural" && {
+                        backgroundColor: "#287D44",
+                      },
+                    ]}
+                  >
+                    <Image
+                      style={styles.imgCategoria}
+                      source={require("../../../assets/imgs/icons/cultural.png")}
+                    />
+                  </View>
+
+                  <Text style={styles.categoriaText}>Cultural</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.containerCategoria}
+                  onPress={() => setCategoriaSelecionada("Geodiversidade")}
+                >
+                  <View
+                    style={[
+                      styles.img,
+                      categoriaSelecionada === "Geodiversidade" && {
+                        backgroundColor: "#287D44",
+                      },
+                    ]}
+                  >
+                    <Image
+                      style={styles.imgCategoria}
+                      source={require("../../../assets/imgs/icons/geodi.png")}
+                    />
+                  </View>
+
+                  <Text style={styles.categoriaText}>Geodiversi dade</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.containerCategoria}
+                  onPress={() => setCategoriaSelecionada("Geomorfológico")}
+                >
+                  <View
+                    style={[
+                      styles.img,
+                      categoriaSelecionada === "Geomorfológico" && {
+                        backgroundColor: "#287D44",
+                      },
+                    ]}
+                  >
+                    <Image
+                      style={styles.imgCategoria}
+                      source={require("../../../assets/imgs/icons/Geology.png")}
+                    />
+                  </View>
+                  <Text style={styles.categoriaText}>Geomorfo lógico</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.containerCategoria}
+                  onPress={() => setCategoriaSelecionada("Mirante")}
+                >
+                  <View
+                    style={[
+                      styles.img,
+                      categoriaSelecionada === "Mirante" && {
+                        backgroundColor: "#287D44",
+                      },
+                    ]}
+                  >
+                    <Image
+                      style={styles.imgCategoria}
+                      source={require("../../../assets/imgs/icons/tower.png")}
+                    />
+                  </View>
+                  <Text style={styles.categoriaText}>Mirante</Text>
+                </TouchableOpacity>
+              </View>
+              <View
+                style={{
+                  justifyContent: "space-between",
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                }}
+              >
+                <TouchableOpacity
+                  style={styles.containerCategoria}
+                  onPress={() => setCategoriaSelecionada("Paleontológico")}
+                >
+                  <View
+                    style={[
+                      styles.img,
+                      categoriaSelecionada === "Paleontológico" && {
+                        backgroundColor: "#287D44",
+                      },
+                    ]}
+                  >
+                    <Image
+                      style={styles.imgCategoria}
+                      source={require("../../../assets/imgs/icons/paleantologia.png")}
+                    />
+                  </View>
+
+                  <Text style={styles.categoriaText}>Paleonto lógico</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.containerCategoria}
+                  onPress={() => setCategoriaSelecionada("Religioso")}
+                >
+                  <View
+                    style={[
+                      styles.img,
+                      categoriaSelecionada === "Religioso" && {
+                        backgroundColor: "#287D44",
+                      },
+                    ]}
+                  >
+                    <Image
+                      style={styles.imgCategoria}
+                      source={require("../../../assets/imgs/icons/Rosary.png")}
+                    />
+                  </View>
+
+                  <Text style={styles.categoriaText}>Espiritual</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.containerCategoria}
+                  onPress={() => setCategoriaSelecionada("Trilha")}
+                >
+                  <View
+                    style={[
+                      styles.img,
+                      categoriaSelecionada === "Trilha" && {
+                        backgroundColor: "#287D44",
+                      },
+                    ]}
+                  >
+                    <Image
+                      style={styles.imgCategoria}
+                      source={require("../../../assets/imgs/icons/trilha.png")}
+                    />
+                  </View>
+                  <Text style={styles.categoriaText}>Trilha</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={{ width: 50 }}></TouchableOpacity>
+              </View>
+            </View>
+          )}
+
           {/* botão de limpar categoria selecionada */}
           {categoriaSelecionada && (
             <TouchableOpacity
@@ -475,36 +480,30 @@ export default function Home() {
               />
             </TouchableOpacity>
           )}
-          <View className="justify-around flex-row flex-wrap mb-8">
+          <View className=" justify-between flex-row flex-wrap mb-8">
             {/* mostrar o card da colina do horto */}
             {categoriaSelecionada === "Religioso" ||
             categoriaSelecionada === "Trilha" ||
             categoriaSelecionada === null ? (
-              <View className="bg-[#39B061] justify-around items-center rounded-xl mb-3 w-[85vw] flex-row h-36 max-w-sm">
+              <View
+                className="justify-center items-center rounded-xl mb-3 w-[40vw] 
+                h-48 max-w-[230px] bg-[#39B061]"
+              >
                 <Image
-                  className="w-24 h-24 rounded-lg"
+                  className="h-20 w-20 rounded-full mb-2"
                   source={require("../../../assets/imgs/geossitios/colina.png")}
                 />
-                <View className="justify-center h-full gap-3">
-                  <Text className="text-base font-semibold text-white w-36">
-                    Colina do Horto
+                <Text className="text-sm text-white text-center font-semibold w-36 mb-2">
+                  Colina do Horto
+                </Text>
+                <TouchableOpacity
+                  className="bg-white h-7 justify-center items-center px-2 rounded-2xl"
+                  onPress={openTarefas}
+                >
+                  <Text className="font-medium text-xs text-[#18241B]">
+                    Explorar
                   </Text>
-                  <View className="flex-row items-center">
-                    <View className="justify-center items-center flex-row">
-                      <Entypo name="location-pin" size={24} color="#1A4E38" />
-                      <Text className="text-white text-xs font-medium w-14 justify-center items-center mx-1">
-                        Juazeiro do Norte
-                      </Text>
-                    </View>
-
-                    <TouchableOpacity className="bg-white h-7 justify-center items-center px-2 rounded-lg "
-                    onPress={openTarefas}>
-                      <Text className="text-[#39B061] font-semibold text-xs">
-                        Explorar
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
-                </View>
+                </TouchableOpacity>
               </View>
             ) : null}
             {/* mostrando todos os geossítios */}
@@ -526,7 +525,7 @@ export default function Home() {
 //estilização com styleSheet
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
+    padding: 26,
     backgroundColor: "#FFF",
   },
   header: {
@@ -593,12 +592,6 @@ const styles = StyleSheet.create({
     color: "#FFF",
     fontWeight: "700",
     fontSize: 13,
-  },
-  title: {
-    color: "#18241B",
-    fontWeight: "500",
-    fontSize: 18,
-    marginBottom: 25,
   },
   categoriaText: {
     color: "#18241B",
