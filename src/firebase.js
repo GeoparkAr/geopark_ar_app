@@ -8,12 +8,12 @@ import { getFirestore } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyB1aFAvYEicl_SUtKX116VW4slDIpJCTqI",
-  authDomain: "app-rn-fb.firebaseapp.com",
-  projectId: "app-rn-fb",
-  storageBucket: "app-rn-fb.appspot.com",
-  messagingSenderId: "1085259751406",
-  appId: "1:1085259751406:web:b929f4931c7aed711778ff"
+  apiKey: "AIzaSyCO6j1ieNoX2uujxRuRldKwIjYicHrhp0s",
+  authDomain: "geopark-ar-app.firebaseapp.com",
+  projectId: "geopark-ar-app",
+  storageBucket: "geopark-ar-app.appspot.com",
+  messagingSenderId: "86576468544",
+  appId: "1:86576468544:web:425e355ed0d523c84105a5"
 };
 
 // Initialize Firebase
