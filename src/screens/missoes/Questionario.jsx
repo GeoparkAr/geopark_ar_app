@@ -54,7 +54,7 @@ export default function Questionario() {
       setUser(authUser);
       setAuthChecked(true);
     });
-    getDocumentID();
+    //getDocumentID();
     return () => unsubscribe();
   }, []);
 
@@ -84,8 +84,8 @@ export default function Questionario() {
       await checkAuthentication();
 
       // Agora que você tem o documentID, pode buscar a informação do banco de dados
-      const docRef = doc(db, "users", documentID);
-      const docSnapshot = await getDoc(docRef);
+     // const docRef = doc(db, "users", documentID);
+      //const docSnapshot = await getDoc(docRef);
     };
 
     fetchData();
@@ -95,7 +95,7 @@ export default function Questionario() {
   const navigateToTarefas = async () => {
     if (validateFields()) {
       navigation.navigate("Tarefas");
-      const docRef = doc(db, "users", documentID);
+     // const docRef = doc(db, "users", documentID);
     } else {
       Alert.alert(
         "Campos obrigatórios",
@@ -127,7 +127,7 @@ export default function Questionario() {
   const handleContinuarPress = async () => {
     if (validateFields()) {
       navigation.navigate("Tarefas");
-      const docRef = doc(db, "users", documentID);
+      //const docRef = doc(db, "users", documentID);
 
       await updateDoc(docRef, {
         "lastVisit.geoparkAraripe.groupSize": groupSize,

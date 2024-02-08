@@ -7,8 +7,9 @@ import {
   ImageBackground,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
 import { signInAnonymously } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 
 export default function Welcome() {
   const navigation = useNavigation();
@@ -32,6 +33,7 @@ export default function Welcome() {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
       });
   };
 
