@@ -153,8 +153,8 @@ function Root() {
               >
                 <View
                   style={{
-                    width: 24,
-                    height: 24,
+                    width: 26,
+                    height: 26,
                     backgroundColor: "#39B061",
                     justifyContent: "center",
                     alignItems: "center",
@@ -163,7 +163,7 @@ function Root() {
                 >
                   <Image
                     source={require("./assets/imgs/icon.png")}
-                    style={{ width: 24, height: 24, borderRadius: 5 }}
+                    style={{ width: 22, height: 22, borderRadius: 5 }}
                   />
                 </View>
 
@@ -180,8 +180,8 @@ function Root() {
               >
                 <View
                   style={{
-                    width: 24,
-                    height: 24,
+                    width: 26,
+                    height: 26,
                     backgroundColor: "#39B061",
                     borderRadius: 5,
                     justifyContent: "center",
@@ -191,8 +191,8 @@ function Root() {
                   <Image
                     source={require("./assets/imgs/icons/chestbig.png")}
                     style={{
-                      width: 18,
-                      height: 18,
+                      width: 15,
+                      height: 15,
                     }}
                   />
                 </View>
@@ -211,15 +211,15 @@ function Root() {
                 >
                   <View
                     style={{
-                      width: 24,
-                      height: 24,
+                      width: 26,
+                      height: 26,
                       backgroundColor: "#39B061",
                       borderRadius: 5,
                       justifyContent: "center",
                       alignItems: "center",
                     }}
                   >
-                    <Ionicons name="ios-settings" size={18} color="#F4F4F4" />
+                    <Ionicons name="ios-settings" size={16} color="#F4F4F4" />
                   </View>
 
                   <Text style={{ fontSize: 16 }}>Configurações</Text>

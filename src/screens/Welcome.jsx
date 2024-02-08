@@ -13,7 +13,7 @@ import { signInAnonymously } from "firebase/auth";
 export default function Welcome() {
   const navigation = useNavigation();
 
-  const handleAnonymousLogin = async () => {
+   const handleAnonymousLogin = async () => {
     await signInAnonymously(auth)
       .then(async () => {
         const user = auth.currentUser;

@@ -27,6 +27,7 @@ import {
 import CustomButton from "./components/CustomButton";
 import LottieView from "lottie-react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useAuth } from "../../hooks/useAuth";
 
 export default function Tarefas() {
   const navigation = useNavigation();
@@ -74,7 +75,7 @@ export default function Tarefas() {
   };
 
   const lottieRef = useRef(null);
-  
+
   const handleButtonPress = () => {
     if (botao9Habilitado) {
       setCongratulations(true);
@@ -196,26 +197,34 @@ export default function Tarefas() {
     }
   };
 
+  const {
+    data: { docRef },
+  } = useAuth();
+
   const handleClick8 = async () => {
     if (authChecked) {
       if (user && !user.isAnonymous) {
-        navigateToMissao8();
+        
         setBotao9Habilitado(true);
-        const docRef = doc(db, "users", documentID);
+
+        const mission7Value = true;
+  
         await updateDoc(docRef, {
-          "stamps.geoparkAraripe.mission7": true,
+          "stamps.geoparkAraripe.mission7": mission7Value,
         })
-          .then(() => {})
+          .then(() => {
+            navigateToMissao8();
+            console.log('Valor enviado para missão 7:', mission7Value);
+          })
           .catch((error) => {
             const errorMessage = error.message;
-            Alert.alert("Erro ao atualizar BD", errorMessage);
+            console.log("Erro ao atualizar BD", errorMessage);
           });
       } else {
         setModalVisible(true);
       }
-    } else {
     }
-  };
+  };  
 
   const salvarEstadoAoSair = async () => {
     try {
