@@ -9,39 +9,8 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import NetInfo from "@react-native-community/netinfo";
 import { useState, useEffect } from "react";
-import {
-  LocationObjectCoords,
-  requestForegroundPermissionsAsync,
-  getCurrentPositionAsync,
-} from "expo-location";
-import { distance } from "../../../dist";
-import geoloc from "../../../geoloc.json";
 
-export default function Missao() {
-  let dista;
-  const [location, setlocation] = useState(null);
-  const [showLocation, setShowLocation] = useState(false);
-
-  async function resquestLocationPermissions() {
-    const { granted } = await requestForegroundPermissionsAsync();
-
-    if (granted) {
-      const currentPosition = await getCurrentPositionAsync();
-      console.log("LOCALIZAÇÂO: ", currentPosition);
-      dista = distance(
-        geoloc[4][0],
-        geoloc[4][1],
-        Number(currentPosition.coords.latitude),
-        Number(currentPosition.coords.longitude)
-      );
-      setlocation(currentPosition);
-    } else {
-      console.log("Não tem localização");
-    }
-  }
-
-  resquestLocationPermissions();
-
+export default function MissaoSeven() {
   const navigation = useNavigation();
   const [isConnected, setIsConnected] = useState(true);
 
@@ -58,11 +27,9 @@ export default function Missao() {
 
   //navegando para o link da câmera
   const navigateToCamera = () => {
-    if (dista > 100) {
-      navigation.navigate("Camera", {
-        url: "https://web-geoparkcamera-ten.vercel.app/",
-      });
-    }
+    navigation.navigate("Camera", {
+      url: "https://web-geoparkcamera-ten.vercel.app/",
+    });
   };
 
   return (
@@ -70,30 +37,18 @@ export default function Missao() {
       {isConnected ? (
         <View className="flex flex-col justify-around items-center h-[90vh]">
           <Image
-            source={require("../../../assets/imgs/missoes/padrecicero.png")}
+            source={require("../../../assets/imgs/missoes/pedradopecado.png")}
             style={{ width: 200, height: 200 }}
           />
-          <View
-            style={{ justifyContent: "center", alignItems: "center", gap: 20 }}
-          >
-            {dista < 100 ? (
-              <>
-                <Text>{dista}</Text>
-                <Text style={styles.textCamera}>
-                  Clique na câmera e comece a explorar
-                </Text>
-                <TouchableOpacity onPress={navigateToCamera}>
-                  <Image
-                    source={require("../../../assets/imgs/icons/camera.png")}
-                  />
-                </TouchableOpacity>
-              </>
-            ) : (
-              <View>
-                <Text> Muito longe da Colina do Horto.</Text>
-                <Text>Distância: {dista}</Text>
-              </View>
-            )}
+          <View style={{justifyContent: "center", alignItems: "center", gap: 20}}>
+            <Text style={styles.textCamera}>
+              Clique na câmera e comece a explorar
+            </Text>
+            <TouchableOpacity onPress={navigateToCamera}>
+              <Image
+                source={require("../../../assets/imgs/icons/camera.png")}
+              />
+            </TouchableOpacity>
           </View>
         </View>
       ) : (
