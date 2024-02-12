@@ -17,7 +17,7 @@ const distance = (lat1, lon1, lat2, lon2) => {
 
   console.log('Distance:', dist);
 
-  return dist < 100;
+  return dist;
 };
 
 export {distance};
