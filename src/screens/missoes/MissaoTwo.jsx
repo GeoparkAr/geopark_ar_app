@@ -20,8 +20,6 @@ import geoloc from "../../../geoloc.json";
 export default function Missao() {
   let dista;
   const [location, setlocation] = useState(null);
-  const [showLocation, setShowLocation] = useState(false);
-
   async function resquestLocationPermissions() {
     const { granted } = await requestForegroundPermissionsAsync();
 
@@ -76,22 +74,35 @@ export default function Missao() {
           <View
             style={{ justifyContent: "center", alignItems: "center", gap: 20 }}
           >
-            {dista < 100 ? (
-              <>
-                <Text>{dista}</Text>
-                <Text style={styles.textCamera}>
-                  Clique na câmera e comece a explorar
-                </Text>
-                <TouchableOpacity onPress={navigateToCamera}>
-                  <Image
-                    source={require("../../../assets/imgs/icons/camera.png")}
-                  />
-                </TouchableOpacity>
-              </>
+            <Text style={styles.textCamera}>
+              Clique na câmera e comece a explorar
+            </Text>
+            {location &&
+            distance(
+              geoloc[4][0],
+              geoloc[4][1],
+              location.coords.latitude,
+              location.coords.longitude
+            ) < 100 ? (
+              <TouchableOpacity onPress={navigateToCamera}>
+                <Image
+                  source={require("../../../assets/imgs/icons/camera.png")}
+                />
+              </TouchableOpacity>
             ) : (
-              <View>
-                <Text> Muito longe da Colina do Horto.</Text>
-                <Text>Distância: {dista}</Text>
+              <View className="justify-center items-center">
+                <Text className="text-red-700 font-bold text-2xl text-center">
+                  Muito longe.
+                  
+                </Text>
+                <Text className="font-bold text-xl text-center">
+                  {distance(
+                    geoloc[4][0],
+                    geoloc[4][1],
+                    location.coords.latitude,
+                    location.coords.longitude
+                  )} km
+                </Text>
               </View>
             )}
           </View>

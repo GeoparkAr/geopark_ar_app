@@ -333,6 +333,7 @@ export default function Tarefas() {
   function closeMapa() {
     setMapa(false);
   }
+
   return (
     <ScrollView style={{ backgroundColor: "#FFF" }}>
       <View>
