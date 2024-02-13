@@ -16,6 +16,7 @@ import {
 } from "expo-location";
 import { distance } from "../../../dist";
 import geoloc from "../../../geoloc.json";
+import { updateDoc } from "firebase/firestore";
 
 export default function Missao() {
   let dista;
@@ -43,6 +44,10 @@ export default function Missao() {
   const navigation = useNavigation();
   const [isConnected, setIsConnected] = useState(true);
 
+  const {
+    data: { docRef },
+  } = useAuth();
+
   //verifica se há conexão com internet
   useEffect(() => {
     const unsubscribe = NetInfo.addEventListener((state) => {
@@ -54,12 +59,25 @@ export default function Missao() {
     };
   }, []);
 
+  //muda status da missão
+  const handleMissionSave = async () => {
+    await updateDoc(docRef, {
+      "stamps.geoparkAraripe.mission8": true,
+    })
+      .then(() => {})
+      .catch((error) => {
+        const errorMessage = error.message;
+        Alert.alert("Erro ao atualizar BD", errorMessage);
+      });
+  }
+
   //navegando para o link da câmera
   const navigateToCamera = () => {
     if (dista > 100) {
       navigation.navigate("Camera", {
         url: "https://web-geoparkcamera-ten.vercel.app/",
       });
+      handleMissionSave();
     }
   };
 

@@ -56,6 +56,7 @@ export default function Login() {
                 mission5: false,
                 mission6: false,
                 mission7: false,
+                mission8: false,
                 geoparkAraripeStamp: false,
               },
             },
