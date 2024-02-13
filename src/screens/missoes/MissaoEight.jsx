@@ -74,35 +74,40 @@ export default function Missao() {
           <View
             style={{ justifyContent: "center", alignItems: "center", gap: 20 }}
           >
-            <Text style={styles.textCamera}>
-              Clique na câmera e comece a explorar
-            </Text>
-            {location && location.coords && 
+            {location &&
+            location.coords &&
             distance(
               geoloc[2][0],
               geoloc[2][1],
               Number(location.coords.latitude),
               Number(location.coords.longitude)
             ) < 100 ? (
-              <TouchableOpacity onPress={navigateToCamera}>
-                <Image
-                  source={require("../../../assets/imgs/icons/camera.png")}
-                />
-              </TouchableOpacity>
+              <View className="justify-center items-center">
+                <Text style={styles.textCamera}>
+                  Clique na câmera e comece a explorar
+                </Text>
+                <TouchableOpacity onPress={navigateToCamera}>
+                  <Image
+                    source={require("../../../assets/imgs/icons/camera.png")}
+                  />
+                </TouchableOpacity>
+              </View>
             ) : (
               <View className="justify-center items-center">
                 <Text className="text-red-700 font-bold text-2xl text-center">
                   Muito longe.
-                  
                 </Text>
                 <Text className="font-bold text-xl text-center">
-                  {location && 
-                  (distance(
-                    geoloc[2][0],
-                    geoloc[2][1],
-                    Number(location.coords.latitude),
-                    Number(location.coords.longitude))/1000).toFixed(2)
-                  } km
+                  {location &&
+                    (
+                      distance(
+                        geoloc[2][0],
+                        geoloc[2][1],
+                        Number(location.coords.latitude),
+                        Number(location.coords.longitude)
+                      ) / 1000
+                    ).toFixed(2)}{" "}
+                  km
                 </Text>
               </View>
             )}
