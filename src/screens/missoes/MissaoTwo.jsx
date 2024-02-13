@@ -10,7 +10,7 @@ import { useNavigation } from "@react-navigation/native";
 import NetInfo from "@react-native-community/netinfo";
 import { useState, useEffect } from "react";
 import {
-  LocationObjectCoords,
+  LocationObject,
   requestForegroundPermissionsAsync,
   getCurrentPositionAsync,
 } from "expo-location";
@@ -77,12 +77,12 @@ export default function Missao() {
             <Text style={styles.textCamera}>
               Clique na câmera e comece a explorar
             </Text>
-            {location &&
+            {location && location.coords && 
             distance(
               geoloc[4][0],
               geoloc[4][1],
-              location.coords.latitude,
-              location.coords.longitude
+              Number(location.coords.latitude),
+              Number(location.coords.longitude)
             ) < 100 ? (
               <TouchableOpacity onPress={navigateToCamera}>
                 <Image
@@ -96,12 +96,13 @@ export default function Missao() {
                   
                 </Text>
                 <Text className="font-bold text-xl text-center">
-                  {distance(
+                  {location && 
+                  (distance(
                     geoloc[4][0],
                     geoloc[4][1],
-                    location.coords.latitude,
-                    location.coords.longitude
-                  )} km
+                    Number(location.coords.latitude),
+                    Number(location.coords.longitude))/1000).toFixed(2)
+                  } km
                 </Text>
               </View>
             )}

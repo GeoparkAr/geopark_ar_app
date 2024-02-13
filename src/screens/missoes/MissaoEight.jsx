@@ -9,8 +9,37 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import NetInfo from "@react-native-community/netinfo";
 import { useState, useEffect } from "react";
+import {
+  LocationObject,
+  requestForegroundPermissionsAsync,
+  getCurrentPositionAsync,
+} from "expo-location";
+import { distance } from "../../../dist";
+import geoloc from "../../../geoloc.json";
 
-export default function MissaoEight() {
+export default function Missao() {
+  let dista;
+  const [location, setlocation] = useState(null);
+  async function resquestLocationPermissions() {
+    const { granted } = await requestForegroundPermissionsAsync();
+
+    if (granted) {
+      const currentPosition = await getCurrentPositionAsync();
+      console.log("LOCALIZAÇÂO: ", currentPosition);
+      dista = distance(
+        geoloc[2][0],
+        geoloc[2][1],
+        Number(currentPosition.coords.latitude),
+        Number(currentPosition.coords.longitude)
+      );
+      setlocation(currentPosition);
+    } else {
+      console.log("Não tem localização");
+    }
+  }
+
+  resquestLocationPermissions();
+
   const navigation = useNavigation();
   const [isConnected, setIsConnected] = useState(true);
 
@@ -27,9 +56,11 @@ export default function MissaoEight() {
 
   //navegando para o link da câmera
   const navigateToCamera = () => {
-    navigation.navigate("Camera", {
-      url: "https://web-geoparkcamera-ten.vercel.app/",
-    });
+    if (dista > 100) {
+      navigation.navigate("Camera", {
+        url: "https://web-geoparkcamera-ten.vercel.app/",
+      });
+    }
   };
 
   return (
@@ -40,15 +71,41 @@ export default function MissaoEight() {
             source={require("../../../assets/imgs/missoes/padrecicero.png")}
             style={{ width: 200, height: 200 }}
           />
-          <View style={{justifyContent: "center", alignItems: "center", gap: 20}}>
+          <View
+            style={{ justifyContent: "center", alignItems: "center", gap: 20 }}
+          >
             <Text style={styles.textCamera}>
               Clique na câmera e comece a explorar
             </Text>
-            <TouchableOpacity onPress={navigateToCamera}>
-              <Image
-                source={require("../../../assets/imgs/icons/camera.png")}
-              />
-            </TouchableOpacity>
+            {location && location.coords && 
+            distance(
+              geoloc[2][0],
+              geoloc[2][1],
+              Number(location.coords.latitude),
+              Number(location.coords.longitude)
+            ) < 100 ? (
+              <TouchableOpacity onPress={navigateToCamera}>
+                <Image
+                  source={require("../../../assets/imgs/icons/camera.png")}
+                />
+              </TouchableOpacity>
+            ) : (
+              <View className="justify-center items-center">
+                <Text className="text-red-700 font-bold text-2xl text-center">
+                  Muito longe.
+                  
+                </Text>
+                <Text className="font-bold text-xl text-center">
+                  {location && 
+                  (distance(
+                    geoloc[2][0],
+                    geoloc[2][1],
+                    Number(location.coords.latitude),
+                    Number(location.coords.longitude))/1000).toFixed(2)
+                  } km
+                </Text>
+              </View>
+            )}
           </View>
         </View>
       ) : (
