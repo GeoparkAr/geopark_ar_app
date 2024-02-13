@@ -45,9 +45,9 @@ export default function PerguntaUm() {
 
   const converterParaNumero = (opcao) => {
     switch (opcao) {
-      case "1 á 3":
+      case "1 a 3":
         return 1;
-      case "3 á 5":
+      case "3 a 5":
         return 2;
       case "Mais de 5":
         return 3;
@@ -69,33 +69,33 @@ export default function PerguntaUm() {
             <TouchableOpacity
               style={[
                 styles.button,
-                clicado === "1 á 3" && styles.buttonClicked,
+                clicado === "1 a 3" && styles.buttonClicked,
               ]}
-              onPress={() => handleButtonClick("1 á 3")}
+              onPress={() => handleButtonClick("1 a 3")}
             >
               <Text
                 style={[
                   styles.buttonText,
-                  clicado === "1 á 3" && styles.textClicked,
+                  clicado === "1 a 3" && styles.textClicked,
                 ]}
               >
-                1 á 3
+                1 a 3
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={[
                 styles.button,
-                clicado === "3 á 5" && styles.buttonClicked,
+                clicado === "3 a 5" && styles.buttonClicked,
               ]}
-              onPress={() => handleButtonClick("3 á 5")}
+              onPress={() => handleButtonClick("3 a 5")}
             >
               <Text
                 style={[
                   styles.buttonText,
-                  clicado === "3 á 5" && styles.textClicked,
+                  clicado === "3 a 5" && styles.textClicked,
                 ]}
               >
-                3 á 5
+                3 a 5
               </Text>
             </TouchableOpacity>
             <TouchableOpacity

@@ -40,7 +40,7 @@ import NewPassword from "./src/screens/NewPassword";
 
 import { AuthProvider } from "./src/hooks/useAuth";
 import PerguntaUm from "./src/screens/missoes/Questionario/pergunta1";
-import PerguntaDois from "./src/screens/missoes/Questionario/pergunda2";
+import PerguntaDois from "./src/screens/missoes/Questionario/pergunta2";
 import PerguntaTres from "./src/screens/missoes/Questionario/pergunta3";
 import PerguntaQuatro from "./src/screens/missoes/Questionario/pergunta4";
 import Sucesso from "./src/screens/missoes/Questionario/sucesso";

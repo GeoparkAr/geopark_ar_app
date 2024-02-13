@@ -27,7 +27,7 @@ export default function PerguntaTres() {
       visitPurpose = "Yes";
     } else if (clicado === "Não") {
       visitPurpose = "No";
-    } else if (clicado === "È um dos meus objetivos") {
+    } else if (clicado === "É um dos meus objetivos") {
       visitPurpose = "Maybe";
     }
 
@@ -90,17 +90,17 @@ export default function PerguntaTres() {
             <TouchableOpacity
               style={[
                 styles.button,
-                clicado === "È um dos meus objetivos" && styles.buttonClicked,
+                clicado === "É um dos meus objetivos" && styles.buttonClicked,
               ]}
-              onPress={() => handleButtonClick("È um dos meus objetivos")}
+              onPress={() => handleButtonClick("É um dos meus objetivos")}
             >
               <Text
                 style={[
                   styles.buttonText,
-                  clicado === "È um dos meus objetivos" && styles.textClicked,
+                  clicado === "É um dos meus objetivos" && styles.textClicked,
                 ]}
               >
-                È um dos meus objetivos
+                É um dos meus objetivos
               </Text>
             </TouchableOpacity>
           </View>

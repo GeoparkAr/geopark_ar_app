@@ -32,19 +32,19 @@ export default function PerguntaQuatro() {
       switch (opcao) {
         case "Crianças":
           minAge = Math.min(minAge, 0);
-          maxAge = Math.max(maxAge, 0);
+          maxAge = Math.max(maxAge, 11);
           break;
         case "Jovens e Adolescentes":
           minAge = Math.min(minAge, 12);
-          maxAge = Math.max(maxAge, 12);
+          maxAge = Math.max(maxAge, 19);
           break;
         case "Adultos":
           minAge = Math.min(minAge, 20);
-          maxAge = Math.max(maxAge, 20);
+          maxAge = Math.max(maxAge, 59);
           break;
         case "Idosos":
           minAge = Math.min(minAge, 60);
-          maxAge = Math.max(maxAge, 60);
+          maxAge = Math.max(maxAge, 100);
           break;
         default:
           break;
@@ -60,7 +60,7 @@ export default function PerguntaQuatro() {
     await updateDoc(docRef, {
       "lastVisit.geoparkAraripe.groupAgeRange": ageRange,
     })
-      .then(() => {
+      .then( () => {
         Navigate();
       })
       .catch((error) => {

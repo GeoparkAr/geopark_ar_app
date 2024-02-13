@@ -70,9 +70,10 @@ export default function PerguntaDois() {
   } = useAuth();
 
   const handleLastVisitSave = async () => {
+    const cityFinded = cityData.find(cityFind => cityFind.value === city)
     await updateDoc(docRef, {
       "lastVisit.geoparkAraripe.originState": state,
-      "lastVisit.geoparkAraripe.originCity": city,
+      "lastVisit.geoparkAraripe.originCity": cityFinded.label,
     })
       .then(() => {
         Navigate();

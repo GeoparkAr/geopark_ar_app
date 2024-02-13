@@ -8,13 +8,31 @@ import {
   StyleSheet,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { updateDoc } from "firebase/firestore";
 
 export default function Sucesso() {
   const navigation = useNavigation();
 
+  const {
+    data: { docRef },
+  } = useAuth();
+
   const Navigate = () => {
     navigation.navigate("Tarefas");
   };
+
+  const handleMissionSave = async () => {
+    await updateDoc(docRef, {
+      "stamps.geoparkAraripe.mission1": true,
+    })
+      .then(() => {
+        Navigate();
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        Alert.alert("Erro ao atualizar BD", errorMessage);
+      });
+  }
 
   return (
     <SafeAreaView className="bg-white h-full w-full">
@@ -33,7 +51,7 @@ export default function Sucesso() {
           </Text>
         </View>
 
-        <TouchableOpacity style={[styles.submitButton]} onPress={Navigate}>
+        <TouchableOpacity style={[styles.submitButton]} onPress={handleMissionSave}>
           <Text style={styles.submitButtonText}>Concluir</Text>
         </TouchableOpacity>
       </View>
