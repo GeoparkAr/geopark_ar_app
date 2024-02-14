@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { updateDoc } from "firebase/firestore";
+import { useAuth } from "../../../hooks/useAuth";
 
 export default function Sucesso() {
   const navigation = useNavigation();
