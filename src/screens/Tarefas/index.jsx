@@ -210,7 +210,7 @@ export default function Tarefas() {
         const mission7Value = true;
   
         await updateDoc(docRef, {
-          "stamps.geoparkAraripe.mission7": mission7Value,
+          "stamps.geoparkAraripe.geoparkAraripeStamp": mission7Value,
         })
           .then(() => {
             navigateToMissao8();

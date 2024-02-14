@@ -17,8 +17,9 @@ import {
 import { distance } from "../../../dist";
 import geoloc from "../../../geoloc.json";
 import { updateDoc } from "firebase/firestore";
+import { useAuth } from "../../hooks/useAuth";
 
-export default function Missao() {
+export default function MissaoEight() {
   let dista;
   const [location, setlocation] = useState(null);
   async function resquestLocationPermissions() {
@@ -63,6 +64,7 @@ export default function Missao() {
   const handleMissionSave = async () => {
     await updateDoc(docRef, {
       "stamps.geoparkAraripe.mission8": true,
+      "stamps.geoparkAraripe.geoparkAraripeStamp": true,      
     })
       .then(() => {})
       .catch((error) => {

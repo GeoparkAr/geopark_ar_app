@@ -17,6 +17,7 @@ import {
 import { distance } from "../../../dist";
 import geoloc from "../../../geoloc.json";
 import { updateDoc } from "firebase/firestore";
+import { useAuth } from "../../hooks/useAuth";
 
 export default function MissaoTree() {
   let dista;
