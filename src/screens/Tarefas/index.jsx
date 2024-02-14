@@ -462,7 +462,6 @@ export default function Tarefas() {
                       latitude: location.coords.latitude,
                       longitude: location.coords.longitude,
                     }}
-                  
                   />
                   <Marker
                     title="Cruzeiro "
@@ -470,7 +469,7 @@ export default function Tarefas() {
                       latitude: geoloc[0][0], 
                       longitude: geoloc[0][1]
                     }}
-                    
+                    image={require("../../../assets/imgs/mapa/crucifixo_green.png")} 
                   />
                   <Marker
                     title="Igreja do Bom Jesus"
@@ -478,8 +477,7 @@ export default function Tarefas() {
                       latitude: geoloc[1][0], 
                       longitude: geoloc[1][1]
                     }}
-                    style={styles.image}
-                    image={require("../../../assets/imgs/icons/igreja_green.png")} 
+                    image={require("../../../assets/imgs/mapa/igreja_green.png")} 
                     
                   />
                   <Marker
@@ -488,6 +486,7 @@ export default function Tarefas() {
                       latitude: geoloc[2][0], 
                       longitude: geoloc[2][1]
                     }}
+                    image={require("../../../assets/imgs/mapa/padre_green.png")} 
                   />
                   <Marker
                     title="Muro da Sedição "
@@ -495,6 +494,7 @@ export default function Tarefas() {
                       latitude: geoloc[3][0], 
                       longitude: geoloc[3][1]
                     }}
+                    image={require("../../../assets/imgs/mapa/muro_green.png")} 
                   />
                   <Marker
                     title="Estatua do Padre Cícero"
@@ -502,6 +502,7 @@ export default function Tarefas() {
                       latitude: geoloc[4][0], 
                       longitude: geoloc[4][1]
                     }}
+                    image={require("../../../assets/imgs/mapa/estatua_green.png")} 
                   />
                   <Marker
                     title="Pedra Do Pecado"
@@ -509,6 +510,7 @@ export default function Tarefas() {
                       latitude: geoloc[5][0], 
                       longitude: geoloc[5][1]
                     }}
+                    image={require("../../../assets/imgs/mapa/pedra_green.png")} 
                   />
                   <Marker
                     title="Vitrais"
@@ -516,6 +518,7 @@ export default function Tarefas() {
                       latitude: geoloc[7][0], 
                       longitude: geoloc[7][1]
                     }}
+                    image={require("../../../assets/imgs/mapa/vitrais_green.png")} 
                   />
                 </MapView>
               ) : (
