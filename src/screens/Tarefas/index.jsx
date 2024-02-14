@@ -28,6 +28,14 @@ import CustomButton from "./components/CustomButton";
 import LottieView from "lottie-react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useAuth } from "../../hooks/useAuth";
+import {
+  getCurrentPositionAsync,
+  requestForegroundPermissionsAsync,
+  LocationObject,
+  watchPositionAsync,
+  LocationAccuracy,
+} from "expo-location";
+import MapView, { Marker } from "react-native-maps";
 
 export default function Tarefas() {
   const navigation = useNavigation();
@@ -204,17 +212,16 @@ export default function Tarefas() {
   const handleClick8 = async () => {
     if (authChecked) {
       if (user && !user.isAnonymous) {
-        
         setBotao9Habilitado(true);
 
         const mission7Value = true;
-  
+
         await updateDoc(docRef, {
           "stamps.geoparkAraripe.geoparkAraripeStamp": mission7Value,
         })
           .then(() => {
             navigateToMissao8();
-            console.log('Valor enviado para missão 7:', mission7Value);
+            console.log("Valor enviado para missão 7:", mission7Value);
           })
           .catch((error) => {
             const errorMessage = error.message;
@@ -224,7 +231,7 @@ export default function Tarefas() {
         setModalVisible(true);
       }
     }
-  };  
+  };
 
   const salvarEstadoAoSair = async () => {
     try {
@@ -334,6 +341,38 @@ export default function Tarefas() {
     setMapa(false);
   }
 
+  //mapa
+  const [location, setLocation] = useState(null);
+
+  const mapRef = useRef(MapView);
+
+  async function resquestLocationPermissions() {
+    const { granted } = await requestForegroundPermissionsAsync();
+
+    if (granted) {
+      const currentPosition = await getCurrentPositionAsync();
+      console.log("LOCALIZAÇÂO: ", currentPosition);
+      setLocation(currentPosition);
+      console.log(currentPosition);
+    } else {
+      console.log("Não tem localização");
+    }
+  }
+
+  useEffect(() => {
+    resquestLocationPermissions();
+    watchPositionAsync(
+      {
+        accuracy: LocationAccuracy.Highest,
+        timeInterval: 1000,
+        distanceInterval: 1,
+      },
+      (response) => {
+        setLocation(response);
+      }
+    );
+  }, []);
+
   return (
     <ScrollView style={{ backgroundColor: "#FFF" }}>
       <View>
@@ -402,10 +441,35 @@ export default function Tarefas() {
               >
                 <Ionicons name="close-sharp" size={24} color="white" />
               </TouchableOpacity>
-              <Image
-                source={require("../../../assets/imgs/geossitios/arajara.png")}
-                className="w-64 h-96 rounded-lg "
-              />
+              {location && location.coords ? (
+                <MapView
+                ref={mapRef}
+                  source={require("../../../assets/imgs/geossitios/arajara.png")}
+                  className="w-64 h-96 rounded-lg"
+                  style={{ borderRadius: 16 }}
+                  initialRegion={{
+                    latitude: location.coords.latitude,
+                    longitude: location.coords.longitude,
+                    latitudeDelta: 0.005,
+                    longitudeDelta: 0.005,
+                  }}
+                >
+                  <Marker
+                    coordinate={{
+                      latitude: location.coords.latitude,
+                      longitude: location.coords.longitude,
+                    }}
+                  />
+                </MapView>
+              ) : (
+                <View
+                  source={require("../../../assets/imgs/geossitios/arajara.png")}
+                  className="w-64 h-96 rounded-lg"
+                  style={{ borderRadius: 16 }}
+                >
+                  <Text>Carregando</Text>
+                </View>
+              )}
             </View>
           </View>
         </Modal>

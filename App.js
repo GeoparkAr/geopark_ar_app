@@ -20,12 +20,12 @@ import Welcome from "./src/screens/Welcome";
 import Settings from "./src/screens/settings/Settings";
 import Tarefas from "./src/screens/Tarefas/";
 import Missao from "./src/screens/missoes/MissaoTwo";
-import MissaoTree from "./src/screens/missoes/MissaoTree";
-import MissaoFour from "./src/screens/missoes/MissaoFour";
-import MissaoFive from "./src/screens/missoes/MissaoFive";
-import MissaoSix from "./src/screens/missoes/MissaoSix";
-import MissaoSeven from "./src/screens/missoes/MissaoSeven";
+import MissaoFive from "./src/screens/missoes/missaoFive";
+import MissaoSix from "./src/screens/missoes/missaoSix";
+import MissaoSeven from "./src/screens/missoes/missaoSeven";
 import MissaoEight from "./src/screens/missoes/MissaoEight";
+import MissaoTree from "./src/screens/missoes/missaoTree";
+import MissaoFour from "./src/screens/missoes/missaoFour";
 import Selos from "./src/screens/Selos";
 import About from "./src/screens/About";
 import Login from "./src/screens/Login";
@@ -305,6 +305,7 @@ export default function App() {
               }}
             />
           </Stack.Group>
+
           <Stack.Group
             screenOptions={{
               headerTitleAlign: "center",
