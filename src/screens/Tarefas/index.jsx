@@ -36,6 +36,7 @@ import {
   LocationAccuracy,
 } from "expo-location";
 import MapView, { Marker } from "react-native-maps";
+import geoloc from "../../../geoloc.json"
 
 export default function Tarefas() {
   const navigation = useNavigation();
@@ -444,6 +445,7 @@ export default function Tarefas() {
               {location && location.coords ? (
                 <MapView
                 ref={mapRef}
+                  showsPointsOfInterest = "false"
                   source={require("../../../assets/imgs/geossitios/arajara.png")}
                   className="w-64 h-96 rounded-lg"
                   style={{ borderRadius: 16 }}
@@ -453,11 +455,66 @@ export default function Tarefas() {
                     latitudeDelta: 0.005,
                     longitudeDelta: 0.005,
                   }}
+                  
                 >
                   <Marker
                     coordinate={{
                       latitude: location.coords.latitude,
                       longitude: location.coords.longitude,
+                    }}
+                  
+                  />
+                  <Marker
+                    title="Cruzeiro "
+                    coordinate={{
+                      latitude: geoloc[0][0], 
+                      longitude: geoloc[0][1]
+                    }}
+                    
+                  />
+                  <Marker
+                    title="Igreja do Bom Jesus"
+                    coordinate={{
+                      latitude: geoloc[1][0], 
+                      longitude: geoloc[1][1]
+                    }}
+                    style={styles.image}
+                    image={require("../../../assets/imgs/icons/igreja_green.png")} 
+                    
+                  />
+                  <Marker
+                    title="Marco Do Padre Cicero"
+                    coordinate={{
+                      latitude: geoloc[2][0], 
+                      longitude: geoloc[2][1]
+                    }}
+                  />
+                  <Marker
+                    title="Muro da Sedição "
+                    coordinate={{
+                      latitude: geoloc[3][0], 
+                      longitude: geoloc[3][1]
+                    }}
+                  />
+                  <Marker
+                    title="Estatua do Padre Cícero"
+                    coordinate={{
+                      latitude: geoloc[4][0], 
+                      longitude: geoloc[4][1]
+                    }}
+                  />
+                  <Marker
+                    title="Pedra Do Pecado"
+                    coordinate={{
+                      latitude: geoloc[5][0], 
+                      longitude: geoloc[5][1]
+                    }}
+                  />
+                  <Marker
+                    title="Vitrais"
+                    coordinate={{
+                      latitude: geoloc[7][0], 
+                      longitude: geoloc[7][1]
                     }}
                   />
                 </MapView>
@@ -770,4 +827,10 @@ const styles = StyleSheet.create({
     bottom: 4,
     left: -9,
   },
+  image: {
+    width: 2, 
+    height: 6,
+    resizeMode:"contain"
+
+  }
 });
