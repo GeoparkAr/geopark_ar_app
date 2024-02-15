@@ -39,7 +39,7 @@ export default function Sucesso() {
     <SafeAreaView className="bg-white h-full w-full">
       <View className="justify-around items-center h-full w-full p-9">
         <Image
-          source={require("../../../../assets/imgs/icons/cacto_sucesso.png")}
+          source={require("../../../../assets/imgs/icons/cactoSucesso.png")}
           className="w-[250px] h-[195px]"
         />
         <View className="justify-center items-center">

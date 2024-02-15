@@ -469,7 +469,7 @@ export default function Tarefas() {
                       latitude: geoloc[0][0], 
                       longitude: geoloc[0][1]
                     }}
-                    image={require("../../../assets/imgs/mapa/crucifixo_green.png")} 
+                    image={require("../../../assets/imgs/mapa/crucifixo.png")} 
                   />
                   <Marker
                     title="Igreja do Bom Jesus"
@@ -477,7 +477,7 @@ export default function Tarefas() {
                       latitude: geoloc[1][0], 
                       longitude: geoloc[1][1]
                     }}
-                    image={require("../../../assets/imgs/mapa/igreja_green.png")} 
+                    image={require("../../../assets/imgs/mapa/igreja.png")} 
                     
                   />
                   <Marker
@@ -486,7 +486,7 @@ export default function Tarefas() {
                       latitude: geoloc[2][0], 
                       longitude: geoloc[2][1]
                     }}
-                    image={require("../../../assets/imgs/mapa/padre_green.png")} 
+                    image={require("../../../assets/imgs/mapa/padre.png")} 
                   />
                   <Marker
                     title="Muro da Sedição "
@@ -494,7 +494,7 @@ export default function Tarefas() {
                       latitude: geoloc[3][0], 
                       longitude: geoloc[3][1]
                     }}
-                    image={require("../../../assets/imgs/mapa/muro_green.png")} 
+                    image={require("../../../assets/imgs/mapa/muro.png")} 
                   />
                   <Marker
                     title="Estatua do Padre Cícero"
@@ -502,7 +502,7 @@ export default function Tarefas() {
                       latitude: geoloc[4][0], 
                       longitude: geoloc[4][1]
                     }}
-                    image={require("../../../assets/imgs/mapa/estatua_green.png")} 
+                    image={require("../../../assets/imgs/mapa/estatua.png")} 
                   />
                   <Marker
                     title="Pedra Do Pecado"
@@ -510,7 +510,7 @@ export default function Tarefas() {
                       latitude: geoloc[5][0], 
                       longitude: geoloc[5][1]
                     }}
-                    image={require("../../../assets/imgs/mapa/pedra_green.png")} 
+                    image={require("../../../assets/imgs/mapa/pedra.png")} 
                   />
                   <Marker
                     title="Vitrais"
@@ -518,7 +518,7 @@ export default function Tarefas() {
                       latitude: geoloc[7][0], 
                       longitude: geoloc[7][1]
                     }}
-                    image={require("../../../assets/imgs/mapa/vitrais_green.png")} 
+                    image={require("../../../assets/imgs/mapa/vitrais.png")} 
                   />
                 </MapView>
               ) : (
@@ -527,7 +527,7 @@ export default function Tarefas() {
                   className="w-64 h-96 rounded-lg"
                   style={{ borderRadius: 16 }}
                 >
-                  <Text>Carregando</Text>
+                  <Text className="text-base font-semibold">Carregando</Text>
                 </View>
               )}
             </View>
@@ -566,8 +566,8 @@ export default function Tarefas() {
               <Custombutton
                 icon={
                   botao1Habilitado
-                    ? require("../../../assets/imgs/icons/book_green.png")
-                    : require("../../../assets/imgs/icons/book_bw.png")
+                    ? require("../../../assets/imgs/icons/bookGreen.png")
+                    : require("../../../assets/imgs/icons/bookBw.png")
                 }
                 onPress={() => {
                   handleClick1();
@@ -579,8 +579,8 @@ export default function Tarefas() {
                 onPress={handleClick2}
                 icon={
                   botao2Habilitado
-                    ? require("../../../assets/imgs/icons/estatua_green.png")
-                    : require("../../../assets/imgs/icons/estatua_bw.png")
+                    ? require("../../../assets/imgs/icons/estatuaGreen.png")
+                    : require("../../../assets/imgs/icons/estatuaBw.png")
                 }
                 disabled={!botao2Habilitado}
               />
@@ -591,8 +591,8 @@ export default function Tarefas() {
                 disabled={!botao3Habilitado}
                 icon={
                   botao3Habilitado
-                    ? require("../../../assets/imgs/icons/muro_green.png")
-                    : require("../../../assets/imgs/icons/muro_bw.png")
+                    ? require("../../../assets/imgs/icons/muroGreen.png")
+                    : require("../../../assets/imgs/icons/muroBw.png")
                 }
               />
             </View>
@@ -602,8 +602,8 @@ export default function Tarefas() {
                 disabled={!botao4Habilitado}
                 icon={
                   botao4Habilitado
-                    ? require("../../../assets/imgs/icons/igreja_green.png")
-                    : require("../../../assets/imgs/icons/igreja_bw.png")
+                    ? require("../../../assets/imgs/icons/igrejaGreen.png")
+                    : require("../../../assets/imgs/icons/igrejaBw.png")
                 }
               />
             </View>
@@ -613,8 +613,8 @@ export default function Tarefas() {
                 disabled={!botao5Habilitado}
                 icon={
                   botao5Habilitado
-                    ? require("../../../assets/imgs/icons/vitrais_green.png")
-                    : require("../../../assets/imgs/icons/vitrais_bw.png")
+                    ? require("../../../assets/imgs/icons/vitraisGreen.png")
+                    : require("../../../assets/imgs/icons/vitraisBw.png")
                 }
               />
             </View>
@@ -624,8 +624,8 @@ export default function Tarefas() {
                 disabled={!botao6Habilitado}
                 icon={
                   botao6Habilitado
-                    ? require("../../../assets/imgs/icons/crucifixo_green.png")
-                    : require("../../../assets/imgs/icons/crucifixo_bw.png")
+                    ? require("../../../assets/imgs/icons/crucifixoGreen.png")
+                    : require("../../../assets/imgs/icons/crucifixoBw.png")
                 }
               />
             </View>
@@ -635,8 +635,8 @@ export default function Tarefas() {
                 disabled={!botao7Habilitado}
                 icon={
                   botao7Habilitado
-                    ? require("../../../assets/imgs/icons/pedra_green.png")
-                    : require("../../../assets/imgs/icons/pedra_bw.png")
+                    ? require("../../../assets/imgs/icons/pedraGreen.png")
+                    : require("../../../assets/imgs/icons/pedraBw.png")
                 }
               />
             </View>
@@ -646,8 +646,8 @@ export default function Tarefas() {
                 disabled={!botao8Habilitado}
                 icon={
                   botao8Habilitado
-                    ? require("../../../assets/imgs/icons/padre_green.png")
-                    : require("../../../assets/imgs/icons/padre_bw.png")
+                    ? require("../../../assets/imgs/icons/padreGreen.png")
+                    : require("../../../assets/imgs/icons/padreBw.png")
                 }
               />
             </View>
