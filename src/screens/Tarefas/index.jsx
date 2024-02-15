@@ -419,7 +419,16 @@ export default function Tarefas() {
                   navigation.navigate("VisitorToUserRegister");
                 }}
               >
-                <Text style={styles.textStyle}>Criar conta</Text>
+                <Text style={styles.textStyle}>Fazer login</Text>
+              </Pressable>
+              <View style={{ marginBottom: 10 }} />
+              <Pressable
+                style={[styles.button, styles.buttonOpen]}
+                onPress={() => {
+                  setModalVisible(!modalVisible);
+                }}
+              >
+                <Text style={styles.textStyle}>Continuar como visitante</Text>
               </Pressable>
             </View>
           </View>
@@ -777,7 +786,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
   },
   buttonOpen: {
-    backgroundColor: "#F194FF",
+    backgroundColor: "gray",
   },
   buttonClose: {
     backgroundColor: "#39B061",

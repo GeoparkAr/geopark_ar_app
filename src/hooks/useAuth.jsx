@@ -8,6 +8,7 @@ export const AuthProvider = ({children}) => {
     const [data, setData] = useState(null);
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (authUser) => {
+            console.log("authUser", authUser);
             if (authUser && !authUser.isAnonymous) {
                 const docRefResponse = doc(db, "users", authUser.uid);
                 setData({
@@ -27,7 +28,16 @@ export const AuthProvider = ({children}) => {
     
         return () => unsubscribe();
       }, []);
-    return (<AuthContext.Provider value={{data}}>{children}</AuthContext.Provider>)
+
+      function setUser(newUser){
+        const docRefNewUser = doc(db, "users", newUser.uid);
+        setData({
+            user: newUser,
+            docRef: docRefNewUser
+        });
+
+      }
+    return (<AuthContext.Provider value={{data, setUser}}>{children}</AuthContext.Provider>)
 };
 
 export const useAuth = () => {
