@@ -10,7 +10,7 @@ export default function Card({ nome, municipio, source }) {
      border-[#E1E1E1] border"
     >
       <Image className="h-20 w-20 rounded-full mb-2" source={source} />
-      <Text className="text-sm text-center font-semibold w-36 mb-2">
+      <Text className="text-sm text-center font-semibold w-30 mb-2">
         {nome}
       </Text>
       <TouchableOpacity className="bg-[#88d0a0] h-7 justify-center items-center px-3 rounded-2xl ">

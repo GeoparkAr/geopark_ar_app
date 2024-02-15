@@ -156,7 +156,7 @@ export default function Home() {
               flexDirection: "row",
               justifyContent: "center",
             }}
-            onPress={() => navigation.navigate("Welcome")}
+            onPress={() => navigation.navigate("VisitorToUserRegister")}
           >
             <Text
               style={{

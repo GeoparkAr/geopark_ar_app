@@ -416,10 +416,10 @@ export default function Tarefas() {
                 style={[styles.button, styles.buttonClose]}
                 onPress={() => {
                   setModalVisible(!modalVisible);
-                  navigation.navigate("Welcome");
+                  navigation.navigate("VisitorToUserRegister");
                 }}
               >
-                <Text style={styles.textStyle}>Entrar</Text>
+                <Text style={styles.textStyle}>Criar conta</Text>
               </Pressable>
             </View>
           </View>

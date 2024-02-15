@@ -11,14 +11,15 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { useState, useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "../firebase";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, doc, getDocs, query, where } from "firebase/firestore";
+import { useAuth } from "../hooks/useAuth"
 
 export default function Selos() {
   const navigation = useNavigation();
-  const [user, setUser] = useState(null);
   const [authChecked, setAuthChecked] = useState(false);
   const [selos, setSelos] = useState({
     geoparkAraripe: {
+      geoparkAraripeStamp: false,
       mission1: false,
       mission2: false,
       mission3: false,
@@ -26,23 +27,31 @@ export default function Selos() {
       mission5: false,
       mission6: false,
       mission7: false,
+      mission8: false,
     },
   });
+  
+  const {
+    data: { user },
+  } = useAuth();
+
+  const getSelos = async () => {
+    const q = query(
+      collection(db, "users"),
+      where("uid", "==", user.uid)
+    );
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      const userSelos = doc.data().stamps || {};
+      setSelos(userSelos);
+    });
+  }
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (authUser) => {
-      setUser(authUser);
       setAuthChecked(true);
       if (authUser && !authUser.isAnonymous) {
-        const q = query(
-          collection(db, "users"),
-          where("uid", "==", authUser.uid)
-        );
-        const querySnapshot = await getDocs(q);
-        querySnapshot.forEach((doc) => {
-          const userSelos = doc.data().selos || {};
-          setSelos(userSelos);
-        });
+        getSelos();
       }
     });
     return () => unsubscribe();
@@ -52,7 +61,7 @@ export default function Selos() {
     <ScrollView className="bg-white p-4 relative">
       {user && !user.isAnonymous ? (
         <View className="bg-[#39B061] rounded-[10px] flex-row justify-around items-center relative">
-          {selos.geoparkAraripe && selos.geoparkAraripe.mission7 ? (
+          {selos.geoparkAraripe && selos.geoparkAraripe.geoparkAraripeStamp ? (
             <View className="bg-[#39B061] rounded-[10px] flex-row justify-around items-center relative p-5">
               <Image source={require("../../assets/imgs/selo.png")} />
               <View className="justify-center ml-6">

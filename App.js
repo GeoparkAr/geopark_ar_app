@@ -37,6 +37,7 @@ import Help from "./src/screens/settings/Help&suport";
 import Problems from "./src/screens/settings/Problems";
 import CameraWeb from "./src/screens/CameraWeb";
 import NewPassword from "./src/screens/NewPassword";
+import VisitorToUserRegister from "./src/screens/VisitorToUserRegister";
 
 import { AuthProvider } from "./src/hooks/useAuth";
 import PerguntaUm from "./src/screens/missoes/Questionario/pergunta1";
@@ -439,6 +440,13 @@ export default function App() {
             <Stack.Screen
               name="Register"
               component={Register}
+              options={{
+                headerTitle: "Criar conta",
+              }}
+            />
+            <Stack.Screen
+              name="VisitorToUserRegister"
+              component={VisitorToUserRegister}
               options={{
                 headerTitle: "Criar conta",
               }}
