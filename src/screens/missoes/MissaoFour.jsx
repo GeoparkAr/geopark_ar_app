@@ -16,8 +16,10 @@ import {
 } from "expo-location";
 import { distance } from "../../../dist";
 import geoloc from "../../../geoloc.json";
+import { updateDoc } from "firebase/firestore";
+import { useAuth } from "../../hooks/useAuth";
 
-export default function MissaoTree() {
+export default function MissaoFour() {
   let dista;
   const [location, setlocation] = useState(null);
   async function resquestLocationPermissions() {
@@ -43,6 +45,10 @@ export default function MissaoTree() {
   const navigation = useNavigation();
   const [isConnected, setIsConnected] = useState(true);
 
+  const {
+    data: { docRef },
+  } = useAuth();
+
   //verifica se há conexão com internet
   useEffect(() => {
     const unsubscribe = NetInfo.addEventListener((state) => {
@@ -54,12 +60,25 @@ export default function MissaoTree() {
     };
   }, []);
 
+  //muda status da missão
+  const handleMissionSave = async () => {
+    await updateDoc(docRef, {
+      "stamps.geoparkAraripe.mission4": true,
+    })
+      .then(() => {})
+      .catch((error) => {
+        const errorMessage = error.message;
+        Alert.alert("Erro ao atualizar BD", errorMessage);
+      });
+  }
+
   //navegando para o link da câmera
   const navigateToCamera = () => {
     if (dista > 100) {
       navigation.navigate("Camera", {
         url: "https://web-geoparkcamera-ten.vercel.app/",
       });
+      handleMissionSave();
     }
   };
 
@@ -74,35 +93,40 @@ export default function MissaoTree() {
           <View
             style={{ justifyContent: "center", alignItems: "center", gap: 20 }}
           >
-            <Text style={styles.textCamera}>
-              Clique na câmera e comece a explorar
-            </Text>
-            {location && location.coords && 
+            {location &&
+            location.coords &&
             distance(
               geoloc[1][0],
               geoloc[1][1],
               Number(location.coords.latitude),
               Number(location.coords.longitude)
             ) < 100 ? (
-              <TouchableOpacity onPress={navigateToCamera}>
-                <Image
-                  source={require("../../../assets/imgs/icons/camera.png")}
-                />
-              </TouchableOpacity>
+              <View className="justify-center items-center">
+                <Text style={styles.textCamera}>
+                  Clique na câmera e comece a explorar
+                </Text>
+                <TouchableOpacity onPress={navigateToCamera}>
+                  <Image
+                    source={require("../../../assets/imgs/icons/camera.png")}
+                  />
+                </TouchableOpacity>
+              </View>
             ) : (
               <View className="justify-center items-center">
                 <Text className="text-red-700 font-bold text-2xl text-center">
                   Muito longe.
-                  
                 </Text>
                 <Text className="font-bold text-xl text-center">
-                  {location && 
-                  (distance(
-                    geoloc[1][0],
-                    geoloc[1][1],
-                    Number(location.coords.latitude),
-                    Number(location.coords.longitude))/1000).toFixed(2)
-                  } km
+                  {location &&
+                    (
+                      distance(
+                        geoloc[1][0],
+                        geoloc[1][1],
+                        Number(location.coords.latitude),
+                        Number(location.coords.longitude)
+                      ) / 1000
+                    ).toFixed(2)}{" "}
+                  km
                 </Text>
               </View>
             )}

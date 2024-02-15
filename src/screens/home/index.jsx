@@ -46,7 +46,7 @@ export default function Home() {
     {
       nome: "Mirante do Caldas",
       municipio: "Barbalha",
-      source: require("../../../assets/imgs/geossitios/mirante_caldas.png"),
+      source: require("../../../assets/imgs/geossitios/miranteCaldas.png"),
       category: [
         "Trilha",
         "Mirante",
@@ -59,25 +59,25 @@ export default function Home() {
     {
       nome: "Floresta Petrificada do Cariri",
       municipio: "Missão Velha",
-      source: require("../../../assets/imgs/geossitios/floresta_petrificada.png"),
+      source: require("../../../assets/imgs/geossitios/florestaPetrificada.png"),
       category: ["Paleontológico", "Geodiversidade"],
     },
     {
       nome: "Parque dos Pterossauros",
       municipio: "Santana do Cariri",
-      source: require("../../../assets/imgs/geossitios/parque_pterosauros.png"),
+      source: require("../../../assets/imgs/geossitios/parquePterossauros.png"),
       category: ["Paleontológico", "Geodiversidade"],
     },
     {
       nome: "Pedra Cariri",
       municipio: "Nova Olinda",
-      source: require("../../../assets/imgs/geossitios/pedra_cariri.png"),
+      source: require("../../../assets/imgs/geossitios/pedraCariri.png"),
       category: ["Paleontológico", "Geodiversidade"],
     },
     {
       nome: "Pontal de Santa Cruz",
       municipio: "Santana do Cariri",
-      source: require("../../../assets/imgs/geossitios/pontal_santa_cruz.png"),
+      source: require("../../../assets/imgs/geossitios/pontalSantaCruz.png"),
       category: [
         "Mirante",
         "Trilha",
@@ -89,7 +89,7 @@ export default function Home() {
     {
       nome: "Ponte de Pedra",
       municipio: "Nova Olinda",
-      source: require("../../../assets/imgs/geossitios/ponte_pedra.png"),
+      source: require("../../../assets/imgs/geossitios/pontePedra.png"),
       category: [
         "Geomorfológico",
         "Cultural",
@@ -101,13 +101,13 @@ export default function Home() {
     {
       nome: "Riacho do Meio",
       municipio: "Barbalha",
-      source: require("../../../assets/imgs/geossitios/riacho_meio.png"),
+      source: require("../../../assets/imgs/geossitios/riachoMeio.png"),
       category: ["Aquático", "Trilha", "Biodiversidade"],
     },
     {
       nome: "Cachoeira de Missão Velha",
       municipio: "Missão Velha",
-      source: require("../../../assets/imgs/geossitios/cachoeira_missao_velha.png"),
+      source: require("../../../assets/imgs/geossitios/cachoeiraMissaoVelha.png"),
       category: ["Aquático", "Trilha", "Cultural", "Geodiversidade"],
     },
   ];

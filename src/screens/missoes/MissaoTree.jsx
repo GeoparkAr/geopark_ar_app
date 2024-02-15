@@ -16,6 +16,8 @@ import {
 } from "expo-location";
 import { distance } from "../../../dist";
 import geoloc from "../../../geoloc.json";
+import { updateDoc } from "firebase/firestore";
+import { useAuth } from "../../hooks/useAuth";
 
 export default function MissaoTree() {
   let dista;
@@ -42,6 +44,10 @@ export default function MissaoTree() {
 
   const navigation = useNavigation();
   const [isConnected, setIsConnected] = useState(true);
+  
+  const {
+    data: { docRef },
+  } = useAuth();
 
   //verifica se há conexão com internet
   useEffect(() => {
@@ -54,12 +60,25 @@ export default function MissaoTree() {
     };
   }, []);
 
+  //muda status da missão
+  const handleMissionSave = async () => {
+    await updateDoc(docRef, {
+      "stamps.geoparkAraripe.mission3": true,
+    })
+      .then(() => {})
+      .catch((error) => {
+        const errorMessage = error.message;
+        Alert.alert("Erro ao atualizar BD", errorMessage);
+      });
+  }
+
   //navegando para o link da câmera
   const navigateToCamera = () => {
     if (dista > 100) {
       navigation.navigate("Camera", {
         url: "https://web-geoparkcamera-ten.vercel.app/",
       });
+      handleMissionSave();
     }
   };
 
@@ -74,9 +93,6 @@ export default function MissaoTree() {
           <View
             style={{ justifyContent: "center", alignItems: "center", gap: 20 }}
           >
-            <Text style={styles.textCamera}>
-              Clique na câmera e comece a explorar
-            </Text>
             {location && location.coords && 
             distance(
               geoloc[3][0],
@@ -84,11 +100,16 @@ export default function MissaoTree() {
               Number(location.coords.latitude),
               Number(location.coords.longitude)
             ) < 100 ? (
+              <View className="justify-center items-center">
+              <Text style={styles.textCamera}>
+                Clique na câmera e comece a explorar
+              </Text>
               <TouchableOpacity onPress={navigateToCamera}>
                 <Image
                   source={require("../../../assets/imgs/icons/camera.png")}
                 />
               </TouchableOpacity>
+            </View>
             ) : (
               <View className="justify-center items-center">
                 <Text className="text-red-700 font-bold text-2xl text-center">
