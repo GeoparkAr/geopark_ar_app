@@ -22,7 +22,6 @@ export default function Welcome() {
           uid: user.uid,
           stamps: {
             geoparkAraripe: {
-              mission0: true,
               mission1: false,
               mission2: false,
             },
