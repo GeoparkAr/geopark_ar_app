@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   Modal,
   Pressable,
+  ActivityIndicator
 } from "react-native";
 import { useState, useEffect, useRef } from "react";
 import { onAuthStateChanged } from "firebase/auth";
@@ -36,7 +37,7 @@ import {
   LocationAccuracy,
 } from "expo-location";
 import MapView, { Marker } from "react-native-maps";
-import geoloc from "../../../geoloc.json"
+import geoloc from "../../../geoloc.json";
 
 export default function Tarefas() {
   const navigation = useNavigation();
@@ -419,16 +420,7 @@ export default function Tarefas() {
                   navigation.navigate("VisitorToUserRegister");
                 }}
               >
-                <Text style={styles.textStyle}>Fazer login</Text>
-              </Pressable>
-              <View style={{ marginBottom: 10 }} />
-              <Pressable
-                style={[styles.button, styles.buttonOpen]}
-                onPress={() => {
-                  setModalVisible(!modalVisible);
-                }}
-              >
-                <Text style={styles.textStyle}>Continuar como visitante</Text>
+                <Text style={styles.textStyle}>Criar conta</Text>
               </Pressable>
             </View>
           </View>
@@ -453,8 +445,8 @@ export default function Tarefas() {
               </TouchableOpacity>
               {location && location.coords ? (
                 <MapView
-                ref={mapRef}
-                  showsPointsOfInterest = "false"
+                  ref={mapRef}
+                  showsPointsOfInterest="false"
                   source={require("../../../assets/imgs/geossitios/arajara.png")}
                   className="w-64 h-96 rounded-lg"
                   style={{ borderRadius: 16 }}
@@ -464,7 +456,6 @@ export default function Tarefas() {
                     latitudeDelta: 0.005,
                     longitudeDelta: 0.005,
                   }}
-                  
                 >
                   <Marker
                     coordinate={{
@@ -475,68 +466,67 @@ export default function Tarefas() {
                   <Marker
                     title="Cruzeiro "
                     coordinate={{
-                      latitude: geoloc[0][0], 
-                      longitude: geoloc[0][1]
+                      latitude: geoloc[0][0],
+                      longitude: geoloc[0][1],
                     }}
-                    image={require("../../../assets/imgs/mapa/crucifixo.png")} 
+                    image={require("../../../assets/imgs/mapa/crucifixo.png")}
                   />
                   <Marker
                     title="Igreja do Bom Jesus"
                     coordinate={{
-                      latitude: geoloc[1][0], 
-                      longitude: geoloc[1][1]
+                      latitude: geoloc[1][0],
+                      longitude: geoloc[1][1],
                     }}
-                    image={require("../../../assets/imgs/mapa/igreja.png")} 
-                    
+                    image={require("../../../assets/imgs/mapa/igreja.png")}
                   />
                   <Marker
                     title="Marco Do Padre Cicero"
                     coordinate={{
-                      latitude: geoloc[2][0], 
-                      longitude: geoloc[2][1]
+                      latitude: geoloc[2][0],
+                      longitude: geoloc[2][1],
                     }}
-                    image={require("../../../assets/imgs/mapa/padre.png")} 
+                    image={require("../../../assets/imgs/mapa/padre.png")}
                   />
                   <Marker
                     title="Muro da Sedição "
                     coordinate={{
-                      latitude: geoloc[3][0], 
-                      longitude: geoloc[3][1]
+                      latitude: geoloc[3][0],
+                      longitude: geoloc[3][1],
                     }}
-                    image={require("../../../assets/imgs/mapa/muro.png")} 
+                    image={require("../../../assets/imgs/mapa/muro.png")}
                   />
                   <Marker
                     title="Estatua do Padre Cícero"
                     coordinate={{
-                      latitude: geoloc[4][0], 
-                      longitude: geoloc[4][1]
+                      latitude: geoloc[4][0],
+                      longitude: geoloc[4][1],
                     }}
-                    image={require("../../../assets/imgs/mapa/estatua.png")} 
+                    image={require("../../../assets/imgs/mapa/estatua.png")}
                   />
                   <Marker
                     title="Pedra Do Pecado"
                     coordinate={{
-                      latitude: geoloc[5][0], 
-                      longitude: geoloc[5][1]
+                      latitude: geoloc[5][0],
+                      longitude: geoloc[5][1],
                     }}
-                    image={require("../../../assets/imgs/mapa/pedra.png")} 
+                    image={require("../../../assets/imgs/mapa/pedra.png")}
                   />
                   <Marker
                     title="Vitrais"
                     coordinate={{
-                      latitude: geoloc[7][0], 
-                      longitude: geoloc[7][1]
+                      latitude: geoloc[7][0],
+                      longitude: geoloc[7][1],
                     }}
-                    image={require("../../../assets/imgs/mapa/vitrais.png")} 
+                    image={require("../../../assets/imgs/mapa/vitrais.png")}
                   />
                 </MapView>
               ) : (
                 <View
                   source={require("../../../assets/imgs/geossitios/arajara.png")}
-                  className="w-64 h-96 rounded-lg"
+                  className="w-64 h-96 rounded-lg bg-white border border-stone-300 justify-center items-center"
                   style={{ borderRadius: 16 }}
                 >
-                  <Text className="text-base font-semibold">Carregando</Text>
+                  <ActivityIndicator size="large" color="#39B061" />
                 </View>
               )}
             </View>
@@ -786,7 +776,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
   },
   buttonOpen: {
-    backgroundColor: "gray",
+    backgroundColor: "#F194FF",
   },
   buttonClose: {
     backgroundColor: "#39B061",
@@ -840,9 +830,8 @@ const styles = StyleSheet.create({
     left: -9,
   },
   image: {
-    width: 2, 
+    width: 2,
     height: 6,
-    resizeMode:"contain"
-
-  }
+    resizeMode: "contain",
+  },
 });
