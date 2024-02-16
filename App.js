@@ -343,7 +343,7 @@ export default function App() {
               name="Problems"
               component={Problems}
               options={{
-                headerTitle: "Denuncie um problema",
+                headerTitle: "Relate um problema",
               }}
             />
             <Stack.Screen

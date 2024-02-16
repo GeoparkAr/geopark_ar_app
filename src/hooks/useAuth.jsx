@@ -8,7 +8,6 @@ export const AuthProvider = ({children}) => {
     const [data, setData] = useState(null);
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (authUser) => {
-            console.log("authUser", authUser);
             if (authUser && !authUser.isAnonymous) {
                 const docRefResponse = doc(db, "users", authUser.uid);
                 setData({

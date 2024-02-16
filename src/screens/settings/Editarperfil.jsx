@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   TextInput,
   ScrollView,
+  Alert,
 } from "react-native";
 import { StyleSheet } from "react-native";
 import { Entypo } from "@expo/vector-icons";
