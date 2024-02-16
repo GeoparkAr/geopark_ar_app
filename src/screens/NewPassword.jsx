@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   View,
   TextInput,
@@ -5,25 +6,56 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  Alert,
 } from "react-native";
+import { sendPasswordResetEmail } from "firebase/auth";
+import { auth } from "../firebase";
 
 export default function NewPassword() {
+  const [email, setEmail] = useState("");
+
+  const handlePasswordResetEmail = () => {
+    sendPasswordResetEmail(auth, email)
+    .then(() => {
+      Alert.alert("Link enviado", "Enviamos para o seu email um link para redefinião de senha.");
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      Alert.alert(
+        "Erro ao atualizar senha",
+        "Verifique se o email está correto e tente novamente\n\n" + errorCode + "\n" + errorMessage
+      );
+    });
+
+
+  }
+
   return (
     <View className="bg-white h-full pt-4">
       <ScrollView className="px-8 bg-white">
+        <Text
+          style={{
+            fontWeight: "600",
+            fontSize: 16,
+            color: "#18241B",
+            textAlign: "justify",
+            marginVertical: 10,
+          }}
+        >
+          Confirme seu email para receber um link de redefinição de senha
+        </Text>
         <TextInput
-          placeholder="Digite sua nova senha"
+          placeholder="Email"
           style={styles.input}
           className="mb-5 pl-3"
-        />
-        <TextInput
-          placeholder="Confirmar nova senha"
-          style={styles.input}
-          className="mb-5 pl-3"
-          secureTextEntry
+          onChangeText={(text) => setEmail(text)}
         />
 
-        <TouchableOpacity className="h-14 rounded-[10px] flex justify-center items-center w-full bg-[#39B061] mt-8">
+        <TouchableOpacity
+          className="h-14 rounded-[10px] flex justify-center items-center w-full bg-[#39B061] mt-8"
+          onPress={handlePasswordResetEmail}
+          >
           <Text style={styles.textButton}>Confirmar</Text>
         </TouchableOpacity>
        

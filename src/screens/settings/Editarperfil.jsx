@@ -5,11 +5,12 @@ import {
   TouchableOpacity,
   TextInput,
   ScrollView,
+  Alert,
 } from "react-native";
 import { StyleSheet } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { auth, db } from "../../firebase";
-import { updatePassword, updateProfile } from "firebase/auth";
+import { EmailAuthProvider, reauthenticateWithCredential, updatePassword, updateProfile } from "firebase/auth";
 import { collection, doc, getDocs, query, updateDoc, where } from "firebase/firestore";
 import { useAuth } from "../../hooks/useAuth";
 
@@ -78,11 +79,19 @@ export default function EditarPerfil() {
 
   // Função para encerrar a edição da senha
   const EndEditinPasswordFunction = async () => {
-    await updatePassword(user, newPassword).then(() => {
-      setEditingPassword(false);
+    const credential = EmailAuthProvider.credential(user.email, currentPassword);
+    await reauthenticateWithCredential(user, credential)
+    .then(async () => {
+      await updatePassword(user, newPassword)
+      .then(() => {
+        setEditingPassword(false);
+      }).catch((error) => {
+        const errorMessage = error.message;
+        Alert.alert("Erro ao atualizar senha", errorMessage);
+      });
     }).catch((error) => {
       const errorMessage = error.message;
-      Alert.alert("Erro ao atualizar senha", errorMessage);
+      Alert.alert("Erro de reautenticação", "Insira a senha atual correta e tente novamente.\n\n" + errorMessage);
     });
   };
 

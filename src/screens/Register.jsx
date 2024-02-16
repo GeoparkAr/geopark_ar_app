@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { GoogleAuthProvider, createUserWithEmailAndPassword, signInWithPopup, updateProfile } from "firebase/auth";
 import { auth, db } from "../firebase";
 import { setDoc, doc } from "firebase/firestore";
 
@@ -21,7 +21,7 @@ export default function Register() {
   const [senha, setSenha] = useState("");
   const [confirmarSenha, setConfirmarSenha] = useState("");
 
-  const handleSignup = async () => {
+  const handleSignupWithEmailAndPassword = async () => {
     //verificar se as informações inseridas pelo usuário são válidas
     if (!validateEmail(email)) {
       Alert.alert("Erro", "Digite um email válido");
@@ -70,6 +70,45 @@ export default function Register() {
     }
   };
 
+  // const handleSignupWithGoogle = async () => {
+  //   const provider = new GoogleAuthProvider();
+  //   signInWithPopup(auth, provider)
+  //     .then(async (result) => {
+  //       // This gives you a Google Access Token. You can use it to access the Google API.
+  //       const credential = GoogleAuthProvider.credentialFromResult(result);
+  //       const token = credential.accessToken;
+  //       // The signed-in user info.
+  //       const user = result.user;
+  //       // IdP data available using getAdditionalUserInfo(result)
+  //       await setDoc(doc(db, "users", user.uid), {
+  //         uid: user.uid,
+  //         email: user.email.toLowerCase().trim(),
+  //         displayName: user.displayName,
+  //         stamps: {
+  //           geoparkAraripe: {
+  //             mission0: true,
+  //             mission1: false,
+  //             mission2: false,
+  //             mission3: false,
+  //             mission4: false,
+  //             mission5: false,
+  //             mission6: false,
+  //             mission7: false,
+  //             mission8: false,
+  //             geoparkAraripeStamp: false,
+  //           },
+  //         },
+  //       });
+  //       navigation.navigate("Home");
+  //     })
+  //     .catch((error) => {
+  //       // Handle Errors here.
+  //       const errorCode = error.code;
+  //       const errorMessage = error.message;
+  //       Alert.alert("Erro ao criar conta pelo Google", errorCode, errorMessage);
+  //     });
+  // }
+
   //validar email
   const validateEmail = (email) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -117,7 +156,7 @@ export default function Register() {
 
         <TouchableOpacity
           className="h-14 rounded-[10px] flex justify-center items-center w-full bg-[#287D44] mt-7"
-          onPress={handleSignup}
+          onPress={handleSignupWithEmailAndPassword}
         >
           <Text style={styles.textButton}>Criar conta</Text>
         </TouchableOpacity>
@@ -135,13 +174,16 @@ export default function Register() {
           <View style={styles.rightLine}></View>
         </View>
 
-        <TouchableOpacity className="flex flex-row items-center justify-center h-10 rounded-[10px] border-[#18241B] border mb-16">
+        {/* <TouchableOpacity 
+          className="flex flex-row items-center justify-center h-10 rounded-[10px] border-[#18241B] border mb-16"
+          onPress={handleSignupWithGoogle}
+        >
           <Image
             source={require("../../assets/imgs/icons/google.png")}
             className="mr-3"
           />
           <Text style={styles.textGoogle}>Criar com Google</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <View className="flex flex-row justify-center items-center gap-1 mb-5">
           <Text className="text-sm font-semibold">Já possui uma conta? </Text>
           <TouchableOpacity onPress={Login}>

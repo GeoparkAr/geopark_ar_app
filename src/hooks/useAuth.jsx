@@ -27,7 +27,16 @@ export const AuthProvider = ({children}) => {
     
         return () => unsubscribe();
       }, []);
-    return (<AuthContext.Provider value={{data}}>{children}</AuthContext.Provider>)
+
+      function setUser(newUser){
+        const docRefNewUser = doc(db, "users", newUser.uid);
+        setData({
+            user: newUser,
+            docRef: docRefNewUser
+        });
+
+      }
+    return (<AuthContext.Provider value={{data, setUser}}>{children}</AuthContext.Provider>)
 };
 
 export const useAuth = () => {

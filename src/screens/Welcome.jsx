@@ -64,9 +64,9 @@ export default function Welcome() {
         </View>
 
         <View style={styles.containerbuttons}>
-          <TouchableOpacity style={styles.googleButton} className="w-[80vw]">
+          {/* <TouchableOpacity style={styles.googleButton} className="w-[80vw]">
             <Text style={styles.googleText}>Entrar com o Google</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <TouchableOpacity
             style={styles.greenButton}
             onPress={login}

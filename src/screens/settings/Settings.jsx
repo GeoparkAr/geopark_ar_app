@@ -163,7 +163,7 @@ export default function Settings() {
                 />
               </View>
 
-              <Text style={styles.title}>Denuncie um problema</Text>
+              <Text style={styles.title}>Relate um problema</Text>
             </View>
             <Entypo name="chevron-small-right" size={24} color="black" />
           </TouchableOpacity>

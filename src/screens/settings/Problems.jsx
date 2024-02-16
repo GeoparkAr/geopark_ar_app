@@ -1,14 +1,62 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   TouchableOpacity,
   Text,
   StyleSheet,
   TextInput,
-  View
+  View,
+  Alert
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
+import { SelectCountry } from "react-native-element-dropdown";
+import { db } from "../../firebase";
+import { Timestamp, doc, setDoc } from "firebase/firestore";
+import { useAuth } from "../../hooks/useAuth";
 
 export default function Problems() {
+  const { data: { user } } = useAuth();
+
+  const [problemType, setProblemType] = useState("");
+  const [report, setReport] = useState("");
+
+  function replacer(key, value) {
+    return key;
+  }
+
+  const handleProblemReport = async () => {
+    if (!checkFieldValidation()) {
+      Alert.alert("Erro", "Preencha todos os campos");
+    } else if (report.trim().length < 15) {
+      Alert.alert("Erro", "Relato muito curto. Por favor, explique melhor o ocorrido.");
+    } else {
+      await setDoc(doc(db, "reportedProblems", Timestamp.now().seconds + "." + Timestamp.now().nanoseconds), {
+        problemType: problemType,
+        report: report,
+        date: Timestamp.now(),
+        user: user.uid,
+      }).then(() => {
+        Alert.alert("Relato registrado", "Muito obrigado pela contribuição.\nSeu relato já foi salvo em nosso banco de dados.");
+      }).catch((error) => {
+        const errorMessage = error.message;
+        Alert.alert("Erro gravar relato no BD", errorMessage);
+      });
+    }
+  };
+
+  const handleReportChange = (text) => {
+    setReport(text);
+  };
+
+  const problemTypeOptions = [
+    { value: "appLayout", label: "Aparência do app" },
+    { value: "userConfig", label: "Configurações de usuário" },
+    { value: "missions", label: "Missões" },
+    { value: "others", label: "Outros" },
+  ];
+
+  const checkFieldValidation = () => {
+    return Boolean (problemType && report);
+  };
 
   return (
     <View
@@ -17,12 +65,36 @@ export default function Problems() {
         flex: 1,
       }}
     >
-
       <ScrollView style={{ paddingHorizontal: 20, marginBottom: 1 }}>
-        <Text style={styles.title}>Relate um erro</Text>
+        <View>
+          <Text
+            style={{
+              fontWeight: "600",
+              fontSize: 16,
+              color: "#18241B",
+              textAlign: "justify",
+              marginVertical: 10,
+            }}
+          >
+            Qual tipo de problema você deseja relatar?
+          </Text>
+          <SelectCountry
+            style={styles.dropdown}
+            value={problemType}
+            data={problemTypeOptions}
+            valueField="value"
+            labelField="label"
+            placeholder="Selecione"
+            onChange={(e) => {
+              setProblemType(e.value);
+            }}
+          />
+        </View>
+        <View style={{ marginBottom: 20 }} />
         <TextInput
-          placeholder="Escreva aqui"
+          placeholder="Escreva aqui. Mínimo de 15 caracteres (sem espaço)."
           multiline={true}
+          className="flex-1 bg-[#f8f8f8] py-1 px-5 rounded-md h-10"
           style={{
             backgroundColor: "#2427600D",
             width: "100%",
@@ -34,10 +106,12 @@ export default function Problems() {
             textAlignVertical: "top",
             paddingTop: 6
           }}
+          onChangeText={handleReportChange}
         />
 
         <TouchableOpacity
          className="h-14 rounded-[10px] flex justify-center items-center w-full bg-[#39B061] mt-7"
+         onPress={handleProblemReport}
         >
           <Text
             style={{
@@ -70,5 +144,14 @@ const styles = StyleSheet.create({
     color: "#18241B",
     fontSize: 16,
     marginVertical: 4,
+  },
+  dropdown: {
+    height: 50,
+    backgroundColor: "#FFF",
+    borderRadius: 8,
+    paddingHorizontal: 8,
+    borderColor: "#18241B",
+    borderWidth: 1,
+    fontSize: 16,
   },
 });
