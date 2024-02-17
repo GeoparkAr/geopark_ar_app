@@ -9,25 +9,17 @@ import {
   TouchableOpacity,
   Modal,
   Pressable,
-  ActivityIndicator
+  ActivityIndicator,
 } from "react-native";
 import { useState, useEffect, useRef } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth, db } from "../../firebase";
+import { auth } from "../../firebase";
 import { useNavigation } from "@react-navigation/native";
 import Custombutton from "./components/CustomButton";
 import { Entypo, Ionicons } from "@expo/vector-icons";
-import {
-  collection,
-  doc,
-  getDocs,
-  query,
-  updateDoc,
-  where,
-} from "firebase/firestore";
+import { getDoc } from "firebase/firestore";
 import CustomButton from "./components/CustomButton";
 import LottieView from "lottie-react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useAuth } from "../../hooks/useAuth";
 import {
   getCurrentPositionAsync,
@@ -53,6 +45,7 @@ export default function Tarefas() {
   const [botao7Habilitado, setBotao7Habilitado] = useState(false);
   const [botao8Habilitado, setBotao8Habilitado] = useState(false);
   const [botao9Habilitado, setBotao9Habilitado] = useState(false);
+
   const [mapa, setMapa] = useState(false);
   const [congratulations, setCongratulations] = useState(false);
 
@@ -96,27 +89,12 @@ export default function Tarefas() {
     }
   };
 
-  const [documentID, setDocumentID] = useState("");
-
-  const getDocumentID = async () => {
-    const q = query(
-      collection(db, "users"),
-      where("uid", "==", auth.currentUser.uid)
-    );
-
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      setDocumentID(doc.id);
-    });
-  };
-
   //verificar se está logado e coletar o a ID do documento do usuário no BD
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (authUser) => {
       setUser(authUser);
       setAuthChecked(true);
     });
-    getDocumentID();
     console.log(user);
     return () => unsubscribe();
   }, []);
@@ -132,23 +110,43 @@ export default function Tarefas() {
     });
   };
 
+  const getMissoesData = async () => {
+    const docSnap = await getDoc(docRef);
+    setBotao2Habilitado(docSnap.data().stamps.geoparkAraripe.mission1);
+    setBotao3Habilitado(docSnap.data().stamps.geoparkAraripe.mission2);
+    setBotao4Habilitado(docSnap.data().stamps.geoparkAraripe.mission3);
+    setBotao5Habilitado(docSnap.data().stamps.geoparkAraripe.mission4);
+    setBotao6Habilitado(docSnap.data().stamps.geoparkAraripe.mission5);
+    setBotao7Habilitado(docSnap.data().stamps.geoparkAraripe.mission6);
+    setBotao8Habilitado(docSnap.data().stamps.geoparkAraripe.mission7);
+    setBotao9Habilitado(docSnap.data().stamps.geoparkAraripe.mission8);
+    console.log(
+      botao1Habilitado,
+      botao2Habilitado,
+      botao3Habilitado,
+      botao4Habilitado,
+      botao5Habilitado,
+      botao6Habilitado,
+      botao7Habilitado
+    );
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       await checkAuthentication();
     };
 
     fetchData();
+    getMissoesData();
   }, []);
 
   //mudando o estado dos botões
   const handleClick1 = () => {
     navigateToQuestionario();
-    setBotao2Habilitado(true);
   };
 
   const handleClick2 = async () => {
     navigateToMissao();
-    setBotao3Habilitado(true);
   };
 
   //se não estiver logado bloqueia os demais botões e chama o modal
@@ -156,7 +154,6 @@ export default function Tarefas() {
     if (authChecked) {
       if (user && !user.isAnonymous) {
         navigateToMissao3();
-        setBotao4Habilitado(true);
       } else {
         setModalVisible(true);
       }
@@ -167,7 +164,6 @@ export default function Tarefas() {
     if (authChecked) {
       if (user && !user.isAnonymous) {
         navigateToMissao4();
-        setBotao5Habilitado(true);
       } else {
         setModalVisible(true);
       }
@@ -178,7 +174,6 @@ export default function Tarefas() {
     if (authChecked) {
       if (user && !user.isAnonymous) {
         navigateToMissao5();
-        setBotao6Habilitado(true);
       } else {
         setModalVisible(true);
       }
@@ -189,7 +184,6 @@ export default function Tarefas() {
     if (authChecked) {
       if (user && !user.isAnonymous) {
         navigateToMissao6();
-        setBotao7Habilitado(true);
       } else {
         setModalVisible(true);
       }
@@ -200,7 +194,6 @@ export default function Tarefas() {
     if (authChecked) {
       if (user && !user.isAnonymous) {
         navigateToMissao7();
-        setBotao8Habilitado(true);
       } else {
         setModalVisible(true);
       }
@@ -214,104 +207,15 @@ export default function Tarefas() {
   const handleClick8 = async () => {
     if (authChecked) {
       if (user && !user.isAnonymous) {
-        setBotao9Habilitado(true);
-
-        const mission7Value = true;
-
-        await updateDoc(docRef, {
-          "stamps.geoparkAraripe.geoparkAraripeStamp": mission7Value,
-        })
-          .then(() => {
-            navigateToMissao8();
-            console.log("Valor enviado para missão 7:", mission7Value);
-          })
-          .catch((error) => {
-            const errorMessage = error.message;
-            console.log("Erro ao atualizar BD", errorMessage);
-          });
-      } else {
-        setModalVisible(true);
+        navigateToMissao8();
       }
     }
   };
-
-  const salvarEstadoAoSair = async () => {
-    try {
-      await AsyncStorage.setItem(
-        "estadoBotoes",
-        JSON.stringify({
-          botao1Habilitado,
-          botao2Habilitado,
-          botao3Habilitado,
-          botao4Habilitado,
-          botao5Habilitado,
-          botao6Habilitado,
-          botao7Habilitado,
-          botao8Habilitado,
-          botao9Habilitado,
-        })
-      );
-    } catch (error) {
-      console.error("Erro ao salvar o estado:", error);
-    }
-  };
-
-  // Carregar o estado ao iniciar a tela
-  const carregarEstadoInicial = async () => {
-    try {
-      const estadoSalvo = await AsyncStorage.getItem("estadoBotoes");
-      if (estadoSalvo) {
-        const {
-          botao1Habilitado,
-          botao2Habilitado,
-          botao3Habilitado,
-          botao4Habilitado,
-          botao5Habilitado,
-          botao6Habilitado,
-          botao7Habilitado,
-          botao8Habilitado,
-          botao9Habilitado,
-        } = JSON.parse(estadoSalvo);
-        setBotao1Habilitado(botao1Habilitado);
-        setBotao2Habilitado(botao2Habilitado);
-        setBotao3Habilitado(botao3Habilitado);
-        setBotao4Habilitado(botao4Habilitado);
-        setBotao5Habilitado(botao5Habilitado);
-        setBotao6Habilitado(botao6Habilitado);
-        setBotao7Habilitado(botao7Habilitado);
-        setBotao8Habilitado(botao8Habilitado);
-        setBotao9Habilitado(botao9Habilitado);
-      }
-    } catch (error) {
-      console.error("Erro ao carregar o estado inicial:", error);
-    }
-  };
-
-  // Chamar carregarEstadoInicial ao iniciar a tela
-  useEffect(() => {
-    carregarEstadoInicial();
-  }, []);
-
-  // Chamar salvarEstadoAoSair quando sair da tela
-  useEffect(() => {
-    return () => {
-      salvarEstadoAoSair();
-    };
-  }, [
-    botao1Habilitado,
-    botao2Habilitado,
-    botao3Habilitado,
-    botao4Habilitado,
-    botao5Habilitado,
-    botao6Habilitado,
-    botao7Habilitado,
-    botao8Habilitado,
-    botao9Habilitado,
-  ]);
 
   //animação do começar
   const [bounceAnimation] = useState(new Animated.Value(0));
 
+  // Chamar carregarEstadoInicial ao iniciar a tela
   useEffect(() => {
     startBounceAnimation();
   }, []);
@@ -581,15 +485,15 @@ export default function Tarefas() {
                     ? require("../../../assets/imgs/icons/estatuaGreen.png")
                     : require("../../../assets/imgs/icons/estatuaBw.png")
                 }
-                disabled={!botao2Habilitado}
+                disabled={!botao1Habilitado}
               />
             </View>
             <View style={styles.buttonTree}>
               <CustomButton
                 onPress={handleClick3}
-                disabled={!botao3Habilitado}
+                disabled={!botao2Habilitado}
                 icon={
-                  botao3Habilitado
+                  botao2Habilitado
                     ? require("../../../assets/imgs/icons/muroGreen.png")
                     : require("../../../assets/imgs/icons/muroBw.png")
                 }
@@ -598,9 +502,9 @@ export default function Tarefas() {
             <View style={styles.buttonFor}>
               <CustomButton
                 onPress={handleClick4}
-                disabled={!botao4Habilitado}
+                disabled={!botao3Habilitado}
                 icon={
-                  botao4Habilitado
+                  botao3Habilitado
                     ? require("../../../assets/imgs/icons/igrejaGreen.png")
                     : require("../../../assets/imgs/icons/igrejaBw.png")
                 }
@@ -609,9 +513,9 @@ export default function Tarefas() {
             <View style={styles.buttonFive}>
               <CustomButton
                 onPress={handleClick5}
-                disabled={!botao5Habilitado}
+                disabled={!botao4Habilitado}
                 icon={
-                  botao5Habilitado
+                  botao4Habilitado
                     ? require("../../../assets/imgs/icons/vitraisGreen.png")
                     : require("../../../assets/imgs/icons/vitraisBw.png")
                 }
@@ -620,9 +524,9 @@ export default function Tarefas() {
             <View style={styles.buttonSix}>
               <CustomButton
                 onPress={handleClick6}
-                disabled={!botao6Habilitado}
+                disabled={!botao5Habilitado}
                 icon={
-                  botao6Habilitado
+                  botao5Habilitado
                     ? require("../../../assets/imgs/icons/crucifixoGreen.png")
                     : require("../../../assets/imgs/icons/crucifixoBw.png")
                 }
@@ -631,9 +535,9 @@ export default function Tarefas() {
             <View style={styles.buttonSeven}>
               <CustomButton
                 onPress={handleClick7}
-                disabled={!botao7Habilitado}
+                disabled={!botao6Habilitado}
                 icon={
-                  botao7Habilitado
+                  botao6Habilitado
                     ? require("../../../assets/imgs/icons/pedraGreen.png")
                     : require("../../../assets/imgs/icons/pedraBw.png")
                 }
@@ -642,9 +546,9 @@ export default function Tarefas() {
             <View style={styles.buttonEight} className="">
               <CustomButton
                 onPress={handleClick8}
-                disabled={!botao8Habilitado}
+                disabled={!botao7Habilitado}
                 icon={
-                  botao8Habilitado
+                  botao7Habilitado
                     ? require("../../../assets/imgs/icons/padreGreen.png")
                     : require("../../../assets/imgs/icons/padreBw.png")
                 }
@@ -662,10 +566,8 @@ export default function Tarefas() {
                   />
                 </View>
               )}
-
               <TouchableOpacity
                 onPress={handleButtonPress}
-                disabled={!botao9Habilitado}
               >
                 <Image
                   source={

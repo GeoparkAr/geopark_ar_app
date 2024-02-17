@@ -18,7 +18,7 @@ import { auth } from "./src/firebase";
 import Home from "./src/screens/home/index";
 import Welcome from "./src/screens/Welcome";
 import Settings from "./src/screens/settings/Settings";
-import Tarefas from "./src/screens/exemplo";
+import Tarefas from "./src/screens/Tarefas/index";
 import Missao from "./src/screens/missoes/MissaoTwo";
 import MissaoFive from "./src/screens/missoes/missaoFive";
 import MissaoSix from "./src/screens/missoes/missaoSix";

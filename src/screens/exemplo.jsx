@@ -1,14 +1,7 @@
 import { Button, View } from "react-native";
 import { useState, useEffect } from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth, db } from "../firebase";
 import {
-  collection,
-  doc,
-  getDocs,
-  query,
-  updateDoc,
-  where,
+  getDoc,
 } from "firebase/firestore";
 import { useAuth } from "../hooks/useAuth";
 
@@ -18,41 +11,27 @@ export default function Exemplo() {
   const [botao3, setBotao3] = useState(false);
 
   const {
-    data: { docRef },
-  } = useAuth();
+    data: { user, docRef },
+    setUser,
+} = useAuth();
 
-  const handleClick1 = async () => {
-    
-  };
-  const handleClick2 = async () => {
-    setBotao2(true);
-    await updateDoc(docRef, {
-      "stamps.geoparkAraripe.geoparkAraripeStamp": botao2,
-    })
-      .then(() => {
-        console.log("Valor enviado para missão 7:", botao2);
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        console.log("Erro ao atualizar BD", errorMessage);
-      });
-  };
+  function handleClick1() {
+    console.log("clicado");
+  }
+  function handleClick2() {
+    console.log("clicado");
+  }
 
-  const buttonsCollection = collection(
-    db,
-    "stamps.geoparkAraripe.geoparkAraripeStamp"
-  );
+  const getVisitorData = async () => {
+    const docSnap = await getDoc(docRef);
+    setBotao1(docSnap.data().stamps.geoparkAraripe.mission1);
+    setBotao2(docSnap.data().stamps.geoparkAraripe.mission2);
+    setBotao3(docSnap.data().stamps.geoparkAraripe.mission3);
+    console.log(botao1)
+  };
 
   useEffect(() => {
-    const getButton = async () => {
-      try {
-        const data = await getDocs(buttonsCollection);
-        console.log(data)
-      } catch (error) {
-        console.log("não foi possivel:", buttonsCollection);
-      }
-    };
-    getButton();
+    getVisitorData();
   });
 
   return (
