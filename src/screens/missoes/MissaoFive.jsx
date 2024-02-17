@@ -22,25 +22,45 @@ import { useAuth } from "../../hooks/useAuth";
 export default function MissaoFive() {
   let dista;
   const [location, setlocation] = useState(null);
-  async function resquestLocationPermissions() {
-    const { granted } = await requestForegroundPermissionsAsync();
 
-    if (granted) {
-      const currentPosition = await getCurrentPositionAsync();
-      console.log("LOCALIZAÇÂO: ", currentPosition);
-      dista = distance(
-        geoloc[7][0],
-        geoloc[7][1],
-        Number(currentPosition.coords.latitude),
-        Number(currentPosition.coords.longitude)
-      );
-      setlocation(currentPosition);
-    } else {
-      console.log("Não tem localização");
+  useEffect(() => {
+    const resquestLocationPermissions = async () => {
+      const { granted } = await requestForegroundPermissionsAsync();
+
+      if (granted) {
+        const currentPosition = await getCurrentPositionAsync();
+        console.log("LOCALIZAÇÂO: ", currentPosition);
+        dista = distance(
+          geoloc[7][0],
+          geoloc[7][1],
+          Number(currentPosition.coords.latitude),
+          Number(currentPosition.coords.longitude)
+        );
+        setlocation(currentPosition);
+      } else {
+        console.log("Não tem localização");
+      }
     }
-  }
 
-  resquestLocationPermissions();
+    // Chama a função para solicitar permissões e obter a localização
+    resquestLocationPermissions();
+
+    // Atualiza a cada 3 segundos
+    const intervalId = setInterval(() => {
+      resquestLocationPermissions();
+    }, 3000);
+
+    // Verifica a conexão com a internet
+    const unsubscribe = NetInfo.addEventListener((state) => {
+      setIsConnected(state.isConnected);
+    });
+
+    // Limpa o intervalo e o evento de verificação de conexão quando o componente é desmontado
+    return () => {
+      clearInterval(intervalId);
+      unsubscribe();
+    };
+  }, [docRef]);
 
   const navigation = useNavigation();
   const [isConnected, setIsConnected] = useState(true);
@@ -63,23 +83,21 @@ export default function MissaoFive() {
   //muda status da missão
   const handleMissionSave = async () => {
     await updateDoc(docRef, {
-      "stamps.geoparkAraripe.mission5": true,
+      "stamps.geoparkAraripe.mission2": true,
     })
       .then(() => {})
       .catch((error) => {
         const errorMessage = error.message;
         Alert.alert("Erro ao atualizar BD", errorMessage);
       });
-  }
+  };
 
   //navegando para o link da câmera
   const navigateToCamera = () => {
-    if (dista > 100) {
-      navigation.navigate("Camera", {
-        url: "https://web-geoparkcamera-ten.vercel.app/",
-      });
-      handleMissionSave();
-    }
+    navigation.navigate("Camera", {
+      url: "https://web-geoparkcamera-ten.vercel.app/",
+    });
+    handleMissionSave();
   };
 
   return (

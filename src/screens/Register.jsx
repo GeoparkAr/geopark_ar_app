@@ -48,7 +48,6 @@ export default function Register() {
             displayName: user.displayName,
             stamps: {
               geoparkAraripe: {
-                mission0: true,
                 mission1: false,
                 mission2: false,
                 mission3: false,

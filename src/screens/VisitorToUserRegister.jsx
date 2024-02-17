@@ -10,16 +10,20 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
-import { EmailAuthProvider, GoogleAuthProvider, linkWithCredential, updateProfile } from "firebase/auth";
+import {
+  EmailAuthProvider,
+  GoogleAuthProvider,
+  linkWithCredential,
+  updateProfile,
+} from "firebase/auth";
 import { db } from "../firebase";
 import { setDoc, doc, getDoc, deleteDoc } from "firebase/firestore";
-import { useAuth } from "../hooks/useAuth"
-
+import { useAuth } from "../hooks/useAuth";
 
 export default function VisitorToUserRegister() {
   const {
-      data: { user, docRef },
-      setUser,
+    data: { user, docRef },
+    setUser,
   } = useAuth();
 
   const navigation = useNavigation();
@@ -31,12 +35,12 @@ export default function VisitorToUserRegister() {
   const [visitorData, setVisitorData] = useState(null);
 
   const getVisitorData = async () => {
-      const docSnap = await getDoc(docRef);
-      setVisitorData(docSnap.data());
-  }
+    const docSnap = await getDoc(docRef);
+    setVisitorData(docSnap.data());
+  };
 
   useEffect(() => {
-      getVisitorData();
+    getVisitorData();
   }, []);
 
   const handleSignupWithEmailAndPassword = async () => {
@@ -57,27 +61,32 @@ export default function VisitorToUserRegister() {
         .then(async (usercred) => {
           const newUser = usercred.user;
           await updateProfile(newUser, { displayName: nome })
-              .then(() => {})
-              .catch((error) => {
-                  const errorMessage = error.message;
-                  Alert.alert("Erro ao atualizar nome", errorMessage);
-              });
+            .then(() => {})
+            .catch((error) => {
+              const errorMessage = error.message;
+              Alert.alert("Erro ao atualizar nome", errorMessage);
+            });
           await setDoc(doc(db, "users", user.uid), {
-            visitorData,
+            uid: visitorData.uid,
+            stamps: visitorData.stamps,
+            lastVisit: visitorData.lastVisit,
             displayName: newUser.displayName,
             email: newUser.email,
           })
-              .then(() => {})
-              .catch((error) => {
-                  const errorMessage = error.message;
-                  Alert.alert("Erro ao criar novo documento no BD", errorMessage);
-              });
+            .then(() => {})
+            .catch((error) => {
+              const errorMessage = error.message;
+              Alert.alert("Erro ao criar novo documento no BD", errorMessage);
+            });
           await deleteDoc(doc(db, "visitors", newUser.uid))
-              .then(() => {})
-              .catch((error) => {
-                  const errorMessage = error.message;
-                  Alert.alert("Erro ao excluir documento de visitante do BD", errorMessage);
-              });
+            .then(() => {})
+            .catch((error) => {
+              const errorMessage = error.message;
+              Alert.alert(
+                "Erro ao excluir documento de visitante do BD",
+                errorMessage
+              );
+            });
           setUser(newUser);
           navigation.navigate("Home");
         })
@@ -88,41 +97,48 @@ export default function VisitorToUserRegister() {
     }
   };
 
-  // const handleSignupWithGoogle = async () => {
-  //   const credential = GoogleAuthProvider.credential(googleUser.getAuthResponse().id_token);
-  //   await linkWithCredential(user, credential)
-  //     .then(async (usercred) => {
-  //       const newUser = usercred.user;
-  //       await updateProfile(newUser, { displayName: nome })
-  //           .then(() => {})
-  //           .catch((error) => {
-  //               const errorMessage = error.message;
-  //               Alert.alert("Erro ao atualizar nome", errorMessage);
-  //           });
-  //       await setDoc(doc(db, "users", user.uid), {
-  //         visitorData,
-  //         displayName: newUser.displayName,
-  //         email: newUser.email,
-  //       })
-  //           .then(() => {})
-  //           .catch((error) => {
-  //               const errorMessage = error.message;
-  //               Alert.alert("Erro ao criar novo documento no BD", errorMessage);
-  //           });
-  //       await deleteDoc(doc(db, "visitors", newUser.uid))
-  //           .then(() => {})
-  //           .catch((error) => {
-  //               const errorMessage = error.message;
-  //               Alert.alert("Erro ao excluir documento de visitante do BD", errorMessage);
-  //           });
-  //       setUser(newUser);
-  //       navigation.navigate("Home");
-  //     })
-  //     .catch((error) => {
-  //       const errorMessage = error.message;
-  //       Alert.alert("Erro ao criar conta", errorMessage);
-  //     });
-  // }; 
+  const handleSignupWithGoogle = async () => {
+    const credential = GoogleAuthProvider.credential(
+      googleUser.getAuthResponse().id_token
+    );
+    await linkWithCredential(user, credential)
+      .then(async (usercred) => {
+        const newUser = usercred.user;
+        await updateProfile(newUser, { displayName: nome })
+          .then(() => {})
+          .catch((error) => {
+            const errorMessage = error.message;
+            Alert.alert("Erro ao atualizar nome", errorMessage);
+          });
+        await setDoc(doc(db, "users", user.uid), {
+          uid: visitorData.uid,
+          stamps: visitorData.stamps,
+          lastVisit: visitorData.lastVisit,
+          displayName: newUser.displayName,
+          email: newUser.email,
+        })
+          .then(() => {})
+          .catch((error) => {
+            const errorMessage = error.message;
+            Alert.alert("Erro ao criar novo documento no BD", errorMessage);
+          });
+        await deleteDoc(doc(db, "visitors", newUser.uid))
+          .then(() => {})
+          .catch((error) => {
+            const errorMessage = error.message;
+            Alert.alert(
+              "Erro ao excluir documento de visitante do BD",
+              errorMessage
+            );
+          });
+        setUser(newUser);
+        navigation.navigate("Home");
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        Alert.alert("Erro ao criar conta", errorMessage);
+      });
+  };
 
   //validar email
   const validateEmail = (email) => {
@@ -266,4 +282,3 @@ const styles = StyleSheet.create({
     fontWeight: "700",
   },
 });
-  

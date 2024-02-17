@@ -14,7 +14,7 @@ import { doc, setDoc } from "firebase/firestore";
 export default function Welcome() {
   const navigation = useNavigation();
 
-   const handleAnonymousLogin = async () => {
+  const handleAnonymousLogin = async () => {
     await signInAnonymously(auth)
       .then(async () => {
         const user = auth.currentUser;
@@ -26,6 +26,7 @@ export default function Welcome() {
               mission2: false,
             },
           },
+          lastVisit: {},
         });
         navigation.navigate("Home");
       })

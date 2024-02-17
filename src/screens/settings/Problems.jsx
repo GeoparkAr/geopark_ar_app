@@ -5,16 +5,21 @@ import {
   StyleSheet,
   TextInput,
   View,
-  Alert
+  Alert,
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { SelectCountry } from "react-native-element-dropdown";
 import { db } from "../../firebase";
 import { Timestamp, doc, setDoc } from "firebase/firestore";
 import { useAuth } from "../../hooks/useAuth";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Problems() {
-  const { data: { user } } = useAuth();
+  const {
+    data: { user },
+  } = useAuth();
+
+  const navigation = useNavigation();
 
   const [problemType, setProblemType] = useState("");
   const [report, setReport] = useState("");
@@ -27,19 +32,35 @@ export default function Problems() {
     if (!checkFieldValidation()) {
       Alert.alert("Erro", "Preencha todos os campos");
     } else if (report.trim().length < 15) {
-      Alert.alert("Erro", "Relato muito curto. Por favor, explique melhor o ocorrido.");
+      Alert.alert(
+        "Erro",
+        "Relato muito curto. Por favor, explique melhor o ocorrido."
+      );
     } else {
-      await setDoc(doc(db, "reportedProblems", Timestamp.now().seconds + "." + Timestamp.now().nanoseconds), {
-        problemType: problemType,
-        report: report,
-        date: Timestamp.now(),
-        user: user.uid,
-      }).then(() => {
-        Alert.alert("Relato registrado", "Muito obrigado pela contribuição.\nSeu relato já foi salvo em nosso banco de dados.");
-      }).catch((error) => {
-        const errorMessage = error.message;
-        Alert.alert("Erro gravar relato no BD", errorMessage);
-      });
+      await setDoc(
+        doc(
+          db,
+          "reportedProblems",
+          Timestamp.now().seconds + "." + Timestamp.now().nanoseconds
+        ),
+        {
+          problemType: problemType,
+          report: report,
+          date: Timestamp.now(),
+          user: user.uid,
+        }
+      )
+        .then(() => {
+          navigation.navigate("Home");
+          Alert.alert(
+            "Relato registrado",
+            "Muito obrigado pela contribuição.\nSeu relato já foi salvo em nosso banco de dados."
+          );
+        })
+        .catch((error) => {
+          const errorMessage = error.message;
+          Alert.alert("Erro gravar relato no BD", errorMessage);
+        });
     }
   };
 
@@ -55,7 +76,7 @@ export default function Problems() {
   ];
 
   const checkFieldValidation = () => {
-    return Boolean (problemType && report);
+    return Boolean(problemType && report);
   };
 
   return (
@@ -104,14 +125,14 @@ export default function Problems() {
             fontSize: 14,
             marginBottom: 8,
             textAlignVertical: "top",
-            paddingTop: 6
+            paddingTop: 6,
           }}
           onChangeText={handleReportChange}
         />
 
         <TouchableOpacity
-         className="h-14 rounded-[10px] flex justify-center items-center w-full bg-[#39B061] mt-7"
-         onPress={handleProblemReport}
+          className="h-14 rounded-[10px] flex justify-center items-center w-full bg-[#39B061] mt-7"
+          onPress={handleProblemReport}
         >
           <Text
             style={{

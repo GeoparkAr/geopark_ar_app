@@ -10,13 +10,26 @@ import {
 import { StyleSheet } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { auth, db } from "../../firebase";
-import { EmailAuthProvider, reauthenticateWithCredential, updatePassword, updateProfile } from "firebase/auth";
-import { collection, doc, getDocs, query, updateDoc, where } from "firebase/firestore";
+import {
+  EmailAuthProvider,
+  reauthenticateWithCredential,
+  updatePassword,
+  updateProfile,
+} from "firebase/auth";
+import {
+  collection,
+  doc,
+  getDocs,
+  query,
+  updateDoc,
+  where,
+} from "firebase/firestore";
 import { useAuth } from "../../hooks/useAuth";
 
 export default function EditarPerfil() {
-
-  const { data: { user } } = useAuth();
+  const {
+    data: { user, docRef },
+  } = useAuth();
 
   // Estados para controle do nome
   const [editingName, setEditingName] = useState(false);
@@ -28,47 +41,41 @@ export default function EditarPerfil() {
   const [newPassword, setNewPassword] = useState("");
   const [editingPassword, setEditingPassword] = useState(false);
   const [isButtonEnabled, setIsButtonEnabled] = useState(false);
-  // Estado para controle da ID di documento do usuário no BD
-  const [documentID, setDocumentID] = useState("");
-
-  // Função para identificar documento do usuário no BD e coletar sua ID
-  const getDocumentID = async ()=>{
-    const q = query(collection(db, "users"), where("uid", "==", auth.currentUser.uid));
-
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      setDocumentID(doc.id);
-    });
-  };
 
   // Função para iniciar ou encerrar a edição do nome
   const startEditingName = () => {
     setEditingName(!editingName);
-    getDocumentID();
   };
 
   // Função para finalizar a edição do nome
   const finishEditingName = async () => {
-    setName(tempName);
+    // Garante que a primeira letra do nome seja maiúscula
+    const formattedName = tempName.charAt(0).toUpperCase() + tempName.slice(1);
+
+    // Atualiza os estados
+    setName(formattedName);
+
     // Editando no Firebase Authentication
     await updateProfile(user, {
-      displayName: tempName
-    }).then(() => {
-      setEditingName(false);
-    }).catch((error) => {
-      const errorMessage = error.message;
-      Alert.alert("Erro ao atualizar nome", errorMessage);
-    });
-    // Editando no Firebase Firestore Database
-    const docRef = doc(db, "users", documentID);
-    await updateDoc(docRef, {
-      "displayName": tempName
-    }).then(() => {
-    }).catch((error) => {
-      const errorMessage = error.message;
-      Alert.alert("Erro ao atualizar BD", errorMessage);
-    });
+      displayName: formattedName,
+    })
+      .then(() => {
+        setEditingName(false);
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        Alert.alert("Erro ao atualizar nome", errorMessage);
+      });
 
+    // Editando no Firebase Firestore Database
+    await updateDoc(docRef, {
+      displayName: formattedName,
+    })
+      .then(() => {})
+      .catch((error) => {
+        const errorMessage = error.message;
+        Alert.alert("Erro ao atualizar BD", errorMessage);
+      });
   };
 
   // Função para iniciar ou encerrar a edição da senha
@@ -79,20 +86,28 @@ export default function EditarPerfil() {
 
   // Função para encerrar a edição da senha
   const EndEditinPasswordFunction = async () => {
-    const credential = EmailAuthProvider.credential(user.email, currentPassword);
+    const credential = EmailAuthProvider.credential(
+      user.email,
+      currentPassword
+    );
     await reauthenticateWithCredential(user, credential)
-    .then(async () => {
-      await updatePassword(user, newPassword)
-      .then(() => {
-        setEditingPassword(false);
-      }).catch((error) => {
+      .then(async () => {
+        await updatePassword(user, newPassword)
+          .then(() => {
+            setEditingPassword(false);
+          })
+          .catch((error) => {
+            const errorMessage = error.message;
+            Alert.alert("Erro ao atualizar senha", errorMessage);
+          });
+      })
+      .catch((error) => {
         const errorMessage = error.message;
-        Alert.alert("Erro ao atualizar senha", errorMessage);
+        Alert.alert(
+          "Erro de reautenticação",
+          "Insira a senha atual correta e tente novamente.\n\n" + errorMessage
+        );
       });
-    }).catch((error) => {
-      const errorMessage = error.message;
-      Alert.alert("Erro de reautenticação", "Insira a senha atual correta e tente novamente.\n\n" + errorMessage);
-    });
   };
 
   // Função para lidar com mudanças na senha
@@ -126,6 +141,7 @@ export default function EditarPerfil() {
   const textNameStyle = {
     color: isButtonNameEnabled ? "#FFF" : "#747474",
   };
+
   return (
     <View
       style={{

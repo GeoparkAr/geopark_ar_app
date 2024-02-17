@@ -81,7 +81,6 @@ function Root() {
             style={{
               position: "relative",
               height: "100%",
-              paddingLeft: 25,
               gap: 10,
             }}
           >
@@ -95,6 +94,7 @@ function Root() {
                   flexDirection: "row",
                   paddingBottom: 10,
                   paddingTop: 10,
+                  paddingLeft: 25
                 }}
               >
                 <View>
@@ -141,7 +141,7 @@ function Root() {
               </View>
             )}
 
-            <View style={{ gap: 15 }}>
+            <View style={{ gap: 15, paddingLeft: 25 }}>
               <TouchableOpacity
                 style={{
                   flexDirection: "row",

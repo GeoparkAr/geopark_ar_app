@@ -105,7 +105,7 @@ export default function Selos() {
               width: "auto",
               borderRadius: 10,
             }}
-            onPress={() => navigation.navigate("Welcome")}
+            onPress={() => navigation.navigate("VisitorToUserRegister")}
           >
             <Text
               style={{
