@@ -359,7 +359,6 @@ export default function Tarefas() {
                 <MapView
                   ref={mapRef}
                   showsPointsOfInterest="false"
-                  source={require("../../../assets/imgs/geossitios/arajara.png")}
                   className="w-64 h-96 rounded-lg"
                   style={{ borderRadius: 16 }}
                   initialRegion={{
@@ -434,7 +433,7 @@ export default function Tarefas() {
                 </MapView>
               ) : (
                 <View
-                  source={require("../../../assets/imgs/geossitios/arajara.png")}
+
                   className="w-64 h-96 rounded-lg bg-white border border-stone-300 justify-center items-center"
                   style={{ borderRadius: 16 }}
                 >

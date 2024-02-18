@@ -34,7 +34,7 @@ export default function Home() {
     {
       nome: "Arajara",
       municipio: "Barbalha",
-      source: require("../../../assets/imgs/geossitios/arajara.png"),
+      source: require("../../../assets/imgs/geossitios/arajara.jpg"),
       category: [
         "Aquático",
         "Trilha",
@@ -46,7 +46,7 @@ export default function Home() {
     {
       nome: "Mirante do Caldas",
       municipio: "Barbalha",
-      source: require("../../../assets/imgs/geossitios/miranteCaldas.png"),
+      source: require("../../../assets/imgs/geossitios/miranteCaldas.jpg"),
       category: [
         "Trilha",
         "Mirante",
@@ -59,25 +59,25 @@ export default function Home() {
     {
       nome: "Floresta Petrificada do Cariri",
       municipio: "Missão Velha",
-      source: require("../../../assets/imgs/geossitios/florestaPetrificada.png"),
+      source: require("../../../assets/imgs/geossitios/florestaPetrificada.jpg"),
       category: ["Paleontológico", "Geodiversidade"],
     },
     {
       nome: "Parque dos Pterossauros",
       municipio: "Santana do Cariri",
-      source: require("../../../assets/imgs/geossitios/parquePterossauros.png"),
+      source: require("../../../assets/imgs/geossitios/parquePterossauros.jpg"),
       category: ["Paleontológico", "Geodiversidade"],
     },
     {
       nome: "Pedra Cariri",
       municipio: "Nova Olinda",
-      source: require("../../../assets/imgs/geossitios/pedraCariri.png"),
+      source: require("../../../assets/imgs/geossitios/pedraCariri.jpg"),
       category: ["Paleontológico", "Geodiversidade"],
     },
     {
       nome: "Pontal de Santa Cruz",
       municipio: "Santana do Cariri",
-      source: require("../../../assets/imgs/geossitios/pontalSantaCruz.png"),
+      source: require("../../../assets/imgs/geossitios/pontalSantaCruz.jpg"),
       category: [
         "Mirante",
         "Trilha",
@@ -89,7 +89,7 @@ export default function Home() {
     {
       nome: "Ponte de Pedra",
       municipio: "Nova Olinda",
-      source: require("../../../assets/imgs/geossitios/pontePedra.png"),
+      source: require("../../../assets/imgs/geossitios/pontePedra.jpg"),
       category: [
         "Geomorfológico",
         "Cultural",
@@ -101,13 +101,13 @@ export default function Home() {
     {
       nome: "Riacho do Meio",
       municipio: "Barbalha",
-      source: require("../../../assets/imgs/geossitios/riachoMeio.png"),
+      source: require("../../../assets/imgs/geossitios/riachoMeio.jpg"),
       category: ["Aquático", "Trilha", "Biodiversidade"],
     },
     {
       nome: "Cachoeira de Missão Velha",
       municipio: "Missão Velha",
-      source: require("../../../assets/imgs/geossitios/cachoeiraMissaoVelha.png"),
+      source: require("../../../assets/imgs/geossitios/cachoeiraMissaoVelha.jpg"),
       category: ["Aquático", "Trilha", "Cultural", "Geodiversidade"],
     },
   ];
@@ -491,7 +491,7 @@ export default function Home() {
               >
                 <Image
                   className="h-20 w-20 rounded-full mb-2"
-                  source={require("../../../assets/imgs/geossitios/colina.png")}
+                  source={require("../../../assets/imgs/geossitios/colina.jpg")}
                 />
                 <Text className="text-sm text-white text-center font-semibold w-36 mb-2">
                   Colina do Horto
