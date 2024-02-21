@@ -10,7 +10,6 @@ import {
 import { ScrollView } from "react-native-gesture-handler";
 
 export default function Terms() {
-
   return (
     <View
       style={{
@@ -18,7 +17,6 @@ export default function Terms() {
         flex: 1,
       }}
     >
-
       <ScrollView style={{ paddingHorizontal: 20, marginBottom: 1 }}>
         <Text style={styles.title}>Termos e condições de uso:</Text>
         <Text style={styles.text}>
@@ -34,7 +32,7 @@ export default function Terms() {
           Araripe.
         </Text>
         <Text style={styles.text}>
-          O geopark AR está empenhado em garantir que o aplicativo seja tão útil
+          O Geopark AR está empenhado em garantir que o aplicativo seja tão útil
           e eficiente quanto possível. Por essa razão, a nós reserva-se o
           direito de fazer alterações no aplicativo ou cobrar por seus serviços,
           a qualquer momento e por qualquer motivo, nunca iremos cobrar pelo
@@ -44,12 +42,15 @@ export default function Terms() {
           O aplicativo armazena e processa dados pessoais que você nos forneceu,
           para fornecer nosso serviço. É sua responsabilidade manter seu
           telefone e acesso ao aplicativo seguro. Portanto, recomendamos que
-          você não faça jailbreak ou root no seu telefone, que é o processo de
-          remover restrições e limitações de software impostas pelo sistema
-          operacional oficial do seu dispositivo. Poderia fazer o seu telefone
-          vulnerável a malware/vírus/programas maliciosos, comprometer os
-          recursos de segurança do seu telefone e isso pode significar que o
-          aplicativo não funcionará corretamente ou não funcionará.
+          você não faça <Text style={{ fontStyle: "italic" }}>jailbreak </Text>
+          ou <Text style={{ fontStyle: "italic" }}>Root</Text> no seu telefone,
+          que é o processo de remover restrições e limitações de software
+          impostas pelo sistema operacional oficial do seu dispositivo. Poderia
+          fazer o seu telefone vulnerável a{" "}
+          <Text style={{ fontStyle: "italic" }}>malware</Text>/vírus/programas
+          maliciosos, comprometer os recursos de segurança do seu telefone e
+          isso pode significar que o aplicativo não funcionará corretamente ou
+          não funcionará.
         </Text>
         <Text style={styles.text}>
           O aplicativo usa serviços de terceiros que declaram seus Termos e
@@ -66,14 +67,13 @@ export default function Terms() {
           .
         </Text>
         <Text style={styles.text}>
-          Você deve estar ciente de que há certas coisas que o geopark AR não se
+          Você deve estar ciente de que há certas coisas que o Geopark AR não se
           responsabiliza por. Certas funções do aplicativo exigirão que o
           aplicativo tenha uma conexão com a internet. A conexão pode ser Wi-Fi
-          ou fornecida pelo seu provedor de rede móvel, mas o geopark não pode
+          ou fornecida pelo seu provedor de rede móvel, mas o Geopark não pode
           assumir a responsabilidade pelo aplicativo não funcionar totalmente se
           você não tiver acesso a Wi-Fi ou não tiver parte da sua cota de dados.
         </Text>
-        
         <Text style={styles.text}>
           Alterações a esses termos e condições de uso: Nós podemos atualizar
           nossos Termos e Condições de tempos em tempos, portanto, é
@@ -87,7 +87,7 @@ export default function Terms() {
             color: "blue",
             borderBottomColor: "#E8E8E8",
             borderBottomWidth: 1,
-            marginBottom: 20
+            marginBottom: 20,
           }}
         >
           Atualização: 15/12/2023
@@ -98,8 +98,9 @@ export default function Terms() {
           sua privacidade que apresentamos nossa Política de Privacidade, a qual
           detalha o tratamento das suas informações pessoais no contexto do
           Geopark AR. Estamos em conformidade com as leis de privacidade,
-          incluindo o Regulamento Geral de Proteção de Dados (GDPR), e buscamos
-          garantir a transparência e segurança no manuseio de seus dados.
+          incluindo o Regulamento Geral de Proteção de Dados (GDPR) e LGPD (Lei
+          Geral De Proteção De Dados), como também garantir a transparência e
+          segurança no manuseio de seus dados.
         </Text>
         <Text style={styles.title2}>Informações Coletadas:</Text>
         <Text style={styles.text}>
@@ -127,8 +128,8 @@ export default function Terms() {
         <Text style={styles.title2}>Cookies e Tecnologias de Rastreio:</Text>
         <Text style={styles.text}>
           O uso de cookies e outras tecnologias de rastreamento é essencial para
-          o funcionamento do aplicativo, restrito à região do geossítio colina
-          do horto. Essas tecnologias personalizam sua experiência, assegurando
+          o funcionamento do aplicativo, restrito à região do geossítio Colina
+          do Horto. Essas tecnologias personalizam sua experiência, assegurando
           um serviço mais eficiente e alinhado às nossas necessidades.
         </Text>
         <Text style={styles.title2}>Acesso e Controle:</Text>
@@ -159,7 +160,7 @@ export default function Terms() {
             color: "blue",
             borderBottomColor: "#E8E8E8",
             borderBottomWidth: 1,
-            marginBottom: 30
+            marginBottom: 30,
           }}
         >
           Atualização: 15/12/2023
@@ -185,6 +186,6 @@ const styles = StyleSheet.create({
     color: "#18241B",
     fontSize: 16,
     marginVertical: 4,
-    fontWeight: "600"
+    fontWeight: "600",
   },
 });

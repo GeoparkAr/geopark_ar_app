@@ -11,11 +11,11 @@ export default function About() {
         <View>
           <Text className="text-[18px] font-medium mb-3">Geopark AR</Text>
           <Text className="text-justify text-base">
-            No seio do Cariri, nasce o Geoark AR, um aplicativo pioneiro
+            No seio do Cariri, nasce o Geopark AR, um aplicativo pioneiro
             desenvolvido a partir de uma residência em Tecnologia da Informação
             e Comunicação (TIC). Seu propósito é suprir as demandas locais em
             tecnologia, especialmente em parceria com o Geopark Araripe. Juntos,
-            criaram o Geoark AR, uma ferramenta que utiliza inteligência
+            criaram o Geoaprk AR, uma ferramenta que utiliza inteligência
             artificial e realidade aumentada para proporcionar informações sobre
             os geossítios do Geopark de maneira acessível e envolvente. A visão
             é clara: democratizar o acesso à informação, tornando a exploração

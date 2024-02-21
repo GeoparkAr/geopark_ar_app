@@ -2601,7 +2601,7 @@
 
 "@types/geojson@^7946.0.10":
   version "7946.0.14"
-  resolved "https://registry.yarnpkg.com/@types/geojson/-/geojson-7946.0.14.tgz#319b63ad6df705ee2a65a73ef042c8271e696613"
+  resolved "https://registry.npmjs.org/@types/geojson/-/geojson-7946.0.14.tgz"
   integrity sha512-WCfD5Ht3ZesJUsONdhvm84dmzWOiOzOAqOncN0++w0lBw1o8OuDNJF2McvvCef/yBqb/HYRahp1BYtODFQ8bRg==
 
 "@types/glob@^7.1.1":
@@ -7664,7 +7664,7 @@ prompts@^2.3.2, prompts@^2.4.0:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@*, prop-types@^15.7.2:
+prop-types@*, prop-types@^15.5.10, prop-types@^15.7.2:
   version "15.8.1"
   resolved "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -7841,7 +7841,7 @@ react-native-gesture-handler@~2.12.0:
 
 react-native-maps@1.7.1:
   version "1.7.1"
-  resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-1.7.1.tgz#e0b9d68542b4b59b5ca3df375ada7c860fb41f2e"
+  resolved "https://registry.npmjs.org/react-native-maps/-/react-native-maps-1.7.1.tgz"
   integrity sha512-CHVLzL+Q2jiUGgbt4/vosxVI1SukWyaLGjD62VLgR/wZpnH4Umi9ql1bmKDPWcfj2C1QZwMU0Yc7rXTbvZUIiw==
   dependencies:
     "@types/geojson" "^7946.0.10"
@@ -7873,6 +7873,18 @@ react-native-shimmer-placeholder@^2.0.9:
   version "2.0.9"
   resolved "https://registry.npmjs.org/react-native-shimmer-placeholder/-/react-native-shimmer-placeholder-2.0.9.tgz"
   integrity sha512-s2pfAAO6uaybREYM2KcaxP3c2XlZvLfHfzmhMlGEoOhSKaoM92KpA1Hx0BeC75yilkliJuowqO/hFzvLB0h7hg==
+
+react-native-swiper-flatlist@^3.2.3:
+  version "3.2.3"
+  resolved "https://registry.yarnpkg.com/react-native-swiper-flatlist/-/react-native-swiper-flatlist-3.2.3.tgz#c96d71cf260a5d7e3759a95d33e1eac38eadfb35"
+  integrity sha512-L4KSy4X1mzUx9a/gZa+lBpY7agS/GHCSzSjHjpIDQB7qh03jKm4PsKyYE5KfFzJRzBMm/srfrixfWzHncZmhkQ==
+
+react-native-swiper@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/react-native-swiper/-/react-native-swiper-1.6.0.tgz#59fdbdf95addee49630312f27077622c27776819"
+  integrity sha512-OnkTTZi+9uZUgy0uz1I9oYDhCU3z36lZn+LFsk9FXPRelxb/KeABzvPs3r3SrHWy1aA67KGtSFj0xNK2QD0NJQ==
+  dependencies:
+    prop-types "^15.5.10"
 
 react-native-webview@13.2.2:
   version "13.2.2"
