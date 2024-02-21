@@ -96,7 +96,6 @@ export default function Tarefas() {
       setUser(authUser);
       setAuthChecked(true);
     });
-    console.log(user);
     return () => unsubscribe();
   }, []);
 
@@ -257,12 +256,8 @@ export default function Tarefas() {
 
     if (granted) {
       const currentPosition = await getCurrentPositionAsync();
-      console.log("LOCALIZAÇÂO: ", currentPosition);
       setLocation(currentPosition);
-      console.log(currentPosition);
-    } else {
-      console.log("Não tem localização");
-    }
+    } 
   }
 
   useEffect(() => {

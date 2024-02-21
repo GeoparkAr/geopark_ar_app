@@ -70,10 +70,10 @@ export default function Terms() {
           Você deve estar ciente de que há certas coisas que o Geopark AR não se
           responsabiliza por. Certas funções do aplicativo exigirão que o
           aplicativo tenha uma conexão com a internet. A conexão pode ser Wi-Fi
-          ou fornecida pelo seu provedor de rede móvel, mas o Geopark não pode
+          ou fornecida pelo seu provedor de rede móvel, mas o Geopark Araripe não pode
           assumir a responsabilidade pelo aplicativo não funcionar totalmente se
           você não tiver acesso a Wi-Fi ou não tiver parte da sua cota de dados.
-        </Text>
+        </Text> 
         <Text style={styles.text}>
           Alterações a esses termos e condições de uso: Nós podemos atualizar
           nossos Termos e Condições de tempos em tempos, portanto, é

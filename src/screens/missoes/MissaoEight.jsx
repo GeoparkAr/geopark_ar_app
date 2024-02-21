@@ -29,7 +29,6 @@ export default function MissaoEight() {
 
       if (granted) {
         const currentPosition = await getCurrentPositionAsync();
-        console.log("LOCALIZAÇÂO: ", currentPosition);
         dista = distance(
           geoloc[2][0],
           geoloc[2][1],
@@ -37,9 +36,7 @@ export default function MissaoEight() {
           Number(currentPosition.coords.longitude)
         );
         setlocation(currentPosition);
-      } else {
-        console.log("Não tem localização");
-      }
+      } 
     }
 
     // Chama a função para solicitar permissões e obter a localização

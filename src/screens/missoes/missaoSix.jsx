@@ -29,7 +29,6 @@ export default function MissaoSix() {
 
       if (granted) {
         const currentPosition = await getCurrentPositionAsync();
-        console.log("LOCALIZAÇÂO: ", currentPosition);
         dista = distance(
           geoloc[0][0],
           geoloc[0][1],
@@ -37,9 +36,7 @@ export default function MissaoSix() {
           Number(currentPosition.coords.longitude)
         );
         setlocation(currentPosition);
-      } else {
-        console.log("Não tem localização");
-      }
+      } 
     }
 
     // Chama a função para solicitar permissões e obter a localização
