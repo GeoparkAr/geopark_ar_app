@@ -186,7 +186,7 @@ export default function Register() {
         <View className="flex flex-row justify-center items-center gap-1 mb-5">
           <Text className="text-sm font-semibold">Já possui uma conta? </Text>
           <TouchableOpacity onPress={Login}>
-            <Text className="text-sm font-semibold text-[#40CC6F]">Entrar</Text>
+            <Text className="text-sm font-semibold text-[#35a75b]">Entrar</Text>
           </TouchableOpacity>
         </View>
       </View>

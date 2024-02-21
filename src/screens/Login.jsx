@@ -22,9 +22,9 @@ export default function Login() {
     navigation.navigate("Register");
   };
 
-  const NovaSenha =() => {
-    navigation.navigate("NewPassword")
-  }
+  const NovaSenha = () => {
+    navigation.navigate("NewPassword");
+  };
   const handleLogin = async () => {
     //verificar se as informações inseridas pelo usuário são válidas
     if (!validateEmail(email)) {
@@ -50,8 +50,8 @@ export default function Login() {
   };
 
   return (
-    <View className="bg-white h-full pt-4">
-      <ScrollView className="px-8 bg-white">
+    <View className="justify-between h-full w-full bg-white px-6">
+      <View className="mt-6">
         <TextInput
           placeholder="Email"
           style={styles.input}
@@ -70,43 +70,27 @@ export default function Login() {
         <TouchableOpacity onPress={NovaSenha}>
           <Text style={styles.text}>Esqueceu a senha?</Text>
         </TouchableOpacity>
+      </View>
 
+      <View>
         <TouchableOpacity
           className="h-14 rounded-[10px] flex justify-center items-center w-full bg-[#287D44]"
           onPress={handleLogin}
         >
           <Text style={styles.textButton}>Entrar</Text>
         </TouchableOpacity>
-        <View
-          className="flex justify-center items-center mt-9 mb-9"
-          style={styles.container}
-        >
-          <View style={styles.leftLine}></View>
-          <Text
-            style={styles.text2}
-            className="mx-2 text-center items-center justify-center self-center"
-          >
-            ou
-          </Text>
-          <View style={styles.rightLine}></View>
-        </View>
-
-        <TouchableOpacity className="flex flex-row items-center justify-center h-10 rounded-[10px] border-[#18241B] border mb-16">
-          <Image
-            source={require("../../assets/imgs/icons/google.png")}
-            className="mr-3"
-          />
-          <Text style={styles.textGoogle}>Entrar com Google</Text>
-        </TouchableOpacity>
-        <View className="flex flex-row justify-center items-center gap-1">
+        <View className="flex flex-row justify-center items-center gap-1 mt-5">
           <Text className="text-sm font-semibold">Não tem uma conta? </Text>
           <TouchableOpacity onPress={Register}>
-            <Text className="text-sm font-semibold text-[#40CC6F]">
+            <Text className="text-sm font-semibold text-[#35a75b]">
               Criar conta
             </Text>
           </TouchableOpacity>
         </View>
-      </ScrollView>
+      </View>
+
+      <View></View>
+      <View></View>
     </View>
   );
 }
