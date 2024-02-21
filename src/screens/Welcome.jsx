@@ -65,9 +65,6 @@ export default function Welcome() {
         </View>
 
         <View style={styles.containerbuttons}>
-          {/* <TouchableOpacity style={styles.googleButton} className="w-[80vw]">
-            <Text style={styles.googleText}>Entrar com o Google</Text>
-          </TouchableOpacity> */}
           <TouchableOpacity
             style={styles.greenButton}
             onPress={login}
@@ -119,31 +116,17 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     gap: 11,
-    paddingVertical: 20,
+    paddingVertical: 40,
   },
   backgroundImage: {
     width: "100%",
     height: "100%",
     resizeMode: "cover",
   },
-  googleButton: {
-    backgroundColor: "#111111",
-    flexDirection: "row",
-    height: 40,
-    borderRadius: 30,
-    justifyContent: "center",
-    alignItems: "center",
-    gap: 12,
-  },
-  googleText: {
-    color: "#ffffff",
-    fontSize: 14,
-    fontWeight: "500",
-  },
   greenButton: {
     backgroundColor: "#287D44",
     flexDirection: "row",
-    height: 40,
+    height: 50,
     borderRadius: 30,
     justifyContent: "center",
     alignItems: "center",
@@ -157,7 +140,7 @@ const styles = StyleSheet.create({
   visitanteButton: {
     backgroundColor: "transparent",
     flexDirection: "row",
-    height: 40,
+    height: 50,
     borderRadius: 30,
     justifyContent: "center",
     alignItems: "center",
