@@ -3,7 +3,6 @@ import { StyleSheet } from "react-native";
 import { ScrollView, TouchableOpacity } from "react-native";
 
 export default function About() {
-
   return (
     <ScrollView style={{ backgroundColor: "#FFF" }}>
       <View className="px-7 justify-center py-3">
@@ -15,11 +14,13 @@ export default function About() {
             desenvolvido a partir de uma residência em Tecnologia da Informação
             e Comunicação (TIC). Seu propósito é suprir as demandas locais em
             tecnologia, especialmente em parceria com o Geopark Araripe. Juntos,
-            criaram o Geoaprk AR, uma ferramenta que utiliza inteligência
-            artificial e realidade aumentada para proporcionar informações sobre
-            os geossítios do Geopark de maneira acessível e envolvente. A visão
-            é clara: democratizar o acesso à informação, tornando a exploração
-            dos pontos turísticos uma experiência simples e inclusiva.
+            os membros da equipe Alefy Almeida, Antonio Lô, Davi Siebra, Laysa
+            Gonçalves e Michael Freire criaram o Geoaprk AR, uma ferramenta que
+            utiliza inteligência artificial e realidade aumentada para
+            proporcionar informações sobre os geossítios do Geopark de maneira
+            acessível e envolvente. A visão é clara: democratizar o acesso à
+            informação, tornando a exploração dos pontos turísticos uma
+            experiência simples e inclusiva.
           </Text>
           <Text className="text-base font-medium mt-2">Nossos Parceiros:</Text>
           <View style={styles.containerparceiros}>
@@ -78,7 +79,9 @@ export default function About() {
               />
             </View>
           </View>
-          <Text className="text-[18px] font-medium mb-3 mt-7">Sobre o Geopark Araripe</Text>
+          <Text className="text-[18px] font-medium mb-3 mt-7">
+            Sobre o Geopark Araripe
+          </Text>
           <Text className="text-justify text-base">
             O Geopark Araripe é uma área de preservação localizada na região do
             Cariri, no estado do Ceará, Brasil. Criado em 2006, o geoparque
@@ -137,8 +140,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     gap: 12,
-    marginTop:12
-
+    marginTop: 12,
   },
   img1: {
     width: 96.973,
