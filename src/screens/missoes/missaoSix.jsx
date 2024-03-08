@@ -80,7 +80,7 @@ export default function MissaoSix() {
   //muda status da missão
   const handleMissionSave = async () => {
     await updateDoc(docRef, {
-      "stamps.geoparkAraripe.mission2": true,
+      "stamps.geoparkAraripe.mission6": true,
     })
       .then(() => {})
       .catch((error) => {
