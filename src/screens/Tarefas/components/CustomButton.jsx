@@ -20,8 +20,8 @@ export default function CustomButton({
       containerViewBackgroundColor = isDisabled ? "#C7C6C6" : "#58CC02";
       break;
     default:
-      backgroundColor = isDisabled ? "#8F8F8F" : "#46A302";
-      containerViewBackgroundColor = isDisabled ? "#C7C6C6" : "#58CC02";
+      backgroundColor = isDisabled ? "#8F8F8F" : "#0239A3";
+      containerViewBackgroundColor = isDisabled ? "#C7C6C6" : "#029CCC";
   }
 
   return (

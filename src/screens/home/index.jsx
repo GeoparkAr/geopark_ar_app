@@ -29,8 +29,25 @@ export default function Home() {
     data: { user, docRef },
   } = useAuth();
 
+  const handlePress = () => {
+    console.log("Card pressionado!");
+  };
+
+   //navegação
+   const navigation = useNavigation();
+
+   function openTarefas() {
+     navigation.navigate("Tarefas");
+   }
+   function openTarefasSebrae() {
+    navigation.navigate("TarefaSebrae");
+  }
+
+
   //informações sobre os geossítios
   const geossitios = [
+    
+    /*
     {
       nome: "Arajara",
       municipio: "Barbalha",
@@ -109,7 +126,8 @@ export default function Home() {
       municipio: "Missão Velha",
       source: require("../../../assets/imgs/geossitios/cachoeiraMissaoVelha.jpg"),
       category: ["Aquático", "Trilha", "Cultural", "Geodiversidade"],
-    },
+    }, */
+
   ];
   //filtrando os geossítios por categoria
   const geossitiosFiltrados = geossitios.filter((geossitio) => {
@@ -120,13 +138,6 @@ export default function Home() {
         : geossitio.category === categoriaSelecionada)
     );
   });
-
-  //navegação
-  const navigation = useNavigation();
-
-  function openTarefas() {
-    navigation.navigate("Tarefas");
-  }
 
   //verificar se está logado
   useEffect(() => {
@@ -148,7 +159,7 @@ export default function Home() {
               borderBottomWidth: 1,
               padding: 15,
               gap: 15,
-              backgroundColor: "#287D44",
+              backgroundColor: "#0B69B4",
               alignItems: "center",
               borderRadius: 10,
               marginBottom: 20,
@@ -192,7 +203,7 @@ export default function Home() {
           <View style={styles.buttons}>
             <TouchableOpacity onPress={() => navigation.navigate("Selos")}>
               <Image
-                source={require("../../../assets/imgs/icons/Chest.png")}
+                source={require("../../../assets/imgs/icons/chestbig.png")}
                 className="h-11 w-11"
               />
             </TouchableOpacity>
@@ -202,9 +213,9 @@ export default function Home() {
         {/* geossítios */}
         <View>
           <View className="flex-row justify-between items-center my-5">
-            <Text className="text-[#18241B] font-bold text-lg">Geossítios</Text>
+            <Text className="text-[#18241B] font-bold text-lg">Pontos Turísticos</Text>
             <TouchableOpacity
-              className="bg-[#39B061] px-3.5 py-1.5 rounded-2xl flex-row justify-center items-center"
+              className="bg-[#0B69B4] px-3.5 py-1.5 rounded-2xl flex-row justify-center items-center"
               onPress={handleCategoria}
             >
               <View className="border border-white rounded-full p-1 justify-center items-center">
@@ -487,7 +498,7 @@ export default function Home() {
             categoriaSelecionada === null ? (
               <View
                 className="justify-center items-center rounded-xl mb-3 w-[40vw] 
-                h-48 max-w-[230px] bg-[#39B061]"
+                h-48 max-w-[230px] bg-[#4285F4]"
               >
                 <Image
                   className="h-20 w-20 rounded-full mb-2"
@@ -506,8 +517,36 @@ export default function Home() {
                 </TouchableOpacity>
               </View>
             ) : null}
+
+            {categoriaSelecionada === "Religioso" ||
+            categoriaSelecionada === "Trilha" ||
+            categoriaSelecionada === null ? (
+              <View
+                className="justify-center items-center rounded-xl mb-3 w-[40vw] 
+                h-48 max-w-[230px] bg-[#4285F4]"
+              >
+                <Image
+                  className="h-20 w-20 rounded-full mb-2"
+                  source={require("../../../assets/imgs/geossitios/logo-sebraelab.png")}
+                />
+                <Text className="text-sm text-white text-center font-semibold w-36 mb-2">
+                  SebraeLab
+                </Text>
+                <TouchableOpacity
+                  className="bg-white h-7 justify-center items-center px-2 rounded-2xl"
+                  onPress={openTarefasSebrae}
+                >
+                  <Text className="font-medium text-xs text-[#18241B]">
+                    Explorar
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            ) : null}
+            
             {/* mostrando todos os geossítios */}
-            {geossitiosFiltrados.map((geossitio) => (
+            
+            {
+            geossitiosFiltrados.map((geossitio) => (
               <Card
                 key={geossitio.nome}
                 nome={geossitio.nome}

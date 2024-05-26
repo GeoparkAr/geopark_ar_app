@@ -178,8 +178,8 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   buttonClicked: {
-    backgroundColor: "#39B061", // Cor quando clicado
-    borderColor: "#39B061",
+    backgroundColor: "#0239A3", // Cor quando clicado
+    borderColor: "#0239A3",
   },
   buttonText: {
     fontSize: 16,
@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
   },
   submitButton: {
     height: 50,
-    backgroundColor: "#39B061",
+    backgroundColor: "#0B69B4",
     width: "80%",
     justifyContent: "center",
     alignItems: "center",

@@ -32,7 +32,7 @@ import {
 import MapView, { Marker } from "react-native-maps";
 import geoloc from "../../../geoloc.json";
 
-export default function Tarefas() {
+export default function TarefasSebrae() {
   const navigation = useNavigation();
   const [authChecked, setAuthChecked] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
@@ -279,13 +279,11 @@ export default function Tarefas() {
       <View>
         <View className=" bg-[#0B69B4] mx-4 rounded-2xl px-5 py-5 mt-3 mb-5">
           <View className="flex-row justify-between items-center">
-            <Text className=" text-xl font-bold text-white">
-              Colina do Horto
-            </Text>
+            <Text className=" text-xl font-bold text-white">SebraeLab</Text>
             <TouchableOpacity
               onPress={openMapa}
               className=" border border-[#0225A3] border-b-4 bg-[#02CCC0]
-            px-3 rounded-2xl flex-row justify-center items-center py-1"
+              px-3 rounded-2xl flex-row justify-center items-center py-1"
             >
               <Entypo name="map" size={22} color="white" />
               <Text className="font-bold text-white text-sm ml-2">MAPA</Text>
@@ -293,9 +291,9 @@ export default function Tarefas() {
           </View>
 
           <Text className="text-white text-justify mt-3">
-            A Colina do Horto é um local religioso associado ao Padre Cícero.
-            Abriga a estátua do Padim Ciço, centro de devoção e peregrinação de
-            fiéis que acreditam em milagres associados ao religioso.
+            O Sebraelab é um vetor voltado para o compartilhamento de ideias e
+            de aprendizado contínuo. As estratégias inovadoras são o motor para
+            melhorias no desempenho das empresas.
           </Text>
         </View>
         <Modal
@@ -345,7 +343,7 @@ export default function Tarefas() {
             <View className=" items-center relative">
               <TouchableOpacity
                 className="rounded-full bg-[#029CCC] p-1 absolute
-              -top-4 right-3 z-20 justify-center items-center"
+                -top-4 right-3 z-20 justify-center items-center"
                 onPress={closeMapa}
               >
                 <Ionicons name="close-sharp" size={24} color="white" />

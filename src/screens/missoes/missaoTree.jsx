@@ -122,6 +122,7 @@ export default function MissaoTree() {
               <TouchableOpacity onPress={navigateToCamera}>
                 <Image
                   source={require("../../../assets/imgs/icons/camera.png")}
+                  style={{width:200, height:200}}
                 />
               </TouchableOpacity>
             </View>

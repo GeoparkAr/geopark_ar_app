@@ -123,6 +123,7 @@ export default function MissaoTwo() {
                 <TouchableOpacity onPress={navigateToCamera}>
                   <Image
                     source={require("../../../assets/imgs/icons/camera.png")}
+                    style={{width:200, height:200}}
                   />
                 </TouchableOpacity>
               </View>

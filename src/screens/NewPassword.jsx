@@ -53,7 +53,7 @@ export default function NewPassword() {
         />
 
         <TouchableOpacity
-          className="h-14 rounded-[10px] flex justify-center items-center w-full bg-[#39B061] mt-8"
+          className="h-14 rounded-[10px] flex justify-center items-center w-full bg-[#0B69B4] mt-8"
           onPress={handlePasswordResetEmail}
           >
           <Text style={styles.textButton}>Confirmar</Text>

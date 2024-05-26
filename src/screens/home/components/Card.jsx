@@ -3,7 +3,7 @@ import { View, Image, Text, TouchableOpacity } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 
 //propriedades que devem ser importadas
-export default function Card({ nome, municipio, source }) {
+export default function Card({ nome, municipio, source, onPress }) {
   return (
     <View
       className=" justify-center items-center rounded-xl mb-3 w-[40vw] h-48 max-w-[230px]
@@ -13,8 +13,8 @@ export default function Card({ nome, municipio, source }) {
       <Text className="text-sm text-center font-semibold w-30 mb-2">
         {nome}
       </Text>
-      <TouchableOpacity className="bg-[#88d0a0] h-7 justify-center items-center px-3 rounded-2xl ">
-        <Text className=" font-medium text-xs text-[#194e2a]">Em breve!</Text>
+      <TouchableOpacity className="bg-[#88bad0] h-7 justify-center items-center px-3 rounded-2xl" onPress={onPress}>
+        <Text className=" font-medium text-xs text-[#ffffff]">Explorar</Text>
       </TouchableOpacity>
     </View>
   );

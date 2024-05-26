@@ -45,6 +45,7 @@ import PerguntaDois from "./src/screens/missoes/Questionario/pergunta2";
 import PerguntaTres from "./src/screens/missoes/Questionario/pergunta3";
 import PerguntaQuatro from "./src/screens/missoes/Questionario/pergunta4";
 import Sucesso from "./src/screens/missoes/Questionario/sucesso";
+import TarefasSebrae from "./src/screens/Tarefas/sebraelab";
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -94,7 +95,7 @@ function Root() {
                   flexDirection: "row",
                   paddingBottom: 10,
                   paddingTop: 10,
-                  paddingLeft: 25
+                  paddingLeft: 25,
                 }}
               >
                 <View>
@@ -124,7 +125,7 @@ function Root() {
                   borderBottomColor: "#f4f4f4",
                   borderBottomWidth: 1,
                   padding: 15,
-                  backgroundColor: "#287D44",
+                  backgroundColor: "#0B69B4",
                   height: 60,
                   justifyContent: "center",
                 }}
@@ -156,7 +157,7 @@ function Root() {
                   style={{
                     width: 26,
                     height: 26,
-                    backgroundColor: "#39B061",
+                    backgroundColor: "#0B69B4",
                     justifyContent: "center",
                     alignItems: "center",
                     borderRadius: 5,
@@ -183,7 +184,7 @@ function Root() {
                   style={{
                     width: 26,
                     height: 26,
-                    backgroundColor: "#39B061",
+                    backgroundColor: "#0B69B4",
                     borderRadius: 5,
                     justifyContent: "center",
                     alignItems: "center",
@@ -214,7 +215,7 @@ function Root() {
                     style={{
                       width: 26,
                       height: 26,
-                      backgroundColor: "#39B061",
+                      backgroundColor: "#0B69B4",
                       borderRadius: 5,
                       justifyContent: "center",
                       alignItems: "center",
@@ -317,6 +318,11 @@ export default function App() {
               name="Tarefas"
               component={Tarefas}
               options={{ title: "Colina do Horto" }}
+            />
+            <Stack.Screen
+              name="TarefaSebrae"
+              component={TarefasSebrae}
+              options={{ title: "SebraeLab" }}
             />
             <Stack.Screen
               name="Camera"

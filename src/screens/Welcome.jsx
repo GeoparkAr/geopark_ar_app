@@ -52,15 +52,14 @@ export default function Welcome() {
         className=" relative justify-between items-center pt-16 flex-1"
       >
         <View
-          style={{ justifyContent: "center", alignItems: "center", gap: 10 }}
+          style={{ justifyContent: "center", alignItems: "center" }}
         >
           <Image
-            source={require("../../assets/imgs/logo.png")}
-            style={{ width: 130, height: 120, marginVertical: 15 }}
+            source={require("../../assets/imgs/icon2.png")}
+            style={{ width: 130, height: 130, marginTop: 15 }}
           />
-          <Text style={{ color: "#fff", fontSize: 14 }}>Bem-vindo ao</Text>
-          <Text style={{ color: "#fff", fontSize: 20, fontWeight: "800" }}>
-            Geopark AR
+          <Text style={{ color: "#fff", fontSize: 16, fontWeight: "800" }}>
+            Turismo e Tecnologia
           </Text>
         </View>
 
@@ -124,7 +123,7 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
   },
   greenButton: {
-    backgroundColor: "#287D44",
+    backgroundColor: "#0B69B4",
     flexDirection: "row",
     height: 50,
     borderRadius: 30,

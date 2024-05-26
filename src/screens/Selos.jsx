@@ -60,9 +60,9 @@ export default function Selos() {
   return (
     <ScrollView className="bg-white p-4 relative">
       {user && !user.isAnonymous ? (
-        <View className="bg-[#39B061] rounded-[10px] flex-row justify-around items-center relative">
+        <View className="bg-[#0B69B4] rounded-[10px] flex-row justify-around items-center relative">
           {selos.geoparkAraripe && selos.geoparkAraripe.geoparkAraripeStamp ? (
-            <View className="bg-[#39B061] rounded-[10px] flex-row justify-around items-center relative p-5">
+            <View className="bg-[#0B69B4] rounded-[10px] flex-row justify-around items-center relative p-5">
               <Image source={require("../../assets/imgs/selo.png")} />
               <View className="justify-center ml-6">
                 <Text className=" text-white font-bold">Colina do Horto</Text>
@@ -80,7 +80,7 @@ export default function Selos() {
                     )
                   }
                 >
-                  <FontAwesome5 name="download" size={20} color="#1A4E38" />
+                  <FontAwesome5 name="download" size={20} color="#0B69B4" />
                 </TouchableOpacity>
               </View>
             </View>
@@ -91,7 +91,7 @@ export default function Selos() {
           )}
         </View>
       ) : (
-        <View className="bg-[#39B061] rounded-[10px] justify-around items-center relative p-3">
+        <View className="bg-[#0B69B4] rounded-[10px] justify-around items-center relative p-3">
           <Text className="text-white min-w-fit text-justify mb-3">
             Recompensas disponíveis apenas para usuários logados.
           </Text>

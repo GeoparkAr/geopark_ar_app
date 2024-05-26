@@ -74,7 +74,7 @@ export default function Login() {
 
       <View>
         <TouchableOpacity
-          className="h-14 rounded-[10px] flex justify-center items-center w-full bg-[#287D44]"
+          className="h-14 rounded-[10px] flex justify-center items-center w-full bg-[#0B69B4]"
           onPress={handleLogin}
         >
           <Text style={styles.textButton}>Entrar</Text>
@@ -82,7 +82,7 @@ export default function Login() {
         <View className="flex flex-row justify-center items-center gap-1 mt-5">
           <Text className="text-sm font-semibold">Não tem uma conta? </Text>
           <TouchableOpacity onPress={Register}>
-            <Text className="text-sm font-semibold text-[#35a75b]">
+            <Text className="text-sm font-semibold text-[#0B69B4]">
               Criar conta
             </Text>
           </TouchableOpacity>
